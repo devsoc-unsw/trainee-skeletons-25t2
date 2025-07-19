@@ -1,0 +1,18 @@
+{
+  "name": "trainee-skeletons-25t2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm run -r --parallel test",
+    "build": "pnpm run -r build",
+    "dev": "pnpm run -r --parallel --aggregate-output dev",
+    "lint": "pnpm run -r lint"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
