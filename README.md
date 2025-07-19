@@ -23,12 +23,22 @@ cd trainee-skeletons-25t2
 3. Install dependencies
 ```bash
 pnpm install
+```
+
+4. Start the database via `docker compose` and run it in the background
+```bash
+docker compose up -d
 
 ```
-4. Start the frontend and backend (this will run both in parallel)
+5. Apply migration to load the correct schemas in Postgres.
+```bash
+pnpm drizzle-kit migrate
+```
+6. Start the frontend and backend (this will run both in parallel)
 ```bash
 pnpm run dev
 
 ```
+
 ### Usage
 Once both the frontend and backend are running, you can navigate to the frontend on `http://localhost:5173`
