@@ -10,7 +10,7 @@
     "lint": "pnpm run -r lint"
   },
   "workspaces": [
-    "packages/*"
+    "apps/*"
   ],
   "keywords": [],
   "author": "",
