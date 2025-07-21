@@ -7,7 +7,8 @@ Description of project here
 
 Before you begin, ensure you have met the following requirements:
 - [PNPM](https://pnpm.io/installation) installed (if you are on Mac/Linux/WSL, follow the **On POSIX systems** section)
-- [Docker](https://www.docker.com/) installed to run the database
+- [Docker](https://www.docker.com/) installed to run the database. If you are using WSL, make sure you follow [this](https://docs.docker.com/desktop/features/wsl/) to configure
+Docker Desktop to use WSL2 as a backend.
 
 ### Installation
 1. Clone the repo
@@ -20,7 +21,7 @@ git clone git@github.com:devsoc-unsw/trainee-skeletons-25t2.git
 cd trainee-skeletons-25t2
 
 ```
-3. Install dependencies
+3. Install dependencies, this will install the dependencies for both the frontend and backend
 ```bash
 pnpm install
 ```
