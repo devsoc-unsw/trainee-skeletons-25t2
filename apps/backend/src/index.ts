@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import someRoutes from "./routes/some.route"
 import "dotenv/config"
 
@@ -6,7 +7,7 @@ import "dotenv/config"
 const port = process.env.PORT || "3000";
 
 const app = express();
-app.use(express.json()).use('', someRoutes)
+app.use(cors()).use(express.json()).use('', someRoutes)
 
 
 app.listen(port, () => {

@@ -33,6 +33,8 @@
     "typescript-eslint": "^8.37.0"
   },
   "dependencies": {
+    "@types/cors": "^2.8.19",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "postgres": "^3.4.7"
   }
