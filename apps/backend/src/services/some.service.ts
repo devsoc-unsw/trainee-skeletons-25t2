@@ -1,3 +1,3 @@
 export function sendTestMessage() {
-    return { message: "Hello World" };
+  return { message: "Hello World" };
 }
