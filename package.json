@@ -6,8 +6,12 @@
   "scripts": {
     "test": "pnpm run -r --parallel test",
     "build": "pnpm run -r build",
-    "dev": "pnpm run -r --parallel --aggregate-output dev",
     "lint": "pnpm run -r lint"
+    "dev": "pnpm run -r --parallel --aggregate-output dev",
+    "db:push": "pnpm --filter backend db:push",
+    "db:generate": "pnpm --filter backend db:generate",
+    "db:migrate": "pnpm --filter backend db:migrate",
+    "db:studio": "pnpm --filter backend db:studio",
   },
   "workspaces": [
     "apps/*"
