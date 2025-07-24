@@ -22,11 +22,11 @@ export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
 1. Generate a new migration file and then perform the migration using the following commands
 
 ```bash
-pnpm drizzle-kit generate
-pnpm drizzle-kit migrate
+pnpm run db:generate
+pnpm run db:migrate
 ```
 
-4. Alternatively, you can just run `pnpm drizzle-kit push` to directly push any schema changes, though make sure to generate the schema once you are done with your feature
+4. Alternatively, you can just run `pnpm run db:push` to directly push any schema changes, though make sure to generate the schema once you are done with your feature
 5. Visit the [Drizzle Documentation](https://orm.drizzle.team/docs/overview) for further documentation on how to use Drizzle
 
 ## Project Structure
