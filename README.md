@@ -34,7 +34,7 @@ docker compose up -d
 6. Apply migration to load the correct schemas in Postgres.
 ```bash
 cd apps/backend
-pnpm drizzle-kit migrate
+pnpm db:migrate
 ```
 7. Start the frontend and backend (this will run both in parallel)
 ```bash
