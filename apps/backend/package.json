@@ -25,6 +25,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.15",
     "@types/pg": "^8.15.4",
+    "@types/socket.io": "^3.0.2",
     "dotenv": "^17.2.0",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.3",
@@ -42,6 +43,7 @@
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "postgres": "^3.4.7"
+    "postgres": "^3.4.7",
+    "socket.io": "^4.8.1"
   }
 }
