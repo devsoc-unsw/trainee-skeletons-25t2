@@ -4,7 +4,7 @@ import someRoutes from "./routes/some.route";
 import "dotenv/config";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
-import setUpSocketListeners from "./socket";
+import setUpSocketListeners from "./sockets";
 import { Room } from "./room";
 
 const port = process.env.PORT || "3000";
@@ -13,8 +13,8 @@ const port = process.env.PORT || "3000";
 const roomMap: Map<string, Room> = new Map();
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server, {
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
   // TODO: put this in env variable
   cors: {
     origin: "http://localhost:5173",
@@ -25,7 +25,7 @@ setUpSocketListeners(io, roomMap);
 
 app.use(cors()).use(express.json()).use("", someRoutes);
 
-server.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
