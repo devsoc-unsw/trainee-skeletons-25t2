@@ -14,7 +14,7 @@ export default function setUpSocketListeners(io: Server, roomMap: Map<string, Ro
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
       // to the frontend in real-time
-      socket.to(roomId).emit("syncState", { ...roomMap.get(roomId) });
+      io.in(roomId).emit("syncState", { ...roomMap.get(roomId) });
     });
 
     socket.on("disconnect", () => {
