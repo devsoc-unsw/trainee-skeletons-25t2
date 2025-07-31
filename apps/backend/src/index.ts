@@ -4,7 +4,7 @@ import someRoutes from "./routes/some.route";
 import "dotenv/config";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
-import { setUpSocketListeners } from "./socket";
+import setUpSocketListeners from "./socket";
 import { Room } from "./room";
 
 const port = process.env.PORT || "3000";
