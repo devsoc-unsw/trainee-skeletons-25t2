@@ -13,7 +13,7 @@ export default function setUpSocketListeners(io: Server, roomMap: Map<string, Ro
       socket.join(roomId);
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
-      // to the frontend in real-time
+      // to the frontend in real-time. also we use the spread operator here to serialize te room class into an object
       io.in(roomId).emit("syncState", { ...roomMap.get(roomId) });
     });
 
