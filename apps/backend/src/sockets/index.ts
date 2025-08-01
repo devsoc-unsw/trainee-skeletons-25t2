@@ -17,7 +17,7 @@ export default function setUpSocketListeners(
     // TODO: Define socket event handlers here
     socket.on("room:create", (payload: { roomId: string }) => {
       const { roomId } = payload;
-      const room = roomService.createRoom(roomId, { userId, name })
+      const room = roomService.createRoom(roomId, { userId, name });
       socket.join(roomId);
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
