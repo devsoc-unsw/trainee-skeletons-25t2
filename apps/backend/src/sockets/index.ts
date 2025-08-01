@@ -1,25 +1,32 @@
-import { Server } from "socket.io";
-import { Room } from "../room";
+import { DefaultEventsMap, Server } from "socket.io";
+import { User } from "../rooms/room";
+import { RoomService } from "../rooms/room.service";
 
-export default function setUpSocketListeners(io: Server, roomMap: Map<string, Room>) {
+export default function setUpSocketListeners(
+  io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, User>,
+) {
+  const roomService = new RoomService();
   io.on("connection", (socket) => {
-    console.log(`User connected ${socket.id}`);
+    const userId = socket.handshake.query.userId as string;
+    const name = socket.handshake.query.name as string;
+    socket.data.userId = userId;
+    socket.data.name = name;
+
+    console.log(`User connected ${userId} ${name}`);
 
     // TODO: Define socket event handlers here
-    // UserId can probably be stored in the socket data, will figure this out later
-    socket.on("room:create", (payload: { roomId: string, userId: string }) => {
-      const { roomId, userId } = payload;
-      roomMap.set(roomId, new Room(roomId, userId));
+    socket.on("room:create", (payload: { roomId: string }) => {
+      const { roomId } = payload;
+      const room = roomService.createRoom(roomId, { userId, name })
       socket.join(roomId);
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
-      // to the frontend in real-time. also we use the spread operator here to serialize te room class into an object
-      io.in(roomId).emit("syncState", { ...roomMap.get(roomId) });
+      // to the frontend in real-time.
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     socket.on("disconnect", () => {
-      console.log(`User disconnected ${socket.id}`);
+      console.log(`User disconnected ${userId} ${name}`);
     });
   });
-
 }
