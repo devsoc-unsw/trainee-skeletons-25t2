@@ -2,13 +2,12 @@ import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import { io as Client, Socket } from "socket.io-client";
 import { httpServer } from "../server";
 
-
-
-describe("Socket Tests", () => {
+describe("Socket Integration Tests", () => {
   const userId = "123";
   const name = "Adrian";
   let socket: Socket;
 
+  // We need to set up a test client socket and set up the http server to test
   beforeAll(async () => {
     const port = 3001;
     await new Promise<void>((resolve) => httpServer.listen(port, resolve));
@@ -17,6 +16,7 @@ describe("Socket Tests", () => {
     });
   });
 
+  // Need to ensure the socket is not left open
   afterAll(async () => {
     socket.close();
     await new Promise<void>((resolve, reject) =>
@@ -37,6 +37,5 @@ describe("Socket Tests", () => {
         resolve();
       });
     });
-  })
-
-})
+  });
+});
