@@ -5,20 +5,20 @@ import { httpServer } from "../server";
 describe("Socket Integration Tests", () => {
   const userId = "123";
   const name = "Adrian";
-  let socket: Socket;
+  let clientSocket: Socket;
 
   // We need to set up a test client socket and set up the http server to test
   beforeAll(async () => {
     const port = 3001;
     await new Promise<void>((resolve) => httpServer.listen(port, resolve));
-    socket = Client(`http://localhost:${port}`, {
+    clientSocket = Client(`http://localhost:${port}`, {
       query: { userId, name },
     });
   });
 
   // Need to ensure the socket is not left open
   afterAll(async () => {
-    socket.close();
+    clientSocket.close();
     await new Promise<void>((resolve, reject) =>
       httpServer.close((err) => (err ? reject(err) : resolve())),
     );
@@ -28,9 +28,9 @@ describe("Socket Integration Tests", () => {
     const roomId = "123456";
 
     await new Promise<void>((resolve) => {
-      socket.emit("room:create", { roomId });
+      clientSocket.emit("room:create", { roomId });
 
-      socket.on("syncState", (room) => {
+      clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
         expect(room.users).toContainEqual({ userId, name });
