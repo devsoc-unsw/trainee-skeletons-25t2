@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test:unsw": "tsx --require dotenv/config src/tests/some.test.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "build": "tsc",
     "lint": "eslint .",
     "db:push": "drizzle-kit push",

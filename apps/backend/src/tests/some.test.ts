@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "dotenv/config";
 import { getUnswRestaurants } from "../services/unsw.service";
 
 async function testGetUnswRestaurants() {
