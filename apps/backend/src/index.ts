@@ -1,18 +1,10 @@
-import express from "express";
-import cors from "cors";
-import someRoutes from "./routes/some.route";
+import { httpServer } from "./server";
 import "dotenv/config";
 
 const port = process.env.PORT || "3000";
 
-const app = express();
-app
-  .use(cors())
-  .use(express.json())
-  .use("", someRoutes);
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+httpServer.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
 process.on("SIGINT", async () => {
