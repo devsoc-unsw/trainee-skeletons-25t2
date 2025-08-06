@@ -38,7 +38,7 @@ describe("Socket Integration Tests", () => {
     clientSocket1.disconnect();
   });
 
-  test("Test room creation", async () => {
+  test("1. Test room creation", async () => {
     await new Promise<void>((resolve) => {
       clientSocket.emit("room:create", { roomId });
 
@@ -51,7 +51,7 @@ describe("Socket Integration Tests", () => {
     });
   });
 
-  test("Test creating, then joining a room", async () => {
+  test("2. Test creating, then joining a room", async () => {
     await new Promise<void>((resolve) => {
       clientSocket.emit("room:create", { roomId });
       
@@ -66,7 +66,7 @@ describe("Socket Integration Tests", () => {
     await new Promise<void>((resolve) => {
       clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId})
 
-      clientSocket1.once("syncState", (room) => {
+      clientSocket1.on("syncState", (room) => {
         expect(room.users).toContainEqual({ userId, name });
         expect(room.users).toContainEqual({ userId: userId1, name: name1 });
         expect(room.users.length).toStrictEqual(2);
@@ -75,16 +75,15 @@ describe("Socket Integration Tests", () => {
     });
   });
   
-  test("Test leaving a room", async () => {
+  test("3. Test leaving a room", async () => {
 
     // setup room w 2 users
     await new Promise<void>((resolve) => {
       clientSocket.emit("room:create", { roomId });
 
-      clientSocket.once("syncState", (room) => {
+      clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
-        console.log(`are there two usres in here already? ${JSON.stringify(room.users)}`)
         expect(room.users).toContainEqual({ userId, name });
         resolve();
       });
@@ -93,7 +92,7 @@ describe("Socket Integration Tests", () => {
     await new Promise<void>((resolve) => {
       clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId})
 
-      clientSocket1.once("syncState", (room) => {
+      clientSocket1.on("syncState", (room) => {
         expect(room.users).toContainEqual({ userId, name });
         expect(room.users).toContainEqual({ userId: userId1, name: name1 });
         resolve();
@@ -103,7 +102,7 @@ describe("Socket Integration Tests", () => {
     await new Promise<void>((resolve) => {
       clientSocket1.emit("room:leave", { user: { userId: userId1, name: name1 }, roomId: roomId})
       
-      clientSocket.once("syncState", (room) => {
+      clientSocket.on("syncState", (room) => {
         expect(room.users.length).toStrictEqual(1);
         expect(room.users).toContainEqual({ userId, name });
         resolve()
@@ -111,3 +110,94 @@ describe("Socket Integration Tests", () => {
     });
   });
 });
+
+describe("Socket disconnection test", () => {
+const userId = "123";
+  const name = "Adrian";
+  let clientSocket: ClientSocket;
+  const roomService = new RoomService();
+
+  const userId1 = "999"
+  const name1 = "Tim";
+  let clientSocket1: ClientSocket;
+  const roomId = "123456";
+
+  // We need to set up a test client socket and set up the http server to test
+  beforeEach(async () => {
+    const port = 3001;
+    await new Promise<void>((resolve) =>
+      httpServer.listen(port, () => {
+        clientSocket = ioc(`http://localhost:${port}`, {
+          query: { userId, name },
+        });
+
+        clientSocket1 = ioc(`http://localhost:${port}`, {
+          query: { userId: userId1, name: name1 },
+        });
+        clientSocket1.on("connect", resolve)
+      }),
+    );
+  });
+
+  // Need to ensure the socket(s) is not left open
+  afterEach(async () => {
+    httpServer.close();
+    clientSocket.disconnect();
+  });
+  
+  test("1. Test disconnecting a user, removes them from all rooms", async () => {
+    const roomId1 = 3000;
+
+    // setup first room
+    await new Promise<void>((resolve) => {
+      clientSocket.emit("room:create", { roomId });
+
+      clientSocket.on("syncState", (room) => {
+        expect(room).toBeDefined();
+        expect(room.id).toBe(roomId);
+        expect(room.users).toContainEqual({ userId, name });
+        resolve();
+      });
+    });
+
+    // setup second room
+    await new Promise<void>((resolve) => {
+      clientSocket.emit("room:create", { roomId1 });
+
+      clientSocket.on("syncState", (room) => {
+        expect(room).toBeDefined();
+        expect(room.id).toBe(roomId1);
+        expect(room.users).toContainEqual({ userId, name });
+        resolve();
+      });
+    });
+
+    // join first room
+    await new Promise<void>((resolve) => {
+      clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId})
+
+      clientSocket1.on("syncState", (room) => {
+        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
+        resolve();
+      })
+    });
+
+    // join second room
+    await new Promise<void>((resolve) => {
+      clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId1})
+
+      clientSocket1.on("syncState", (room) => {
+        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
+        resolve();
+      })
+    });
+
+    await new Promise<void>((resolve) => {
+      clientSocket1.emit("disconnect");
+      
+
+    });
+  });
+})

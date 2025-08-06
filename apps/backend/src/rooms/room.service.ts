@@ -13,11 +13,16 @@ export class RoomService {
     return this.rooms.get(roomId);
   }
 
+  // kind of just for testing -> can get rid of later?
+  getRooms(): Map<String, Room> {
+    return this.rooms;
+  }
+
   deleteRoom(roomId: string): boolean {
     return this.rooms.delete(roomId);
   }
 
-  disconnectUser(user: User) {
+  disconnectUser(user: User)  {
     this.rooms.forEach(room => {
       room.removeUser(user)
     })

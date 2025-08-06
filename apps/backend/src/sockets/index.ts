@@ -58,6 +58,7 @@ export default function setUpSocketListeners(
       // socket.io kicks out the user from every (socket) room they're in, but
       // user also needs to leave every room they're in (our roomService that is)
       roomService.disconnectUser({userId, name})
+      // io.in(roomId).emit("syncState", room.toObject());
       console.log(`User disconnected ${userId} ${name}`);
     });
   });
