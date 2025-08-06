@@ -17,5 +17,11 @@ export class RoomService {
     return this.rooms.delete(roomId);
   }
 
+  disconnectUser(user: User) {
+    this.rooms.forEach(room => {
+      room.removeUser(user)
+    })
+  }
+
   // TODO: add more operations here!
 }
