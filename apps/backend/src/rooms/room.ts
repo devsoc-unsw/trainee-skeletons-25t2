@@ -7,6 +7,8 @@ export class Room {
   id: string;
   owner: User;
   users: Set<User> = new Set();
+  // code: string // room.code = the code that a user needs to input to join the room?
+
   // TODO: need list of restaurants, need to define type (probs look at google api type def)
 
   constructor(id: string, owner: User) {

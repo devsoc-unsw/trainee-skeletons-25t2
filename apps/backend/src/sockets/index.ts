@@ -6,7 +6,10 @@ export default function setUpSocketListeners(
   io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, User>,
 ) {
   const roomService = new RoomService();
+  // this io.on is us - serverside
   io.on("connection", (socket) => {
+
+    // their userId and name is in the socket.handshake.query
     const userId = socket.handshake.query.userId as string;
     const name = socket.handshake.query.name as string;
     socket.data.userId = userId;
@@ -25,6 +28,24 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     });
 
+    // user joins a room
+    // clientSocket goes and connects to our server socket - which is a room
+    socket.on("room:join", (payload: { user: User, roomId: string}) => {
+      const { user, roomId } = payload
+
+      // join the user's socket to the room, and add the User to the set of
+      // users in the room.
+      socket.join(roomId)
+
+      const room = roomService.getRoom(roomId)
+      room?.addUser(user)
+    });
+
+    // user leaves a room
+    socket.on("room:leave", (payload: { user: User }) => {
+    });
+
+    // huh?
     socket.on("disconnect", () => {
       console.log(`User disconnected ${userId} ${name}`);
     });
