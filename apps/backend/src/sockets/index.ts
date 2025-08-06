@@ -6,7 +6,6 @@ export default function setUpSocketListeners(
   io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, User>,
 ) {
   const roomService = new RoomService();
-  // this io.on is us - serverside
   io.on("connection", (socket) => {
 
     // their userId and name is in the socket.handshake.query
@@ -28,31 +27,36 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     });
 
-    // user joins a room
-    // clientSocket goes and connects to our server socket - which is a room
     socket.on("room:join", (payload: { user: User, roomId: string}) => {
       const { user, roomId } = payload
 
-      // join the user's socket to the room, and add the User to the set of
-      // users in the room.
       socket.join(roomId)
 
       const room = roomService.getRoom(roomId)
-      if (room == undefined) {
-        console.log(`room with roomId ${roomId} could not be found`)
-        return
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`)
       } 
       room.addUser(user)
-
       io.in(roomId).emit("syncState", room.toObject());
     });
 
-    // user leaves a room
-    socket.on("room:leave", (payload: { user: User }) => {
+    socket.on("room:leave", (payload: { user: User, roomId: string }) => {
+      const { user, roomId } = payload
+      
+      const room = roomService.getRoom(roomId)
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`)
+      } 
+      room.removeUser(user)
+      io.in(roomId).emit("syncState", room.toObject());
+      
+      // sync before the socket leaves so that it has the room object.
+      socket.leave(roomId)
     });
 
-    // huh?
     socket.on("disconnect", () => {
+      // user needs to leave every room they're in (our room object that is)
+
       console.log(`User disconnected ${userId} ${name}`);
     });
   });
