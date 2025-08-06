@@ -38,7 +38,13 @@ export default function setUpSocketListeners(
       socket.join(roomId)
 
       const room = roomService.getRoom(roomId)
-      room?.addUser(user)
+      if (room == undefined) {
+        console.log(`room with roomId ${roomId} could not be found`)
+        return
+      } 
+      room.addUser(user)
+
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     // user leaves a room
