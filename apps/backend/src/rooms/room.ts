@@ -22,7 +22,11 @@ export class Room {
   }
 
   removeUser(user: User) {
-    this.users.delete(user);
+    this.users.forEach(curr_user => {
+      if (curr_user.userId == user.userId && curr_user.name == user.name) {
+        this.users.delete(curr_user);
+      }
+    });
   }
 
   toObject() {
