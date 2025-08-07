@@ -2,8 +2,14 @@ import { DefaultEventsMap, Server } from "socket.io";
 import { User } from "../rooms/room";
 import { RoomService } from "../rooms/room.service";
 
+type SocketState = {
+  userId: string;
+  name: string;
+  roomId: string | null;
+};
+
 export default function setUpSocketListeners(
-  io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, User>,
+  io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, SocketState>,
 ) {
   const roomService = new RoomService();
   io.on("connection", (socket) => {
@@ -12,6 +18,7 @@ export default function setUpSocketListeners(
     const name = socket.handshake.query.name as string;
     socket.data.userId = userId;
     socket.data.name = name;
+    socket.data.roomId = null;
 
     console.log(`User connected ${userId} ${name}`);
 
@@ -20,16 +27,18 @@ export default function setUpSocketListeners(
       const { roomId } = payload;
       const room = roomService.createRoom(roomId, { userId, name });
       socket.join(roomId);
+      socket.data.roomId = roomId;
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
       // to the frontend in real-time.
       io.in(roomId).emit("syncState", room.toObject());
     });
 
-    socket.on("room:join", (payload: { roomId: string}) => {
+    socket.on("room:join", (payload: { roomId: string }) => {
       const { roomId } = payload
-
+      
       socket.join(roomId)
+      socket.data.roomId = roomId;
 
       const room = roomService.getRoom(roomId)
       if (room === undefined) {
@@ -56,8 +65,20 @@ export default function setUpSocketListeners(
     socket.on("disconnect", () => {
       // socket.io kicks out the user from every (socket) room they're in, but
       // user also needs to leave every room they're in (our roomService that is)
-      roomService.disconnectUser({userId, name})
-      // io.in(roomId).emit("syncState", room.toObject());
+      // assume for now that the user is not in multiple rooms.
+      // roomService.disconnectUser({userId, name})
+
+      // remove the user from the room as well
+      if (socket.data.roomId !== null) {
+        const roomId = socket.data.roomId;
+        const room = roomService.getRoom(socket.data.roomId)
+
+        if (room !== undefined) {
+          room?.removeUser({ userId, name })
+          io.in(roomId).emit("syncState", room.toObject());
+        }
+      }
+
       console.log(`User disconnected ${userId} ${name}`);
     });
   });
