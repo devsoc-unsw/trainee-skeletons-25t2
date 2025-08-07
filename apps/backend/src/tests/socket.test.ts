@@ -144,11 +144,12 @@ const userId = "123";
     httpServer.close();
     clientSocket.disconnect();
   });
-  
-  test.skip("1. Test disconnecting a user, removes them from all rooms", async () => {
-    const roomId1 = 3000;
 
-    // setup first room
+  // this is testing that when you disconnect from a room, the user is also no longer
+  // in the list of users in that room.
+  test("Test disconnecting a room", async () => {
+
+    // setup room w 2 users
     await new Promise<void>((resolve) => {
       clientSocket.emit("room:create", { roomId });
 
@@ -160,32 +161,8 @@ const userId = "123";
       });
     });
 
-    // setup second room
     await new Promise<void>((resolve) => {
-      clientSocket.emit("room:create", { roomId1 });
-
-      clientSocket.on("syncState", (room) => {
-        expect(room).toBeDefined();
-        expect(room.id).toBe(roomId1);
-        expect(room.users).toContainEqual({ userId, name });
-        resolve();
-      });
-    });
-
-    // join first room
-    await new Promise<void>((resolve) => {
-      clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId})
-
-      clientSocket1.on("syncState", (room) => {
-        expect(room.users).toContainEqual({ userId, name });
-        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
-        resolve();
-      })
-    });
-
-    // join second room
-    await new Promise<void>((resolve) => {
-      clientSocket1.emit("room:join", { user: { userId: userId1, name: name1 }, roomId: roomId1})
+      clientSocket1.emit("room:join", { roomId: roomId})
 
       clientSocket1.on("syncState", (room) => {
         expect(room.users).toContainEqual({ userId, name });
@@ -195,9 +172,13 @@ const userId = "123";
     });
 
     await new Promise<void>((resolve) => {
-      clientSocket1.emit("disconnect");
+      clientSocket1.disconnect();
       
-
+      clientSocket.on("syncState", (room) => {
+        expect(room.users.length).toStrictEqual(1);
+        expect(room.users).toContainEqual({ userId, name });
+        resolve()
+      })
     });
   });
 })

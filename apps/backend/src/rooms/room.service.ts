@@ -22,6 +22,7 @@ export class RoomService {
     return this.rooms.delete(roomId);
   }
 
+  // go through rooms and kick out a user
   disconnectUser(user: User)  {
     this.rooms.forEach(room => {
       room.removeUser(user)
