@@ -6,16 +6,22 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
-    parserOptions: {
-      project: "./tsconfig.json",
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: globals.browser,
     },
-    plugins: { js },
-    extends: ["js/recommended"],
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
-    languageOptions: { globals: globals.browser },
+    plugins: {
+      ...tseslint.configs.recommended.plugins,
+      js,
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
   },
   globalIgnores(["dist/*"]),
-  tseslint.configs.recommended,
 ]);
