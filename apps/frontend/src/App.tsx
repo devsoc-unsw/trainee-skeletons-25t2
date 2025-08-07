@@ -1,15 +1,16 @@
+import { useContext, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
 import ResultsPage from "./pages/ResultsPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import { useSocket } from "./contexts/SocketContext";
 import { useEffect } from "react";
+import { SocketContext } from "./contexts/SocketContext";
 
 // TODO: can remove this component, just testing the socket connection works
 function TestSocket() {
-  const socket = useSocket();
+  const socket = useContext(SocketContext);
   const [isConnected, setIsConnected] = useState(socket.connected);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} /> {/* 404 page */}
         </Routes>
       </Router>
-     
+
       <TestSocket />
     </>
   );
