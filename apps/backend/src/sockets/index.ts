@@ -27,8 +27,8 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     });
 
-    socket.on("room:join", (payload: { user: User, roomId: string}) => {
-      const { user, roomId } = payload
+    socket.on("room:join", (payload: { roomId: string}) => {
+      const { roomId } = payload
 
       socket.join(roomId)
 
@@ -36,18 +36,18 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`)
       } 
-      room.addUser(user)
+      room.addUser({ userId, name })
       io.in(roomId).emit("syncState", room.toObject());
     });
 
-    socket.on("room:leave", (payload: { user: User, roomId: string }) => {
-      const { user, roomId } = payload
+    socket.on("room:leave", (payload: { roomId: string }) => {
+      const { roomId } = payload
       
       const room = roomService.getRoom(roomId)
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`)
       } 
-      room.removeUser(user)
+      room.removeUser({userId, name})
       io.in(roomId).emit("syncState", room.toObject());
       
       // sync before the socket leaves so that it has the room object.
