@@ -4,6 +4,34 @@ import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
 import ResultsPage from "./pages/ResultsPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { useSocket } from "./contexts/SocketContext";
+import { useEffect } from "react";
+
+// TODO: can remove this component, just testing the socket connection works
+function TestSocket() {
+  const socket = useSocket();
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
+  useEffect(() => {
+    const onConnect = () => setIsConnected(true);
+    const onDisconnect = () => setIsConnected(false);
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    // Clean up listeners on unmount
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+    };
+  }, [socket]);
+
+  return (
+    <div>
+      <p>Socket status: {isConnected ? "🟢 Connected" : "🔴 Disconnected"}</p>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -17,6 +45,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />} /> {/* 404 page */}
         </Routes>
       </Router>
+     
+      <TestSocket />
     </>
   );
 }

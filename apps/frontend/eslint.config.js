@@ -9,6 +9,9 @@ export default tseslint.config([
   globalIgnores(["dist"]),
   {
     files: ["**/*.{ts,tsx}"],
+    parserOptions: {
+      project: "./tsconfig.json",
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
