@@ -1,5 +1,14 @@
-import { expect, test } from "vitest";
+import "dotenv/config";
+import { getUnswRestaurants } from "../services/unsw.service";
 
-test("adds 1 + 2 to equal 3", () => {
-  expect(1 + 2).toBe(3);
-});
+async function testGetUnswRestaurants() {
+  try {
+    const res = await getUnswRestaurants();
+
+    console.log("UNSW Restaurants:", JSON.parse(res));
+  } catch (error) {
+    console.error("Error fetching UNSW restaurants:", error);
+  }
+}
+
+testGetUnswRestaurants();

@@ -1,0 +1,162 @@
+UNSW Restaurants: [
+  {
+    name: 'Alleyway Kitchen UNSW',
+    rating: 4.7,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJ5-TCPV-xEmsRHzlDkmTCdzA',
+    user_ratings_total: 3
+  },
+  {
+    name: 'The Lounge UNSW',
+    rating: 4.4,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJBdzg226xEmsRoAcyaTmKvdo',
+    user_ratings_total: 55
+  },
+  {
+    name: 'PappaRich UNSW',
+    rating: 4,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJJYsI7MaxEmsRQuvaCtFM5e4',
+    user_ratings_total: 147
+  },
+  {
+    name: 'Zhou Mum Cafe',
+    rating: 4.1,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJpy9EmI6xEmsRuyE_2twzTgE',
+    user_ratings_total: 169
+  },
+  {
+    name: 'Yallah Eat Pita, Kebab & Shawarma Bar',
+    rating: 4.5,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJ7xThauixEmsRORPQeeiPD_E',
+    user_ratings_total: 1220
+  },
+  {
+    name: 'Quad Food Court',
+    rating: 4,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJISLkA4uxEmsRRmfpGuvlyjU',
+    user_ratings_total: 161
+  },
+  {
+    name: 'Soul Origin UNSW',
+    rating: 3.5,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJVy74Y5-xEmsRx4fMuam9AGE',
+    user_ratings_total: 51
+  },
+  {
+    name: 'Guzman y Gomez - UNSW',
+    rating: 3.9,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJeRzML4uxEmsRySrUd30ArIo',
+    user_ratings_total: 766
+  },
+  {
+    name: 'Gradueat',
+    rating: 4.3,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJ3yBeEiCyEmsR3Z_qiVlVJW0',
+    user_ratings_total: 186
+  },
+  {
+    name: 'The Best Taste of Asia',
+    rating: 4.4,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJIQTZxtCxEmsRcx7pB0gpYfc',
+    user_ratings_total: 68
+  },
+  {
+    name: 'Mathews Food Court',
+    rating: 4,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJqXN-EiCyEmsR504wKWue6DA',
+    user_ratings_total: 7
+  },
+  {
+    name: 'Modern BBQ Kingsford',
+    rating: 4,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJpYorwmaxEmsRXfhCa55Chqg',
+    user_ratings_total: 79
+  },
+  {
+    name: 'Coffee On Campus',
+    rating: 3.5,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJ40SFUYqxEmsRDDt0GCDMfhs',
+    user_ratings_total: 170
+  },
+  {
+    name: 'Sella Vinoteca',
+    rating: 4.8,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJ55lhxiazEmsRdMRG3xrGiaA',
+    user_ratings_total: 377
+  },
+  {
+    name: 'Southern Wok',
+    rating: 4.2,
+    is_open: false,
+    photos: [ [Object] ],
+    place_id: 'ChIJMQHavIqxEmsR2Xqg3z2a8dE',
+    user_ratings_total: 67
+  },
+  {
+    name: 'Manpuku Kingsford',
+    rating: 4.4,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJG7nTL4-xEmsRcOV5DUwaUwI',
+    user_ratings_total: 1036
+  },
+  {
+    name: 'Treasures at the Juniors',
+    rating: 3.7,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJ_Xrr2GGxEmsRglLaVRRkUbE',
+    user_ratings_total: 293
+  },
+  {
+    name: 'Del Punto',
+    rating: 4.4,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJlXPF5SKyEmsRomlDHHAOwFk',
+    user_ratings_total: 510
+  },
+  {
+    name: 'Wewok New Chinese Restaurant',
+    rating: 4.1,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJk1vtGDexEmsRR2XiBT2Oz9c',
+    user_ratings_total: 287
+  },
+  {
+    name: 'Haku',
+    rating: 4.6,
+    is_open: true,
+    photos: [ [Object] ],
+    place_id: 'ChIJ0-BeiCqzEmsRCehtxx-vJqI',
+    user_ratings_total: 161
+  }
+]

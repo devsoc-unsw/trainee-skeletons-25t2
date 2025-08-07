@@ -7,7 +7,6 @@ export default function setUpSocketListeners(
 ) {
   const roomService = new RoomService();
   io.on("connection", (socket) => {
-
     // their userId and name is in the socket.handshake.query
     const userId = socket.handshake.query.userId as string;
     const name = socket.handshake.query.name as string;
