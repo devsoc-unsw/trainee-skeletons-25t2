@@ -4,10 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-<<<<<<< HEAD
-=======
     "test:unsw": "tsx --require dotenv/config src/tests/some.test.ts",
->>>>>>> 77b65391f0056439b1df9c887b6091f16433152b
     "test": "vitest run",
     "build": "tsc",
     "lint": "eslint .",
