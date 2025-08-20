@@ -5,7 +5,7 @@ export async function sendTestMessage(req: Request, res: Response) {
   try {
     const message = someService.sendTestMessage();
     res.json(message);
-  } catch (err: any) {
-    res.status(500).json({ message: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ message: "An error has occured" });
   }
 }
