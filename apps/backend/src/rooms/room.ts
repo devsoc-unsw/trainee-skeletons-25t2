@@ -7,6 +7,9 @@ export class Room {
   id: string;
   owner: User;
   users: Set<User> = new Set();
+  // finished_users: Set<User> = new Set();
+  // code: string // room.code = the code that a user needs to input to join the room?
+
   // TODO: need list of restaurants, need to define type (probs look at google api type def)
 
   constructor(id: string, owner: User) {
@@ -20,7 +23,11 @@ export class Room {
   }
 
   removeUser(user: User) {
-    this.users.delete(user);
+    this.users.forEach(curr_user => {
+      if (curr_user.userId == user.userId && curr_user.name == user.name) {
+        this.users.delete(curr_user);
+      }
+    });
   }
 
   toObject() {

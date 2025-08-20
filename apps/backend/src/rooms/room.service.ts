@@ -13,8 +13,20 @@ export class RoomService {
     return this.rooms.get(roomId);
   }
 
+  // kind of just for testing -> can get rid of later?
+  getRooms(): Map<String, Room> {
+    return this.rooms;
+  }
+
   deleteRoom(roomId: string): boolean {
     return this.rooms.delete(roomId);
+  }
+
+  // go through rooms and kick out a user
+  disconnectUser(user: User)  {
+    this.rooms.forEach(room => {
+      room.removeUser(user)
+    })
   }
 
   // TODO: add more operations here!
