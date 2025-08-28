@@ -2,7 +2,7 @@ import { DefaultEventsMap, Server } from "socket.io";
 import { User } from "../rooms/room";
 import { RoomService } from "../rooms/room.service";
 
-type SocketState = {
+export type SocketState = {
   userId: string;
   name: string;
   roomId: string | null;
@@ -35,31 +35,31 @@ export default function setUpSocketListeners(
     });
 
     socket.on("room:join", (payload: { roomId: string }) => {
-      const { roomId } = payload
-      
-      socket.join(roomId)
+      const { roomId } = payload;
+
+      socket.join(roomId);
       socket.data.roomId = roomId;
 
-      const room = roomService.getRoom(roomId)
+      const room = roomService.getRoom(roomId);
       if (room === undefined) {
-        throw Error(`room with roomId ${roomId} could not be found`)
-      } 
-      room.addUser({ userId, name })
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+      room.addUser({ userId, name });
       io.in(roomId).emit("syncState", room.toObject());
     });
 
     socket.on("room:leave", (payload: { roomId: string }) => {
-      const { roomId } = payload
-      
-      const room = roomService.getRoom(roomId)
+      const { roomId } = payload;
+
+      const room = roomService.getRoom(roomId);
       if (room === undefined) {
-        throw Error(`room with roomId ${roomId} could not be found`)
-      } 
-      room.removeUser({userId, name})
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+      room.removeUser({ userId, name });
       io.in(roomId).emit("syncState", room.toObject());
-      
+
       // sync before the socket leaves so that it has the room object.
-      socket.leave(roomId)
+      socket.leave(roomId);
     });
 
     socket.on("disconnect", () => {
@@ -71,10 +71,10 @@ export default function setUpSocketListeners(
       // remove the user from the room as well
       if (socket.data.roomId !== null) {
         const roomId = socket.data.roomId;
-        const room = roomService.getRoom(socket.data.roomId)
+        const room = roomService.getRoom(socket.data.roomId);
 
         if (room !== undefined) {
-          room?.removeUser({ userId, name })
+          room?.removeUser({ userId, name });
           io.in(roomId).emit("syncState", room.toObject());
         }
       }

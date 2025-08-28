@@ -4,7 +4,7 @@ import someRoutes from "./routes/some.route";
 import "dotenv/config";
 import { DefaultEventsMap, Server } from "socket.io";
 import { createServer } from "node:http";
-import setUpSocketListeners from "./sockets";
+import setUpSocketListeners, { SocketState } from "./sockets";
 import { User } from "./rooms/room";
 
 const app = express();
@@ -13,7 +13,7 @@ const io = new Server<
   DefaultEventsMap,
   DefaultEventsMap,
   DefaultEventsMap,
-  User
+  SocketState
 >(httpServer, {
   // TODO: put this in env variable
   cors: {
