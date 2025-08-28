@@ -1,7 +1,7 @@
 import { Room, User } from "./room";
 
 export class RoomService {
-  private rooms: Map<String, Room> = new Map();
+  private rooms: Map<string, Room> = new Map();
 
   createRoom(roomId: string, owner: User): Room {
     const room = new Room(roomId, owner);
