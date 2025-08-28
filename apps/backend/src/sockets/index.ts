@@ -1,5 +1,5 @@
 import { DefaultEventsMap, Server } from "socket.io";
-import { User } from "../rooms/room";
+import { User } from "../types";
 import { RoomService } from "../rooms/room.service";
 
 export type SocketState = {
@@ -60,6 +60,28 @@ export default function setUpSocketListeners(
 
       // sync before the socket leaves so that it has the room object.
       socket.leave(roomId);
+    });
+
+    // TODO:
+    // change state of every User to be VOTING
+    socket.on("room:startVoting", () => {
+    });
+
+    // TODO:
+    // given some details return a list of Restaurants:
+    // this might be an API endpoint instead but for now stub as a websocket event
+    socket.on("room:findRestaurants", () => {
+    });
+
+    // TODO:
+    // vote for a restaurant, vote must be: -1 or 1 or 2
+    socket.on("room:voteRestaurant", (payload: { restaurantId: number, vote: number}) => {
+    });
+
+    // TODO:
+    // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
+    // their votes.
+    socket.on("room:prepareResults", () => {
     });
 
     socket.on("disconnect", () => {
