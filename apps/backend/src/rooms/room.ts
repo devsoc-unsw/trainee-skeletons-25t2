@@ -26,9 +26,9 @@ export class Room {
     this.users.add(user);
   }
 
-  removeUser(user: User) {
+  removeUser(userId: string) {
     this.users.forEach(curr_user => {
-      if (curr_user.userId == user.userId && curr_user.name == user.name) {
+      if (curr_user.userId == userId) {
         this.users.delete(curr_user);
       }
     });

@@ -25,7 +25,7 @@ export default function setUpSocketListeners(
     // TODO: Define socket event handlers here
     socket.on("room:create", (payload: { roomId: string }) => {
       const { roomId } = payload;
-      const room = roomService.createRoom(roomId, { userId, name });
+      const room = roomService.createRoom(roomId, { userId, name, userState: "WAITING"});
       socket.join(roomId);
       socket.data.roomId = roomId;
 
@@ -44,7 +44,7 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
       }
-      room.addUser({ userId, name });
+      room.addUser({ userId, name, userState: "WAITING" });
       io.in(roomId).emit("syncState", room.toObject());
     });
 
@@ -55,7 +55,7 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
       }
-      room.removeUser({ userId, name });
+      room.removeUser(userId);
       io.in(roomId).emit("syncState", room.toObject());
 
       // sync before the socket leaves so that it has the room object.
@@ -96,7 +96,7 @@ export default function setUpSocketListeners(
         const room = roomService.getRoom(socket.data.roomId);
 
         if (room !== undefined) {
-          room?.removeUser({ userId, name });
+          room?.removeUser(userId);
           io.in(roomId).emit("syncState", room.toObject());
         }
       }
