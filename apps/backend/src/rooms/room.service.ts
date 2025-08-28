@@ -1,4 +1,5 @@
-import { Room, User } from "./room";
+import { Room } from "./room";
+import { User } from "../types";
 
 export class RoomService {
   private rooms: Map<string, Room> = new Map();
