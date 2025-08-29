@@ -1,4 +1,4 @@
-import { User, Restaurant } from "../types";
+import type { User, Restaurant } from "../types";
 
 export class Room {
   id: string;
