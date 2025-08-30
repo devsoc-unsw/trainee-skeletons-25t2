@@ -1,11 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import RoomPage from "./pages/RoomPage";
+import SwipePage from "./pages/SwipePage";
 import ResultsPage from "./pages/ResultsPage";
+import PreferencePage from "./pages/PreferencesPage";
+import HostPage from "./pages/HostPage";
+import Navbar from "./components/NavBar";
+
 import NotFoundPage from "./pages/NotFoundPage";
-import { useEffect } from "react";
 import { SocketContext } from "./contexts/SocketContext";
 
 // TODO: can remove this component, just testing the socket connection works
@@ -33,22 +36,37 @@ function TestSocket() {
     </div>
   );
 }
-
 function App() {
   return (
-    <>
-      {/* ROUTING */}
+    <div className="flex flex-col min-h-screen">
       <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/room/:roomId" element={<RoomPage />} />
-          <Route path="/results/:roomId" element={<ResultsPage />} />
-          <Route path="*" element={<NotFoundPage />} /> {/* 404 page */}
-        </Routes>
-      </Router>
+        {/* Navbar */}
+        <header className="sticky top-0 z-20">
+          <Navbar />
+        </header>
 
-      <TestSocket />
-    </>
+        {/* Main content */}
+        <main className="flex-1 flex flex-col justify-center items-center">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/room/:roomId/preferences"
+              element={<PreferencePage />}
+            />
+            <Route path="/room/:roomId/host" element={<HostPage />} />
+            <Route path="/room/:roomId/swipe" element={<SwipePage />} />
+            <Route path="/room/:roomId/results" element={<ResultsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+
+        {/* Footer */}
+        <footer className=" p-4 text-center mt-5 text-white">
+          <TestSocket />
+          {/* <Footer /> */}
+        </footer>
+      </Router>
+    </div>
   );
 }
 
