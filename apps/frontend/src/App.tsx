@@ -6,7 +6,7 @@ import SwipePage from "./pages/SwipePage";
 import ResultsPage from "./pages/ResultsPage";
 import PreferencePage from "./pages/PreferencesPage";
 import HostPage from "./pages/HostPage";
-import Navbar from "./components/NavBar";
+import NavigationBar from "./components/NavigationBar";
 
 import NotFoundPage from "./pages/NotFoundPage";
 import { SocketContext } from "./contexts/SocketContext";
@@ -42,7 +42,7 @@ function App() {
       <Router>
         {/* Navbar */}
         <header className="sticky top-0 z-20">
-          <Navbar />
+          <NavigationBar />
         </header>
 
         {/* Main content */}

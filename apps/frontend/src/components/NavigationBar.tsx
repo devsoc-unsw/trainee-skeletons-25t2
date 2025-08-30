@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function NavigationBar() {
   return (
     <nav className="flex justify-between items-center px-5 py-2 backdrop-blur-sm">
       {/* Logo LHS */}
