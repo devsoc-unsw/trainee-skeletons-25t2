@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 
-export default function RoomPage() {
+export default function SwipePage() {
   // IF HOST -> option to share link, play the game, Host control panel where you can see how many people completed + end vote early + timer of when it ends
   // IF ATTENDEE -> play the game.
   const { roomId } = useParams();
 
-  return <h1>Room Page — Room ID: {roomId}</h1>;
+  return <h1>Swipe Page — Room ID: {roomId}</h1>;
 }
