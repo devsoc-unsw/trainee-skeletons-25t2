@@ -1,4 +1,5 @@
-import { Room, User } from "./room";
+import { Room } from "./room";
+import { User } from "../types";
 
 export class RoomService {
   private rooms: Map<string, Room> = new Map();
@@ -23,11 +24,13 @@ export class RoomService {
   }
 
   // go through rooms and kick out a user
-  disconnectUser(user: User)  {
-    this.rooms.forEach(room => {
-      room.removeUser(user)
-    })
-  }
+  // just assume that a User can only be in 1 room at a time so 
+  // dont need this rn
+  // disconnectUser(user: User)  {
+  //   this.rooms.forEach(room => {
+  //     room.removeUser(user)
+  //   })
+  // }
 
   // TODO: add more operations here!
 }

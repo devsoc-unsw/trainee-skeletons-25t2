@@ -5,7 +5,6 @@ import "dotenv/config";
 import { DefaultEventsMap, Server } from "socket.io";
 import { createServer } from "node:http";
 import setUpSocketListeners, { SocketState } from "./sockets";
-import { User } from "./rooms/room";
 
 const app = express();
 const httpServer = createServer(app);

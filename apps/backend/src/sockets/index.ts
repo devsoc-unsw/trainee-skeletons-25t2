@@ -1,5 +1,5 @@
 import { DefaultEventsMap, Server } from "socket.io";
-import { User } from "../rooms/room";
+import { User } from "../types";
 import { RoomService } from "../rooms/room.service";
 
 export type SocketState = {
@@ -25,7 +25,7 @@ export default function setUpSocketListeners(
     // TODO: Define socket event handlers here
     socket.on("room:create", (payload: { roomId: string }) => {
       const { roomId } = payload;
-      const room = roomService.createRoom(roomId, { userId, name });
+      const room = roomService.createRoom(roomId, { userId, name, userState: "WAITING"});
       socket.join(roomId);
       socket.data.roomId = roomId;
 
@@ -44,7 +44,7 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
       }
-      room.addUser({ userId, name });
+      room.addUser({ userId, name, userState: "WAITING" });
       io.in(roomId).emit("syncState", room.toObject());
     });
 
@@ -55,11 +55,33 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
       }
-      room.removeUser({ userId, name });
+      room.removeUser(userId);
       io.in(roomId).emit("syncState", room.toObject());
 
       // sync before the socket leaves so that it has the room object.
       socket.leave(roomId);
+    });
+
+    // TODO:
+    // change state of every User to be VOTING
+    socket.on("room:startVoting", () => {
+    });
+
+    // TODO:
+    // given some details return a list of Restaurants:
+    // this might be an API endpoint instead but for now stub as a websocket event
+    socket.on("room:findRestaurants", () => {
+    });
+
+    // TODO:
+    // vote for a restaurant, vote must be: -1 or 1 or 2
+    socket.on("room:voteRestaurant", (payload: { restaurantId: number, vote: number}) => {
+    });
+
+    // TODO:
+    // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
+    // their votes.
+    socket.on("room:prepareResults", () => {
     });
 
     socket.on("disconnect", () => {
@@ -74,7 +96,7 @@ export default function setUpSocketListeners(
         const room = roomService.getRoom(socket.data.roomId);
 
         if (room !== undefined) {
-          room?.removeUser({ userId, name });
+          room?.removeUser(userId);
           io.in(roomId).emit("syncState", room.toObject());
         }
       }

@@ -2,6 +2,8 @@ import { beforeEach, afterEach, afterAll, beforeAll, describe, expect, test } fr
 import { io as ioc, Socket as ClientSocket } from "socket.io-client";
 import { httpServer } from "../server";
 import { RoomService } from "../rooms/room.service";
+import { UserState } from "../types";
+import { usersTable } from "../db/schema";
 
 describe("Socket Integration Tests", () => {
   const userId = "123";
@@ -45,7 +47,7 @@ describe("Socket Integration Tests", () => {
       clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
         resolve();
       });
     });
@@ -58,7 +60,7 @@ describe("Socket Integration Tests", () => {
       clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING"});
         resolve()
       });
     });
@@ -67,8 +69,8 @@ describe("Socket Integration Tests", () => {
       clientSocket1.emit("room:join", { roomId: roomId})
 
       clientSocket1.on("syncState", (room) => {
-        expect(room.users).toContainEqual({ userId, name });
-        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
+        expect(room.users).toContainEqual({ userId: userId1, name: name1, userState: "WAITING" });
         expect(room.users.length).toStrictEqual(2);
         resolve();
       })     
@@ -84,7 +86,7 @@ describe("Socket Integration Tests", () => {
       clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
         resolve();
       });
     });
@@ -93,8 +95,8 @@ describe("Socket Integration Tests", () => {
       clientSocket1.emit("room:join", { roomId: roomId})
 
       clientSocket1.on("syncState", (room) => {
-        expect(room.users).toContainEqual({ userId, name });
-        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
+        expect(room.users).toContainEqual({ userId: userId1, name: name1, userState: "WAITING" });
         resolve();
       })
     });
@@ -104,7 +106,7 @@ describe("Socket Integration Tests", () => {
       
       clientSocket.on("syncState", (room) => {
         expect(room.users.length).toStrictEqual(1);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
         resolve()
       })
     });
@@ -156,7 +158,7 @@ const userId = "123";
       clientSocket.on("syncState", (room) => {
         expect(room).toBeDefined();
         expect(room.id).toBe(roomId);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
         resolve();
       });
     });
@@ -165,8 +167,8 @@ const userId = "123";
       clientSocket1.emit("room:join", { roomId: roomId})
 
       clientSocket1.on("syncState", (room) => {
-        expect(room.users).toContainEqual({ userId, name });
-        expect(room.users).toContainEqual({ userId: userId1, name: name1 });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
+        expect(room.users).toContainEqual({ userId: userId1, name: name1, userState: "WAITING" });
         resolve();
       })
     });
@@ -176,7 +178,7 @@ const userId = "123";
       
       clientSocket.on("syncState", (room) => {
         expect(room.users.length).toStrictEqual(1);
-        expect(room.users).toContainEqual({ userId, name });
+        expect(room.users).toContainEqual({ userId, name, userState: "WAITING" });
         resolve()
       })
     });
