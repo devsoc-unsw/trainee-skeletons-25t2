@@ -5,9 +5,9 @@ export type User = {
 };
 
 export type Restaurant = {
-  id: number,
+  id: string,
   name: string,
-  distance: number,
+  distance: number, // metres
   cuisine: string,
   rating: number,
   is_open: boolean,
