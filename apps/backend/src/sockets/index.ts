@@ -65,6 +65,19 @@ export default function setUpSocketListeners(
     // TODO:
     // change state of every User to be VOTING
     socket.on("room:startVoting", () => {
+      const roomId = socket.data.roomId;
+      
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.startVoting();
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     // TODO:
@@ -96,7 +109,7 @@ export default function setUpSocketListeners(
         const room = roomService.getRoom(socket.data.roomId);
 
         if (room !== undefined) {
-          room?.removeUser(userId);
+          room.removeUser(userId);
           io.in(roomId).emit("syncState", room.toObject());
         }
       }

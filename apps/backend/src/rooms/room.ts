@@ -1,4 +1,5 @@
 import type { User, Restaurant } from "../types";
+import { v4 as uuidv4 } from 'uuid';
 
 export class Room {
   id: string;
@@ -6,7 +7,7 @@ export class Room {
   users: Set<User> = new Set();
   // finished_users: Set<User> = new Set();
   code: string // room.code = the code that a user needs to input to join the room?
-  endDate: Date;
+  endDate: Date; 
   restaurants: Restaurant[] | null;
   // TODO: need list of restaurants, need to define type (probs look at google api type def)
 
@@ -14,7 +15,7 @@ export class Room {
     this.id = id;
     this.owner = owner;
     this.addUser(owner);
-    this.code = "TODO";
+    this.code = uuidv4().slice(0,4); // could (should) add collision checking 
     this.restaurants = null;
 
     const defaultDate = new Date();
@@ -34,6 +35,15 @@ export class Room {
     });
   }
 
+  startVoting() {
+    this.users.forEach(user => {
+      user.userState = "VOTING";
+    });
+
+    // TODO:
+    // add timer logic here
+  }
+  
   toObject() {
     return {
       id: this.id,
@@ -42,9 +52,4 @@ export class Room {
     };
   }
 
-  // TODO:
-  // Generate a unique 4 digit code for users to join the room with
-  generateCode() {
-    this.code = "TODO";
-  }
 }
