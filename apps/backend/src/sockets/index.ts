@@ -62,8 +62,8 @@ export default function setUpSocketListeners(
       socket.leave(roomId);
     });
 
-    // TODO:
     // change state of every User to be VOTING
+    // add a guard here to check that the user calling is the owner of the room
     socket.on("room:startVoting", () => {
       const roomId = socket.data.roomId;
       
@@ -74,6 +74,11 @@ export default function setUpSocketListeners(
       const room = roomService.getRoom(roomId);
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
+      }
+      
+      const ownerId = room.owner.userId;
+      if (ownerId !== socket.data.userId) {
+        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
       }
 
       room.startVoting();
