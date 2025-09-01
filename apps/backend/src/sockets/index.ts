@@ -75,7 +75,7 @@ export default function setUpSocketListeners(
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
       }
-      
+
       const ownerId = room.owner.userId;
       if (ownerId !== socket.data.userId) {
         throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
@@ -93,7 +93,7 @@ export default function setUpSocketListeners(
 
     // TODO:
     // vote for a restaurant, vote must be: -1 or 1 or 2
-    socket.on("room:voteRestaurant", (payload: { restaurantId: number, vote: number}) => {
+    socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
     });
 
     // TODO:

@@ -1,3 +1,4 @@
+import { Result } from "pg";
 import type { User, Restaurant } from "../types";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,7 +9,7 @@ export class Room {
   // finished_users: Set<User> = new Set();
   code: string // room.code = the code that a user needs to input to join the room?
   endDate: Date; 
-  restaurants: Restaurant[] | null;
+  restaurants: Restaurant[];
   // TODO: need list of restaurants, need to define type (probs look at google api type def)
 
   constructor(id: string, owner: User) {
@@ -16,7 +17,7 @@ export class Room {
     this.owner = owner;
     this.addUser(owner);
     this.code = uuidv4().slice(0,4); // could (should) add collision checking 
-    this.restaurants = null;
+    this.restaurants = [];
 
     const defaultDate = new Date();
     defaultDate.setDate(defaultDate.getDate() + 1);
@@ -25,6 +26,18 @@ export class Room {
 
   addUser(user: User) {
     this.users.add(user);
+  }
+
+  addRestaurant(restaurant: Restaurant) {
+    this.restaurants.push(restaurant);
+  }
+
+  getRestaurant(restaurantId: string) {
+    this.restaurants.forEach(resto => {
+      if (resto.id === restaurantId) {
+        return resto;
+      }
+    })
   }
 
   removeUser(userId: string) {
