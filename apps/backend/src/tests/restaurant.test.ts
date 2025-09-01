@@ -17,6 +17,49 @@ describe("test room:startVoting", () => {
   const name1 = "Tim";
   let clientSocket1: ClientSocket;
   const roomId = "123456";
+      const restaurant1Id ='ChIJ5-TCPV-xEmsRHzlDkmTCdzA';
+  const restaurant2Id = 'ChIJ7xThauixEmsRORPQeeiPD_E';
+  const restaurant3Id = 'ChIJeRzML4uxEmsRySrUd30ArIo';
+  const NO = -1;
+  const YES = 1;
+  const SUPERYES = 2; 
+
+
+  const restaurant1 = {
+    id: restaurant1Id,
+    name: 'Alleyway Kitchen UNSW',
+    distance: 500,
+    cuisine: "Chinese",
+    rating: 4.7,
+    votes: 0,
+    is_open: false,
+    user_ratings_total: 3,
+    reviews: ["best value restaurant on campus"]
+  };
+
+
+  const restaurant2 = {
+    id: restaurant2Id,
+    name: 'Yallah Eat Pita, Kebab & Shawarma Bar',
+    distance: 250,
+    cuisine: "somewhere in the middle east/mediterranean",
+    rating: 4.5,
+    is_open: true,
+    votes: 0,
+    user_ratings_total: 1220,
+    reviews: ["yallah eats is certified bussin - timothy hidalgo"]
+  };
+
+  const restaurant3 = {
+    id: restaurant3Id,
+    name: 'Guzman y Gomez - UNSW',
+    distance: 300,
+    cuisine: "mexican",
+    is_open: true,
+    votes: 0,
+    user_ratings_total: 766,
+    reviews: ["OVERRATED ASFFFFFFFF"]
+  };
 
   // We need to set up a test client socket and set up the http server to test
   beforeEach(async () => {
@@ -79,6 +122,54 @@ describe("test room:startVoting", () => {
         resolve();
       })     
     });
+
+    
+    // vote for a restaurant w/ -1, 1, 2 (no, yes, superyes)
+    // remember clientSocket is the host, clientSocket1 is just another user.
+    await new Promise<void>((resolve) => {
+      clientSocket.emit("room:voteResturant",  { restuarantId: restaurant1Id, vote: NO} );
+      clientSocket1.emit("room:voteResturant",  { restuarantId: restaurant1Id, vote: NO} );
+
+      clientSocket.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant1Id).votes).toStrictEqual(-2);
+        resolve();
+      })    
+      clientSocket1.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant1Id).votes).toStrictEqual(-2);
+        resolve();
+      })      
+    });
+
+    await new Promise<void>((resolve) => {
+      clientSocket.emit("room:voteResturant",  { restuarantId: restaurant2Id, vote: YES} );
+      clientSocket1.emit("room:voteResturant",  { restuarantId: restaurant2Id, vote: YES} );
+
+      clientSocket.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant1Id).votes).toStrictEqual(2);
+        resolve();
+      })     
+
+      clientSocket1.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant1Id).votes).toStrictEqual(2);
+        resolve();
+      })   
+    });
+
+    await new Promise<void>((resolve) => {
+      clientSocket.emit("room:voteResturant",  { restuarantId: restaurant3Id, vote: SUPERYES} );
+      clientSocket1.emit("room:voteResturant",  { restuarantId: restaurant3Id, vote: SUPERYES} );
+
+      clientSocket.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant3Id).votes).toStrictEqual(-2);
+        resolve();
+      });     
+
+      clientSocket1.once("syncState", (room) => {
+        expect(room.getRestaurant(restaurant3Id).votes).toStrictEqual(-2);
+        resolve();
+      });
+    });
+    
   });
   
 });
