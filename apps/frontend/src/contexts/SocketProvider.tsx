@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { SocketContext } from "./SocketContext";
+import { SocketContext } from "./socketContext";
 import type { User } from "../types";
 import { io, Socket } from "socket.io-client";
 
 type SocketProviderProps = {
-  user: User;
+  user: User | null;
   children: React.ReactNode;
 };
 
@@ -15,16 +15,18 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   children,
 }) => {
   const socketRef = useRef<Socket | null>(null);
-  const { name, userId } = user;
 
   useEffect(() => {
+    if (!user) return;
+
+    const { name, userId } = user;
     const socket = io(URL, { query: { name, userId } });
     socketRef.current = socket;
 
     return () => {
       socket.disconnect();
     };
-  }, [name, userId]);
+  }, [user]);
 
   return (
     <SocketContext.Provider value={{ socket: socketRef.current }}>
