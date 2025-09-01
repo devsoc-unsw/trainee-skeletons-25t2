@@ -1,18 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { SocketContext } from "./SocketContext";
-import { socket } from "../utils/socket";
+import type { User } from "../types";
+import { io, Socket } from "socket.io-client";
 
-export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
+type SocketProviderProps = {
+  user: User;
+  children: React.ReactNode;
+};
+
+const URL = "http://localhost:3000";
+
+export const SocketProvider: React.FC<SocketProviderProps> = ({
+  user,
   children,
 }) => {
+  const socketRef = useRef<Socket | null>(null);
+  const { name, userId } = user;
+
   useEffect(() => {
-    socket.connect();
+    const socket = io(URL, { query: { name, userId } });
+    socketRef.current = socket;
+
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [name, userId]);
 
   return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket: socketRef.current }}>
+      {children}
+    </SocketContext.Provider>
   );
 };

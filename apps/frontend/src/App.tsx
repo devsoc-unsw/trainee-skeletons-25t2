@@ -1,4 +1,3 @@
-import { useContext, useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -9,33 +8,7 @@ import HostPage from "./pages/HostPage";
 import NavigationBar from "./components/NavigationBar";
 
 import NotFoundPage from "./pages/NotFoundPage";
-import { SocketContext } from "./contexts/SocketContext";
 
-// TODO: can remove this component, just testing the socket connection works
-function TestSocket() {
-  const socket = useContext(SocketContext);
-  const [isConnected, setIsConnected] = useState(socket.connected);
-
-  useEffect(() => {
-    const onConnect = () => setIsConnected(true);
-    const onDisconnect = () => setIsConnected(false);
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-
-    // Clean up listeners on unmount
-    return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-    };
-  }, [socket]);
-
-  return (
-    <div>
-      <p>Socket status: {isConnected ? "🟢 Connected" : "🔴 Disconnected"}</p>
-    </div>
-  );
-}
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -62,7 +35,6 @@ function App() {
 
         {/* Footer */}
         <footer className=" p-4 text-center mt-5 text-white">
-          <TestSocket />
           {/* <Footer /> */}
         </footer>
       </Router>
