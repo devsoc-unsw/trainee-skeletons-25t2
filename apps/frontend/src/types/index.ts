@@ -1,1 +1,1 @@
-export type { User } from "./types.ts";
+export type { User, Room } from "./types.ts";
