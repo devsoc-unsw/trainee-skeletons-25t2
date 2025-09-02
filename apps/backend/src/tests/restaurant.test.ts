@@ -4,7 +4,9 @@ import { httpServer } from "../server";
 import { RoomService } from "../rooms/room.service";
 import { Room } from "../rooms/room";
 
-// this test file tests the voting for a restaurant
+// this test file tests adding Restaurants
+// and also tests voting for a restaurant
+
 
 // helper to getRestaurant from the room object, since it is not actually a Room but an object
 // with all the same fields
@@ -76,7 +78,7 @@ describe("test room:addRestaurant", () => {
   };
 
   // We need to set up a test client socket and set up the http server to test
-  beforeEach(async () => {
+  beforeAll(async () => {
     const port = 3001;
     await new Promise<void>((resolve) =>
       httpServer.listen(port, () => {
@@ -93,14 +95,14 @@ describe("test room:addRestaurant", () => {
   });
 
   // Need to ensure the socket(s) is not left open
-  afterEach(async () => {
+  afterAll(async () => {
     httpServer.close();
     clientSocket.disconnect();
     clientSocket1.disconnect();
   });
 
 
-  test("1. create a room, join two users and start voting", async () => {
+  test("1. test adding restaurants and starting voting", async () => {
     await new Promise<void>((resolve) => {
       clientSocket.emit("room:create", { roomId });
 
@@ -169,64 +171,65 @@ describe("test room:addRestaurant", () => {
         resolve();
       })     
     });
-
     
-    // vote for a restaurant w/ -1, 1, 2 (no, yes, superyes)
-    // remember clientSocket is the host, clientSocket1 is just another user.
-    await new Promise<void>((resolve) => {
-      clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant1Id, vote: NO} );
-
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant1Id).votes).toStrictEqual(-1);
-        resolve();
-      })      
     });
 
-    // SOME KIND OF ISSUE WITH SYNCSTATE FOR CLIENTSOCKET1?
-    
-    await new Promise<void>((resolve) => {
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant1Id).votes).toStrictEqual(-2);
-        resolve();
-      })      
-      clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant1Id, vote: NO} );
+    test("2. test voting restaurants", async () => {
+        // vote for a restaurant w/ -1, 1, 2 (no, yes, superyes)
+        // remember clientSocket is the host, clientSocket1 is just another user.
+        await new Promise<void>((resolve) => {
+        clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant1Id, vote: NO} );
 
-    });
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant1Id).votes).toStrictEqual(-1);
+            resolve();
+        })      
+        });
 
-    await new Promise<void>((resolve) => {
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant2Id).votes).toStrictEqual(1);
-        resolve();
-      });     
-      clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant2Id, vote: YES} );
+        await new Promise<void>((resolve) => {
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant1Id).votes).toStrictEqual(-2);
+            resolve();
+        })      
+        clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant1Id, vote: NO} );
 
-    });
+        });
 
-    await new Promise<void>((resolve) => {
-      clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant2Id, vote: YES} );
+        await new Promise<void>((resolve) => {
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant2Id).votes).toStrictEqual(1);
+            resolve();
+        });     
+        clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant2Id, vote: YES} );
 
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant2Id).votes).toStrictEqual(2);
-        resolve();
-      })     
-    });
+        });
 
-  await new Promise<void>((resolve) => {
-      clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant3Id, vote: SUPERYES} );
+        await new Promise<void>((resolve) => {
+        clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant2Id, vote: YES} );
 
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant3Id).votes).toStrictEqual(2);
-        resolve();
-      });     
-    });
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant2Id).votes).toStrictEqual(2);
+            resolve();
+        })     
+        });
 
     await new Promise<void>((resolve) => {
-      clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant3Id, vote: SUPERYES} );
+        clientSocket.emit("room:voteRestaurant",  { restaurantId: restaurant3Id, vote: SUPERYES} );
 
-      clientSocket.once("syncState", (room) => {
-        expect(getRestaurant(room, restaurant3Id).votes).toStrictEqual(4);
-        resolve();
-      });     
-      });
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant3Id).votes).toStrictEqual(2);
+            resolve();
+        });     
+        });
+
+        await new Promise<void>((resolve) => {
+        clientSocket1.emit("room:voteRestaurant",  { restaurantId: restaurant3Id, vote: SUPERYES} );
+
+        clientSocket.once("syncState", (room) => {
+            expect(getRestaurant(room, restaurant3Id).votes).toStrictEqual(4);
+            resolve();
+        });     
+        });
     });
+
 });
