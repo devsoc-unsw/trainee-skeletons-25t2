@@ -12,7 +12,7 @@ export const roomAtom = atom<Room | null>(null);
 
 // Derived state from rooms, think of these as like views/slices of parts of the original room state.
 // Try to use these over the actual room atom when reading state.
-export const usersAtom = atom((get) => get(roomAtom)?.users ?? []);
+export const playersAtom = atom((get) => get(roomAtom)?.users ?? []);
 export const roomPropsAtom = atom((get) => {
   const room = get(roomAtom);
   if (!room) return null;
