@@ -7,7 +7,7 @@ export class Room {
   owner: User;
   users: Set<User> = new Set();
   // finished_users: Set<User> = new Set();
-  code: string // room.code = the code that a user needs to input to join the room?
+  code: string; // room.code = the code that a user needs to input to join the room?
   endDate: Date; 
   restaurants: Restaurant[];
   // TODO: need list of restaurants, need to define type (probs look at google api type def)
@@ -38,6 +38,16 @@ export class Room {
         return resto;
       }
     })
+
+    return null;
+  }
+
+  voteRestaurant(restaurantId: string, vote: number) {
+    for (const resto of this.restaurants)  {
+      if (resto.id === restaurantId) {
+        resto.votes += vote;
+      }
+    }
   }
 
   removeUser(userId: string) {
@@ -62,6 +72,9 @@ export class Room {
       id: this.id,
       owner: this.owner,
       users: Array.from(this.users),
+      code: this.code,
+      endDate: this.endDate,
+      restaurants: this.restaurants
     };
   }
 

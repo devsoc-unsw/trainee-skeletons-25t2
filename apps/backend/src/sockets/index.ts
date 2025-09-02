@@ -1,6 +1,7 @@
 import { DefaultEventsMap, Server } from "socket.io";
-import { User } from "../types";
+import { Restaurant, User } from "../types";
 import { RoomService } from "../rooms/room.service";
+import { getUnswRestaurants } from "../services/unsw.service";
 
 export type SocketState = {
   userId: string;
@@ -94,6 +95,38 @@ export default function setUpSocketListeners(
     // TODO:
     // vote for a restaurant, vote must be: -1 or 1 or 2
     socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
+      const { restaurantId, vote } = payload;
+      console.log(`voting for ${restaurantId} with vote ${vote}`);
+
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.voteRestaurant(restaurantId, vote);
+      io.in(roomId).emit("syncState", room.toObject());
+    });
+
+    socket.on("room:addRestaurant", (payload: { restaurant: Restaurant }) => {
+      const { restaurant } = payload;
+
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.addRestaurant(restaurant);
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     // TODO:
