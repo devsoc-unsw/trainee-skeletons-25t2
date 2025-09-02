@@ -96,7 +96,6 @@ export default function setUpSocketListeners(
     // vote for a restaurant, vote must be: -1 or 1 or 2
     socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
       const { restaurantId, vote } = payload;
-      console.log(`voting for ${restaurantId} with vote ${vote}`);
 
       const roomId = socket.data.roomId;
       if (roomId === null) {
@@ -127,7 +126,7 @@ export default function setUpSocketListeners(
 
       room.addRestaurant(restaurant);
       io.in(roomId).emit("syncState", room.toObject());
-    });
+    }); 
 
     // TODO:
     // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 

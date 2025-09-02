@@ -33,12 +33,11 @@ export class Room {
   }
 
   getRestaurant(restaurantId: string) {
-    this.restaurants.forEach(resto => {
+    for (const resto of this.restaurants) {
       if (resto.id === restaurantId) {
         return resto;
       }
-    })
-
+    }
     return null;
   }
 
