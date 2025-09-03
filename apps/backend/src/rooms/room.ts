@@ -69,7 +69,7 @@ export class Room {
 
   endVoting() {
     this.users.forEach(user => {
-      user.userState = "VOTING";
+      user.userState = "FINISHED";
     });
 
     this.gameState = "FINISHED";
@@ -98,7 +98,8 @@ export class Room {
       users: Array.from(this.users),
       code: this.code,
       endDate: this.endDate,
-      restaurants: this.restaurants
+      restaurants: this.restaurants,
+      gameState: this.gameState
     };
   }
 
