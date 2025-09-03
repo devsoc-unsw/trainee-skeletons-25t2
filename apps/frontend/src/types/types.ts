@@ -13,4 +13,6 @@ export type Room = {
   // TODO: Add restaraunt
 };
 
+export type GameState = "WAITING" | "STARTED" | "FINISHED";
+
 // TODO: define type for restaraunt

@@ -1,4 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { useSocket } from "../contexts";
+import { useEffect } from "react";
+import type { GameState } from "../types";
 
 export default function HostPage() {
   // IF HOST -> option to share link, play the game, Host control panel where you can see how many people completed + end vote early + timer of when it ends
@@ -6,6 +9,29 @@ export default function HostPage() {
   // Contained State: Players, Restaurants, Room Details, Votes?
   // Define socket events here for updating room, vote update broadcasts, updating players, updating game state
   const { roomId } = useParams();
+  const { socket } = useSocket();
 
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("user:join", (userId: string) => {});
+    socket.on("user:leave", (userId: string) => {});
+    socket.on("game:state_updated", (gameState: GameState) => {});
+    // TODO: add params
+    socket.on("game:vote_restaurant", () => {});
+
+    return () => {
+      socket.off("user:join");
+      socket.off("user:leave");
+      socket.off("user:state_updated");
+      socket.off("game:vote_restaurant");
+    };
+  }, [socket]);
+
+  if (!socket) {
+    return <Navigate to="/404" replace />;
+  }
+
+  // TODO: handle redirect for game state change
   return <h1>Host Page — Room ID: {roomId}</h1>;
 }
