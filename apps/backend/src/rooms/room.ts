@@ -1,20 +1,20 @@
 import type { User, Restaurant } from "../types";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export class Room {
   id: string;
   owner: User;
   users: Set<User> = new Set();
   code: string;
-  endDate: Date; 
+  endDate: Date;
   restaurants: Restaurant[];
-  gameState: "LOBBY" | "STARTED" | "FINISHED" = "LOBBY"
+  gameState: "LOBBY" | "STARTED" | "FINISHED" = "LOBBY";
 
   constructor(id: string, owner: User) {
     this.id = id;
     this.owner = owner;
     this.addUser(owner);
-    this.code = uuidv4().slice(0,4); // could (should) add collision checking 
+    this.code = uuidv4().slice(0, 4); // could (should) add collision checking
     this.restaurants = [];
 
     const defaultDate = new Date();
@@ -40,7 +40,7 @@ export class Room {
   }
 
   voteRestaurant(restaurantId: string, vote: number) {
-    for (const resto of this.restaurants)  {
+    for (const resto of this.restaurants) {
       if (resto.id === restaurantId) {
         resto.votes += vote;
       }
@@ -48,7 +48,7 @@ export class Room {
   }
 
   removeUser(userId: string) {
-    this.users.forEach(curr_user => {
+    this.users.forEach((curr_user) => {
       if (curr_user.userId == userId) {
         this.users.delete(curr_user);
       }
@@ -56,7 +56,7 @@ export class Room {
   }
 
   startVoting() {
-    this.users.forEach(user => {
+    this.users.forEach((user) => {
       user.userState = "VOTING";
     });
 
@@ -67,27 +67,26 @@ export class Room {
   }
 
   endVoting() {
-    this.users.forEach(user => {
+    this.users.forEach((user) => {
       user.userState = "FINISHED";
     });
 
     this.gameState = "FINISHED";
   }
 
-  // sort restaurants in place rather than returning anything 
+  // sort restaurants in place rather than returning anything
   prepareResults() {
     this.restaurants.sort((a, b) => {
       if (a.votes < b.votes) {
-        return -1
-      } 
+        return -1;
+      }
       if (a.votes > b.votes) {
-        return 1
+        return 1;
       }
       return 0;
     });
-
   }
-  
+
   toObject() {
     return {
       id: this.id,
@@ -96,8 +95,7 @@ export class Room {
       code: this.code,
       endDate: this.endDate,
       restaurants: this.restaurants,
-      gameState: this.gameState
+      gameState: this.gameState,
     };
   }
-
 }
