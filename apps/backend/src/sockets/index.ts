@@ -102,7 +102,7 @@ export default function setUpSocketListeners(
 
       const ownerId = room.owner.userId;
       if (ownerId !== socket.data.userId) {
-        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
+        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot end voting`);
       }
 
       room.endVoting();
@@ -115,7 +115,6 @@ export default function setUpSocketListeners(
     socket.on("room:findRestaurants", () => {
     });
 
-    // TODO:
     // vote for a restaurant, vote must be: -1 or 1 or 2
     socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
       const { restaurantId, vote } = payload;
@@ -151,7 +150,6 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     }); 
 
-    // TODO:
     // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
     // their votes.
     socket.on("room:prepareResults", () => {
@@ -163,6 +161,10 @@ export default function setUpSocketListeners(
       const room = roomService.getRoom(roomId);
       if (room === undefined) {
         throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      if (room.gameState !== "FINISHED") {
+        throw Error(`cant prepare results, gameState ${room.gameState} is not FINISHED`);
       }
 
       room.prepareResults();
