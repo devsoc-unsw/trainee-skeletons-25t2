@@ -6,11 +6,10 @@ export class Room {
   id: string;
   owner: User;
   users: Set<User> = new Set();
-  // finished_users: Set<User> = new Set();
-  code: string; // room.code = the code that a user needs to input to join the room?
+  code: string;
   endDate: Date; 
   restaurants: Restaurant[];
-  // TODO: need list of restaurants, need to define type (probs look at google api type def)
+  gameState: "LOBBY" | "STARTED" | "FINISHED" = "LOBBY"
 
   constructor(id: string, owner: User) {
     this.id = id;
@@ -62,8 +61,34 @@ export class Room {
       user.userState = "VOTING";
     });
 
+    this.gameState = "STARTED";
+
     // TODO:
     // add timer logic here
+  }
+
+  endVoting() {
+    this.users.forEach(user => {
+      user.userState = "VOTING";
+    });
+
+    this.gameState = "FINISHED";
+  }
+
+  // sort restaurants in place rather than returning anything 
+  // default 5
+  prepareResults() {
+    this.restaurants.sort((a, b) => {
+      if (a.votes < b.votes) {
+        return -1
+      } 
+      if (a.votes > b.votes) {
+        return 1
+      }
+
+      return 0;
+    });
+
   }
   
   toObject() {

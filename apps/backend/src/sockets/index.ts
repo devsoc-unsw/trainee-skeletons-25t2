@@ -86,6 +86,29 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     });
 
+    // moves every user to be "DONE state"
+    // and changes the state of the room to be "FINISHED"
+    socket.on("room:endVoting", () => {
+      const roomId = socket.data.roomId;
+      
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      const ownerId = room.owner.userId;
+      if (ownerId !== socket.data.userId) {
+        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
+      }
+
+      room.endVoting();
+      io.in(roomId).emit("syncState", room.toObject());
+    });
+
     // TODO:
     // given some details return a list of Restaurants:
     // this might be an API endpoint instead but for now stub as a websocket event
@@ -132,6 +155,18 @@ export default function setUpSocketListeners(
     // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
     // their votes.
     socket.on("room:prepareResults", () => {
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.prepareResults();
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     socket.on("disconnect", () => {
