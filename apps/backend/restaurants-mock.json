@@ -1,0 +1,384 @@
+{
+  "restaurants": [
+    {
+      "id": "ChIJBdzg226xEmsRoAcyaTmKvdo",
+      "name": "The Lounge UNSW",
+      "address": "Level 11, Library (F21), Library Rd, UNSW Sydney, Kensington NSW 2033, Australia",
+      "rating": 4.4,
+      "minPrice": "20",
+      "maxPrice": "40",
+      "mapLink": "https://maps.google.com/?cid=15761906250049259424&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
+      "reviews": [
+        {
+          "rating": 5,
+          "text": "The place is really nice on the top floor of the UNSW Library building. The view is beautiful, the place is calm and pleasant. People are welcoming.\n\nThe food is in the style of fine dining. But not very expensive compared to other fine dining options in Sydney. For a meal, it will cost around $50 with desserts. The food is tasty and there is not a big menu to select from."
+        },
+        {
+          "rating": 5,
+          "text": "As far as on campus eateries go comma this rate among the best I’ve been to in the world. Be sure to get there when they have the hamburger on special menu because they really know how to do it right. No frills and that’s what you want. Delicious. Also check out the dessert menu, not to Miss!"
+        },
+        {
+          "rating": 5,
+          "text": "UNSW's new dining venue - fantastic restaurant to take VIPs for lunch or dinner. Sensational for casual dining, business meetings, coffee or functions. Seating is available inside or outside on the verandah area. I recommend outdoor seating during summer time to take in the picturesque views towards Botany Bay. Exceptional sunset views are best paired with a drink and bar nibbles. Food is always exceptional, whether it be for small or large events. A thoughtfully curated wine list to suit all budgets."
+        },
+        {
+          "rating": 3,
+          "text": "It was a good thing we were there for lunch as the portions were small and the prices relatively high. A tiny serve of cheese (2 small pieces) with crackers and a few raisins was certainly not worth $16. Minimalistic to be kind. Mean otherwise. The quality of the food was fine, the service average, the ambience and view good, though you can't see the view when seated. I get the impression it is intended for people on expense accounts."
+        },
+        {
+          "rating": 5,
+          "text": "An excellent new dining experience on campus and a great place for UNSW staff to enjoy a casual meal, hold a business meeting or celebrate a special occasion. The Lounge offers exceptional service and food quality beyond what is seen in the rest of campus. Located on the top of the main library, not only is this hidden away from the general student population, but the additional balcony offers exception views of the campus below and the city in the distance.\n\nThe lounge offers a selection of a la carte options with dessert, wine and tea to come with. With various menus for breakfast, lunch and dinner and a late closing time of 10 pm, this place would be great for any occasion."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/places/ANXAkqF6xcaOilXesFlqWlgA9PlqnWIUxYan2YMqeLs51I9ER2i9eAR_J4KbiSJLOQVBfQgzUhc8Cd4ugUqhe_hVmKyZF-vgaD6QEG4=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqEE3Sfg6vzeenyhlP2qnqa3slEonjxrfm2VUMkgjNLdqlVUcxpwBL6xVJa4L-P0zEJ46X5DtUur6WarT2EAk_ChwQGtv6qWjLQ=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyG1labJ0GAN1MfEj5PWrBav03LGRBtFI-B-iLTwyLjrxLE9q1xsEWBoxaBUAcOB3N7IG0_6Zo85IJWQqbd-m5hkHU5wsoCo1vsn3f7yGCpS4KxvcD7itOnM4gY08jHH7okqVNY6Q17Talu6JA=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqG-qwVQ7EvQg5LGATNcpGAKo-4nmrQykJIMvBbqsPHFeWGNmlKGT8OL7OdqU9kz955_IHMA2ie5utLo2WJskP-4Mzik6UTsbD0=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJJYsI7MaxEmsRQuvaCtFM5e4",
+      "name": "PappaRich UNSW",
+      "address": "Quadrangle Building, College Rd, Kensington NSW 2052, Australia",
+      "rating": 4,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=17214249611407584066&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": false,
+      "reviews": [
+        {
+          "rating": 1,
+          "text": "It's very ridiculous that these foods on the picture cost me 16 dollars! And this is also a photo of me adding some beef after I have confirmed it with the staff!!!!!!!!!! The taste is very average, and the amount is pitiful. It's not worth eating at all."
+        },
+        {
+          "rating": 2,
+          "text": "Ordered the Char Kway Teow. Absolutely tiny portions, yet same price as other stores. i could see through the food to the bottom of the bowl, which is a mini one too."
+        },
+        {
+          "rating": 4,
+          "text": "food was good, the vegetables were bitter so i wouldn't recommend that– a bit stingy on the portions of wontons, not as advertised but overall the taste was good. each section had a completely different taste palette to the next so if you like coherence it won't be for you."
+        },
+        {
+          "rating": 2,
+          "text": "Food is ok,a  bin chicken took my food but that was not the shop's fault (those evil dirty birds were so brutal when stealing people food from the hands) that is why the atmosphere is so uncomfortable to eat there.\nStaffs are not friendly and rarely say thank you. Customer service needs to be improved. But I found that is the uniform customer service style of all Papa rich shops I have been to."
+        },
+        {
+          "rating": 1,
+          "text": "I ordered 3 chicken rice but I just get one chicken! So bad!!! I’ll not order with this restaurant again!"
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxLlitmfYFCWDASXn8KHOhLkIf8WWNnV9koiqg9suhm4YNewvY7lEK2Bis2B1A7VlfvptjtZG9htYal1I2fkU9HLGnKvoQm75EaMNdXcBkME7aGzLInDjKd8zwlwJGMZpUOWTrIrAXN7lEEtQ=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqH4J_mr4cEsd-LZ2SC1PUOnkyYz8fFAkok95emAOmB_rEd-r-XhcPCT1-80F3dw6CI2CsIeAbtS5QYRwEh4WSnC62xEtOxInco=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqEnVOgxhB_FDDu9sg6MOHk7a7aCX85j-6uyJm5ORH6ue-UwXsn9Wb99PBZIalP8Sm2S6WzLLP4YRvaW8FcizCLQIuC0oVx0EnQ=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2czHiUqLhcD81hMU9rzsrpdFAsURUvgIwH6HzaZXrBKmo7lW44csauU9bfOV0fknAVV8rfjXnTKNgZh1j1-r5XAW72doDwaawVfjSqBGnzCRcTPm6nozJuyoZc_4HsKNxjfqkHFGbL4OF6kBrzsI7-YNEQ=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJ5-TCPV-xEmsRHzlDkmTCdzA",
+      "name": "Alleyway Kitchen UNSW",
+      "address": "Quad Food Court, Quadrangle Building, College Rd, Kensington NSW 2033, Australia",
+      "rating": 4.9,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=3492473773255506207&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": false,
+      "reviews": [
+        {
+          "rating": 5,
+          "text": "The Chinese box meals at UNSW's on-campus canteen are awesome! They're generous in portion—two meats and one veg/three veggies and one meat fill you up, with plenty of rice. The taste is home-style and delicious, cheaper than off-campus options. No need to go far after class, they’re ready quickly so you can eat while it’s hot. Total go-to for UNSW students!"
+        },
+        {
+          "rating": 5,
+          "text": "Nice place to get food in the uni, very affordable with many options 👌"
+        },
+        {
+          "rating": 5,
+          "text": "Very friendly staff, always love the food ((esp Honey Chicken)) :) 😋"
+        },
+        {
+          "rating": 4,
+          "text": "Options without bones are best imo. Not sure how I feel about all the single use plastic containers they are using.\nBudget friendly\nWatch out for Greg the ibis he will take your food without asking"
+        },
+        {
+          "rating": 5,
+          "text": "Great Chinese food with a big portion. Best Chinese food at UNSW."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/places/ANXAkqHC3LEKb2zZjGuq9Y9MG_vjFtHhBgcGHJvJal6DXbuAekw9_VtQ1K50s9E1pe7B9hzkYu9jqbE-l03jY8X_QoQTSet3rmcDcNA=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2czSeIuMt0zw4nwvis-F8JBQ7xQ8RxYi_OqV4bGtdnBJDLWXLUDKMN9qWkOCYaJR8gdCk73IhGCCWc9r8ZZGeIvWmjCu0m4eY15ZCIYGwYWUJmZAdJDwtjQDUvmPQaAvGuPGi-qRQbIhec8GjBYRLe3y5A=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyOCU1aq5pIxUkx47smts3C9g3Cweq3RIpK6KKxzyGLs_aUNKDp-1nTBqOkLA6poAvzpcW8XAqiw6O_QsWK1IJEkN3OYk6lsUlWtWlp4FsGYLN6J9_7LJYntbvGWyZtBPYgXI-cdOFhFhTFTmqhuK26Pw=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxvgzhu4fZgbCMbZJKjCa5iWMLp2qbslfmptidYVcTPHMYnEa2TKPObTZJ1wK_33T1IsXXchsyNjtlh6Pc9YolzSkIaCoAde0udyElVyigdKZWz-Iy_6gP05uTERx9RnTw2S9iySdaWpOkgBYE6OXdP=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJMQHavIqxEmsR2Xqg3z2a8dE",
+      "name": "Southern Wok",
+      "address": "LG 58 Morven Brown Building University of, Kensington NSW 2033, Australia",
+      "rating": 4.3,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=15128042213849725657&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": false,
+      "reviews": [
+        {
+          "rating": 4,
+          "text": "Upon entry to this restaurant, I was in a bad mood due to the harsh Sydney weather. However, the aura of this place was quite uplifting; with the  smell indicating the home made aspect of the meals .\nI opted for the classic choice of “Hainanese Chicken Tasty Rice - $16.5 ”. The order arrived quite quickly. I was slightly disappointed with the portions to be honest but that was quickly resolved upon tasting. One orders this meal when they require a hearty meal, which luckily was the case here. The chicken is boiled and steamed to perfection. Accompanied by well seasoned scallions, this dish is just a great comfort food. The flavours blend together creating a tasty concoction. Evidently, a mix of chicken and rice should normally be quite good; this place turns it into a delectable meal.\n\nI would however recommend having a more balanced marination of the chicken as it does at parts lack flavour. Overall, I was quite pleased with this experience.\n\nAs for the place itself; the indoor seating area feels quite crammed and gets very hot on certain days. The outdoor seating is lovely though and balances out the weather on a hot day such as the day of this review. I was delighted to have this option."
+        },
+        {
+          "rating": 4,
+          "text": "3.8/5*\n\nFood and academia both possess high levels of priority for the Feed Punchers, often being in conjunction with one another. Another academic Feed Punch saw the Feed Punchers landing at Southern Wok, located in the mid to upper campus of UNSW.\n\n-The roast duck was roasted to perfection with great crispy skin, maintaining a sweet and salty dark-soy flavour. Sided with a moist steamed bok choy, which helped balance the saltiness.\n\n-The Shanghai noodles were extremely diverse, featuring beef, prawns and chicken. There was a strong fish sauce taste and  an addition of bok choy and crunchy onion. A bit of extra spice would have empowered this dish greatly.\n\n-The Hainan chicken was poached to perfection. It was extremely soft and delicate in the mouth, giving off simple but effective flavours of ginger, garlic and chicken broth.\n\n-The Shandong chicken was a little light on seasoning and flavour, but the chicken was yet again, cooked to perfection. Also served with bok choy and rice, alike the other dishes.\n\n-The fried rice had chicken in it which was quite unique, differing from classic pork fried rices. It had nice tastes of spring onion, egg and subtle flavours from the prawns.\n\n-The BBQ pork was tender but lacked in flavour. The one served with rice had a slight salty-soy-chilli taste, however, the one served with noodles was extremely flavourless.\n\nOverall, this was a nice, quick, academic feed, which offered some well cooked meals, just slightly falling short of flavour in some areas. Thanks Southern Wok!"
+        },
+        {
+          "rating": 5,
+          "text": "Love the food - always cure my homesickness. The combo egg sauce noodles and fried beef noodles are the best. Love the ladies and gentlemen work here too. Always super friendly and welcoming :) thank you"
+        },
+        {
+          "rating": 2,
+          "text": "Too much MSG. I swear I was completely foggy and lightheaded for an hour after finishing the noodle soup. This is definitely not just a carb crash — I’ve always been super sensitive to MSG. The broth would taste even better with less seasoning."
+        },
+        {
+          "rating": 4,
+          "text": "A lovely, cosy, home-made feel restaurant in the bustling upper campus of UNSW. One of my favourites, with clean seating and cutlery and a wide selection of food. Most recently, however, the food quantities per order have been decreasing, specifically for take-away orders. There is too much rice and not enough meat.\nThe restaurant still earns 4 stars, although heavily debated, as I recently found two hairs in my meal.\nI recommend the Pad See Eew. I also recommend hairnets for the kitchen!"
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyMXDPL_Y401jpM9-9ExF6Hb-eoK9rLxj8bgMM0pSqBPTHxsQ4QwB834kv5HYIaDgeAN-q01bpEP9Ux84L7af6gDLf5JOsBs-8YE2My5XY6TR76X1bdMedNdVjIoD5C7ls4OVNscPpPlLcwOA=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyDJHVJEEq5cLJAvegfRI2T-O7xkhCY_NkwN1uzBgBs-1bOK6N4bAH2ZcvLJfWnXn683tixWsK6zc9P_vLrBpZdHHjIi-gkYVmJVey8cqL3IVRVdLNV5yv8JFLWdvYxDrZ3p2RhQcK9x7W9fw=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2czSl1mmIGhh33DF3XEeMOo050LSo2jm2B-Y-HxkZBkvF4rXXJtdcNsVtX_k6oZB8wC0q_PS4yLp1H9yem1jrEScTqdV39xEpUY07554Df2nh7TIlrMh1P6Ql-ej7M9lzTbi7Kv6JUsR4SnD0KY=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwmVCCKo_eggITzTuaJGU7P2jcnKryFk3RLtMnMwTqATIBpHCwY99Z82YtxvySk94bXeT0Tw8_v77ysedsmgCEOuqaA3bwXhDfZMRu3VQvQ19dYLj86C4ILmizs8y_K1k-onoqbX9jVB2OAdQ=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJ40cwiE6zEmsR17fKQLjRWnc",
+      "name": "Dolce Fiori",
+      "address": "52 St Pauls St, Randwick NSW 2031, Australia",
+      "rating": 4.6,
+      "minPrice": "40",
+      "maxPrice": "60",
+      "mapLink": "https://maps.google.com/?cid=8600417027708598231&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": false,
+      "reviews": [
+        {
+          "rating": 5,
+          "text": "One of those places when you go visit once, stays with you and you can’t wait to return again.\nBecause …the place is Happy. It has a vibe. It’s on its own . It has a theatrical energy and you feel like you are in the amusement park.. somehow.\nWonderful Mario is there to look after you and he will go around and make sure everyone is having a good time and as well enjoying their food. Very lovely and so kind staff was looking after us as well.\nWe definitely did Enjoyed. Delicious food and incredibly tasty Italian wine .. such a treat. Wonderful value . Totally recommend.\nSydney’s hidden gem."
+        },
+        {
+          "rating": 5,
+          "text": "Had a phenomenal time here tonight. The food and service was 5 star. Rasu and the new server really made our night. They even gave us little chocolate treats when we didn’t want dessert and were so accommodating when we wanted to move outside. Would definitely recommend and will be back!!"
+        },
+        {
+          "rating": 5,
+          "text": "We had a mum and son dinner. My 5yo son said he wished he could give a 5 star rating. He said especially because they were so nice to us and because the place was super pretty and nice.\nI enjoyed my steak with potatoes and salad. I couldn’t finish the whole steak. We are visiting from out of area for the children’s hospital. Thanks for cheering us up."
+        },
+        {
+          "rating": 5,
+          "text": "You are truly missing out if you don’t plan a dinner date night at Dolce Fiorii. I went with my gals and had the most wonderful time. The wine was smooth. The food was delicious. The venue is aesthetically on point! But what made the evening that extra special was restaurant owner Mario checking in on everyone and having a wonderful chat with some definite wise words from a wise man! It was a 10/10 experience on a Tuesday night! I cannot wait to go back"
+        },
+        {
+          "rating": 5,
+          "text": "Visited on the 29/04/2025\n\nVery good customer service and staff were friendly as well as fast service. Also not to mention they serve great cocktails and food especially the pizzas. Restaurant atmosphere is very aesthetically pleasing with neon lights. I recommend this place if you are hanging around the spot looking for a great meal."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/places/ANXAkqEE2ylQDyIPR5jGf_2AgSnw81sAzzctLfcZapUW-V4MeFflOL2Qd0BJwJQbN0w-j9_jgMMKK9WP9nJ0CVFgtwr5FJHapuEiZu0=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqF6JToJjGlfCT90mC2SNOwPKpxOI35toiZP3DTULzqXmOwpGqxsyYgS_ugCGOUVzBIHMDQfxUj-D54AYuZNXk8JBDwQM2DEfYQ=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqHpw828P0H4sebe98L9QmtUMXO0gu07tPO01mc-_K11rHRLcMeel607GP6YbO4XhoZ_7fLUsHJ5FDdWpgmF9HiYhK_XdD13W9Y=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqGT35h-RNh5SNVw6r9WFeeoGKkbENdDb01rtClq8VGKSseG0CpIEGUA6jiw5-0t58xIJz8T5uc1-7cGFFB6aMAAMG0HT3NW6Cw=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJ0WgQBIuxEmsRN-F0k9CDPbI",
+      "name": "Laksa Delight",
+      "address": "Mathew's Arcade, University of New South Wales, High St, Kensington NSW 2033, Australia",
+      "rating": 4.2,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=12843566644180869431&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": false,
+      "reviews": [
+        {
+          "rating": 1,
+          "text": "Worst services ever.  The dishes without rice is even more expensive than if they were with rice. They say that the groceries are more expensive than rice. Worst excuse ever.  I never heard that excuse in any other restaurants. This place should be named Laksa Dismay, Laksa Displease, or Laksa Disgust.\n\nI would give them 0 stars or even negative stars if Google Reviews allowed me to do so.  I hope this place closes down for good."
+        },
+        {
+          "rating": 5,
+          "text": "This is the best Laksa I've ever had, you can really tell the chefs put time, love & effort into their food.\n\nThis is a must try!\n\nThe photos don't do this food justice, the fried chicken is also a must try!!"
+        },
+        {
+          "rating": 5,
+          "text": "This review has been over 20 years in the making. My first experience of this incredible laksa was in my first year uni at UNSW in 2000. I still remember the no nonsense malaysian aunties who took care of this lowly undergrad. It's been there for me through thick and thin, through uni, and exams. The soup was delicious, rumoured to be so addictive there could've been drugs in there we joked. But it was all love and authenticity. I order mine just egg noodles and soy chicken. This laksa has and will be the gold standard by which I measure all other laksas.\nI was pleased to discover that while the place has changed hands since, the quality was the same.\nYou'll laugh, you'll cry, and most of all you'll love."
+        },
+        {
+          "rating": 5,
+          "text": "A hidden gem within Sydney. I love visiting this place when I’m in Sydney. There is always queues for their laksa no matter the time of day. It is delicious, spicy and flavorsome. They use a combination of rice and hokkien noodles in the soups. The choices of meat available ranges from beef, chicken, pork, wontons and seafood. Make sure you slurp every drop of your soup because I will guarantee you would be asking for more. The store is open throughout the year but close during summer university break."
+        },
+        {
+          "rating": 5,
+          "text": "Time and time again this place does not disappoint when it comes to laksa. Always full of flavour and you're greeted with a smile every time. My fave food place on UNSW campus."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxL1uY9sjxw--fA0IlUHOecAxvkniymzRmqNUUJC7YYSkP2lnfSHVSSIH_CcYvxhlF1zfW2__AXN-sVSVrA4AcRtRq9UKweoaeDWWoDdnr8CFsVuSYQ0WskO5sV7cHfDkkumvRp2WZT5OChP7E=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqEJB3mKYsDQufptx6O1C4hTBWuCWXshq3ZI9M-_8UMQfF0zEqezsovzhzlH6-ID3na6N0hTfLGkVLtoVjcFVo0PP0yQ-qQeyOs=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwds2Jk3pmORVGH0FVAkuLDUGmWoTIMg4ogfT5LOcMKiFFx21aQa6PEoXLjjrvkQBz2DILFuLbPyXtUtE-yOSOrqNPdXwm_ydwJM2CAQ2P7lpVY1XjY0MUmLb560dlGF9TGijVaA5ScMiqCArs=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2czssFSYVaSwNF37ZUrgPA35nUHMTeLlrD7w3R4To7diObeDd3hpJfV6Wy-WPZwETdgJSaQn-oxgzLoL3rpUTOlqn0e0PEazVAZMSTcycgRywP5moMZYVyfMU4qw-Ay0ooAKh5wuHjTmuomN=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJYWgKtu2zEmsRy0m4DuazaAc",
+      "name": "XS Espresso - UNSW",
+      "address": "G05 & G05a Ground Floor Biological Science (D26, Kensington NSW 2033, Australia",
+      "rating": 3.4,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=533874356514212299&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
+      "reviews": [
+        {
+          "rating": 4,
+          "text": "The burger is nice and chips are good. But the waiting time is a little bit long. Also, if you don't ask, they won't serve you tap water or tomato source. The price is slightly higher compared to other campus food."
+        },
+        {
+          "rating": 5,
+          "text": "One of my favorite cafe in Randwick. I often visited here during lunch. It could be crowded but you still get a table. We often sit outside. I had pistachio latte, for me it’s too sweet. Almond croissant is great. Brownie gluten-free is ok. Mocha is great too."
+        },
+        {
+          "rating": 5,
+          "text": "I love this cafe! A bit more on the expensive side but it's cute, and both the coffee and the food is good."
+        },
+        {
+          "rating": 1,
+          "text": "Terrible Ordering Experience – Paid but No Food!\nI placed an order using the self-service machine, and my card was charged (showing as pending). However, I never received an order number. When I asked the staff, they claimed they didn’t get my order because the payment was \"pending.\" But this makes no sense—I’ve been to another Vietnamese restaurant where my payment also showed as pending, yet I got my food immediately. Even past transactions here were pending at first, but the orders went through.\n\nThe staff said my money would be refunded in 7 days, but in my experience, refunds usually require another card swipe—I doubt I’ll actually get it back. Now I’m out of money with no food, and no real solution. Awful service and a complete waste of time. Never coming back!"
+        },
+        {
+          "rating": 5,
+          "text": "Staff were nice and welcoming!\n\nNice place for breakfast, we tried the XS stack and three-topping omelet and both were delicious.\n\nThe Berry Blast was great.\n\nWe are yet to try the coffee at this branch. But the other branch in Bondi had a great coffee.\n\nWould love to come again for sure."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/places/ANXAkqFSlyvp9U9J7YAVG8ryKdjb7cH6H8kip_7Feot2vl1SwOq1coBEnV4T0HCxPWafhOvvW84idBckTCS5jAo4lfZz7oANdFf7bJA=s4800-w768",
+        "https://lh3.googleusercontent.com/places/ANXAkqHacZGKgBMkb8udGzct9-eIj_OoVPVVBayb8jo-RhN6cpWcEs5UkHwLokHDRKHZy_Z1D7BCsICRSybbGkwkr7IZqGSamQsrbSs=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwUMzco5D9iFKkLc6NW-ZM6yqOyoiVW2E7rV2YEf8QOnk4ZS4pCSEFzvZ4Ln679giiV4M8sD63JhAbck_pGLr4p9gDOhUYB8J4sPJSN9L9CEQ_aEvqFLnq4Yt_vkk9TBV94VFgMFZXZ3yATB9w=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyjsr6awvcCsgyl-DKeI2UISjHscVenqF28GigangxZUlTjGj5LemnPaXs19FWmQxx36mGKXwHO4veMJZjQoEPinBoOfSyTyFwj6t8MlgEW26fVGdHkZEqOeJKhFlNwq856ecHWXoHq3eHP5w=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJ3yBeEiCyEmsR3Z_qiVlVJW0",
+      "name": "Gradueat",
+      "address": "Kensington NSW 2033, Australia",
+      "rating": 4.2,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=7864786167326744541&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
+      "reviews": [
+        {
+          "rating": 1,
+          "text": "Waited in line with two others, and the owner seemed rushed and flustered—just tapping cards and moving people along without saying a single word. Zero interaction, zero courtesy. Ordered a ham croissant, which was reheated by squashing it into a flat, soggy mess. Easily the worst croissant I’ve ever had. Thanks for wasting my $8."
+        },
+        {
+          "rating": 5,
+          "text": "I seriously love everything about this place. It’s run by the sweetest older couple who are always so friendly and chatty. You can tell they work really hard and genuinely care about what they do which just makes the vibe even better.\n\nThe coffee is always spot on. Smooth, strong, and just consistently good. It’s the kind of place where you can rely on your order being perfect every time. Their food is just as good. I always recommend the bacon and egg roll. And the huge muffins which are the best afternoon snack. You honestly can’t go wrong with anything on the menu.\n\nI come here pretty much every day. It’s cozy, welcoming, and reminds me of home. I really wish more people knew about this place and the university needs more independent places like this. If you’re in the area, definitely check it out."
+        },
+        {
+          "rating": 2,
+          "text": "Coffee was alright but the custard tart had such a strange texture. I can only assume they put gelatin in the custard."
+        },
+        {
+          "rating": 5,
+          "text": "I'm craving nutella donut, and here I am😍\nChewy and has a full nutella inside. Worth to try😍\nThank you for your smile as well when you ask my order."
+        },
+        {
+          "rating": 1,
+          "text": "Bought a sausage roll and it tasted off so I told 6 OF MY FRIENDS to smell it, they all say it’s sour while I’m still trying to gulp the first bite down. I go to the people working and one of them says “it’s not off it’s just pork/beef it’s normal” but they give me another roll which I didn’t have the appetite for. I was throwing up the whole night from that single bite and I didn’t even eat anything else that day"
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwb7Vbif6n0TOHJECIrvtLKPMlfGSxbPaazkiC6IqguBKJ4mjIvm_3raYrtSctPgVPTY1bnQQFz23khLEBvaX7KPSCLQ231XjNsKv4mNsPH8hNHYIUE50VEy1GbBeP4_fVLBCZ04Zxk1qpj=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxb2N4Q0mudEXuTzBzxgPvLDMCEni4FJqkhCaBOfTvLNJREno_YduMMo4MejIv4dtxM9ty-I3StoQI6MprezlgGXQ1_9bFFmAVjgvEEx25SyTk0okv89qSyG_hDUyAhwnSgD-UVaH5cEId_OM4=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwLcFfIId4CKZYr97gPyc-cwq0ymFxzLdGUIkr_1k3UAI8R3imIgnVaROsMNEqEq5fZV87Z7OlEhB79ZT6GHGfi8B4upCn3cw1EjNfxqVmdfJTbumk0tLIjmM34g-x5bY5MsW1VDcD_DtGlCg=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cy70_kwWpyUebRFdhxDDTX4lrrcWLGSmvY6nbRt2yutUmL873Z2YwIxPAssZ-xrlzhG1WlB3CER5zL-s9t7s2H4GG-lIAxArkN9L0RvAeqBSc-GA-qnYvbYwzP4fKd21pJyGKONofMwYNmG7g=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJVy74Y5-xEmsRx4fMuam9AGE",
+      "name": "Soul Origin UNSW",
+      "address": "Quadrangle Building, College Rd, Kensington NSW 2033, Australia",
+      "rating": 3.5,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=6989795158343321543&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
+      "reviews": [
+        {
+          "rating": 5,
+          "text": "I'm a regular customer of unsw SO, and I usually thought that the amount of meat in the salad was a bit small, but today the great waitress sister gave me plenty of portions and it was very delicious! 😊I really hope you can keep up this service and I will recommend it to my friends."
+        },
+        {
+          "rating": 1,
+          "text": "Ordered a large Salad, got barely any meat in my salad and when I asked the thai girl with glasses named Pat or Pad instead of grabbing more meat, grabbed a huge bunch of greens extra. the amount of beef i got in my salad is dissapointing. Not only that after when asked what dressing, i asked for lemon, She gave me two options, couldnt understead what she was saying but I asked her many times to just put one of them on. But apparently I need to say the specific name of the dressing for her to actuall give me the salad, that I dont understand what she is saying, and im in a rush so I couldnt care less what dressing you use. Every other time before I just got told lemon was a dressing, so thats all I asked for. If youre gonna be a stubborn little Sh!t because of some dressing names, dont work. I shouldnt have to ask just put any dressing 5 times for me to get my food, and I dont understand how stingy you guys are. In total i got 3 pieces of beef in my salad. And 60% of my bowl is rocket leaf. Thank you guys very much.\n\nEdit in total: 3 small slices of chicken from ur buffalo sald. 2 little slices of of beef and some beef scraps from the beef salad. Actually 0 pieces of meat for the chicken pesto pasta"
+        },
+        {
+          "rating": 2,
+          "text": "I am a regular customer of soul origin, meanwhile since last week I have been not liking the taste of the drinks and food being served. I really hope to continue buying from you so requesting you to make the service and taste better."
+        },
+        {
+          "rating": 4,
+          "text": "The place is good, and the food is fine. I can't complain, and the prices are also reasonable.\n\nBut the only problem I had is that the person served to me seems rude and not attentive. I didn't expect such attitude from that person.\n\nAnyway, use the EatClub app to get some discounts."
+        },
+        {
+          "rating": 1,
+          "text": "Terrible experience slow service, rude staff, and they forgot my order after I paid. The iced latte was just a cup of ice with barely any coffee. Worst of all, I saw a worker refill an empty chocolate bottle with hot water and keep using it! Unprofessional and disgusting. Won’t come back."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/places/ANXAkqEKfeBAoQ7kYKO6Ph1278VmNdPlqryuuLNDmASQZHZyA5VuchFKgdnoTQ5kBbijuQyidZb8LQB3q9rGtiPThmz-aw6tJ_trr-A=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqEGOA2bQkcQd8HFX5ocSy91yvPUHPRLxB5HWS0neBXwgxVsG_1kNtzChUPvXhz6IPAHO67E7WzxwPW39aOtPIjI2CI_i2rTpss=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqExikKhbgzhJBVX027iSqDsNIDfNi0tS6l8NydbQe0XmlJabgr0yrdyTGp2XsrwyET-7ru4uPLqTfZRI9Ux9fm-UD963QI_y3c=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cw5XL0GOhy4c6pgV3b6mGAyGn4ca9TwvpQyqeijVsNvo42VSZ41iYKAous5pznafgKeAawhnWSjKJmE3QWAqdV4gqsGLdGRF8g24NogLIAMz7IxoOEAOL_B-hC4WBY1tBSR0LpwyeV8SN2jgGc=s4800-w800"
+      ]
+    },
+    {
+      "id": "ChIJeRzML4uxEmsRySrUd30ArIo",
+      "name": "Guzman y Gomez - UNSW",
+      "address": "University Terraces Lower Kensington Campus, High St, Kensington NSW 2033, Australia",
+      "rating": 3.8,
+      "minPrice": "1",
+      "maxPrice": "20",
+      "mapLink": "https://maps.google.com/?cid=9992362212109593289&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
+      "reviews": [
+        {
+          "rating": 1,
+          "text": "firstly, the server told me that i couldn’t order alcohol without buying food, which isn’t true. Secondly, how is it fair that i am paying $10 for a small cup of frozen margarita and the service clerk refuses to actually fill it up? terrible service. I literally work at GYG and this is not our policy."
+        },
+        {
+          "rating": 1,
+          "text": "Do not order from here. I waited 45 minutes for my food and this is all that came for $23. Appalling. Do better GYG! This is disgusting"
+        },
+        {
+          "rating": 1,
+          "text": "When you request no pico de gallo 😡 Expensive lunch to be ruined by something you can't eat. Not the first time either!"
+        },
+        {
+          "rating": 2,
+          "text": "Very disappointed with the portion sizes. I should have just ordered a mini bowl because I got the same amount in the regular bowl. Save your money and go somewhere with decent portion sizes!"
+        },
+        {
+          "rating": 1,
+          "text": "I was just starting to like GYG but now….This was $21 and my drink wasn’t full with a piece of coriander on the inside of cup…\nThe server was rude and impatient as well, I showed him my photo id, he flipped his eyes at me and said yeesh, mind you I even tried showing him where to LOOK. Waited for 20 mins for a small meal like this. Learnt my lesson, next time late dinners, go Maccas, it’s more worth it."
+        }
+      ],
+      "photos": [
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwd2xoXfMI4ss9cZMqZ6zLCnsgAphaeBfbWmnJRbF2g4HcIA3E4v1jyBtUmu_nwiZjXQ21WHzy0Fov0xeqeBEU9iYAnR5knNPuPdFoz4HCs9--ZkmyoF1VDggx4AgPycU8_5YOQGfUDQ483f_s=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqFF5CXtEIQuRVjiCetivkorQE7M_LA67W2jYXA0WYgKVKXE1A02oDQDGSoCpJQBcUAB_32Gi2DLhx61av7Ahox6a2900T5AT_w=s4800-w800",
+        "https://lh3.googleusercontent.com/places/ANXAkqFh_e0hRy8wAeak0Pf3mij_E5LykKa9wN_cTPNFU4PD4tdVIgXDrrMlnFb_OeVADTdXpFGzA7wrR4-dE5GpGZ-9Udu8lhE1Xq4=s4800-w440",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwtCi-h1QPsHC5aRVzZtQsA-j7qWSnLeRDxdihi6RQokeG8xy0xzBkKHNl1s51L0e33_Eciog4PsZYXpIymesO5SpA_dWw05ZRzIVpyObtfym6Brs4thKBqvyTX083cZo38Rv0lHmAEcspWgiY=s4800-w800"
+      ]
+    }
+  ]
+}
