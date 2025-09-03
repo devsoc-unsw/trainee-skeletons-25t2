@@ -20,6 +20,11 @@ export default tseslint.config([
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
     ],
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
