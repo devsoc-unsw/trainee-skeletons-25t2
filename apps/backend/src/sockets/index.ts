@@ -26,7 +26,11 @@ export default function setUpSocketListeners(
     // TODO: Define socket event handlers here
     socket.on("room:create", (payload: { roomId: string }) => {
       const { roomId } = payload;
-      const room = roomService.createRoom(roomId, { userId, name, userState: "WAITING"});
+      const room = roomService.createRoom(roomId, {
+        userId,
+        name,
+        userState: "WAITING",
+      });
       socket.join(roomId);
       socket.data.roomId = roomId;
 
@@ -67,9 +71,11 @@ export default function setUpSocketListeners(
     // add a guard here to check that the user calling is the owner of the room
     socket.on("room:startVoting", () => {
       const roomId = socket.data.roomId;
-      
+
       if (roomId === null) {
-        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+        throw Error(
+          `roomId on socket ${socket.data.userId} could not be found`,
+        );
       }
 
       const room = roomService.getRoom(roomId);
@@ -79,7 +85,9 @@ export default function setUpSocketListeners(
 
       const ownerId = room.owner.userId;
       if (ownerId !== socket.data.userId) {
-        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
+        throw Error(
+          `userId ${socket.data.userId} is not the owner of the room, cannot start voting`,
+        );
       }
 
       room.startVoting();
@@ -90,9 +98,11 @@ export default function setUpSocketListeners(
     // and changes the state of the room to be "FINISHED"
     socket.on("room:endVoting", () => {
       const roomId = socket.data.roomId;
-      
+
       if (roomId === null) {
-        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+        throw Error(
+          `roomId on socket ${socket.data.userId} could not be found`,
+        );
       }
 
       const room = roomService.getRoom(roomId);
@@ -102,7 +112,9 @@ export default function setUpSocketListeners(
 
       const ownerId = room.owner.userId;
       if (ownerId !== socket.data.userId) {
-        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot end voting`);
+        throw Error(
+          `userId ${socket.data.userId} is not the owner of the room, cannot end voting`,
+        );
       }
 
       room.endVoting();
@@ -112,26 +124,30 @@ export default function setUpSocketListeners(
     // TODO:
     // given some details return a list of Restaurants:
     // this might be an API endpoint instead but for now stub as a websocket event
-    socket.on("room:findRestaurants", () => {
-    });
+    socket.on("room:findRestaurants", () => {});
 
     // vote for a restaurant, vote must be: -1 or 1 or 2 (no, yes, superyes)
-    socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
-      const { restaurantId, vote } = payload;
+    socket.on(
+      "room:voteRestaurant",
+      (payload: { restaurantId: string; vote: number }) => {
+        const { restaurantId, vote } = payload;
 
-      const roomId = socket.data.roomId;
-      if (roomId === null) {
-        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
-      }
+        const roomId = socket.data.roomId;
+        if (roomId === null) {
+          throw Error(
+            `roomId on socket ${socket.data.userId} could not be found`,
+          );
+        }
 
-      const room = roomService.getRoom(roomId);
-      if (room === undefined) {
-        throw Error(`room with roomId ${roomId} could not be found`);
-      }
+        const room = roomService.getRoom(roomId);
+        if (room === undefined) {
+          throw Error(`room with roomId ${roomId} could not be found`);
+        }
 
-      room.voteRestaurant(restaurantId, vote);
-      io.in(roomId).emit("syncState", room.toObject());
-    });
+        room.voteRestaurant(restaurantId, vote);
+        io.in(roomId).emit("syncState", room.toObject());
+      },
+    );
 
     // add a restaurant to a room's list of Restaurants
     socket.on("room:addRestaurant", (payload: { restaurant: Restaurant }) => {
@@ -139,7 +155,9 @@ export default function setUpSocketListeners(
 
       const roomId = socket.data.roomId;
       if (roomId === null) {
-        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+        throw Error(
+          `roomId on socket ${socket.data.userId} could not be found`,
+        );
       }
 
       const room = roomService.getRoom(roomId);
@@ -149,14 +167,16 @@ export default function setUpSocketListeners(
 
       room.addRestaurant(restaurant);
       io.in(roomId).emit("syncState", room.toObject());
-    }); 
+    });
 
-    // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
+    // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to
     // their votes.
     socket.on("room:prepareResults", () => {
       const roomId = socket.data.roomId;
       if (roomId === null) {
-        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+        throw Error(
+          `roomId on socket ${socket.data.userId} could not be found`,
+        );
       }
 
       const room = roomService.getRoom(roomId);
@@ -165,7 +185,9 @@ export default function setUpSocketListeners(
       }
 
       if (room.gameState !== "FINISHED") {
-        throw Error(`cant prepare results, gameState ${room.gameState} is not FINISHED`);
+        throw Error(
+          `cant prepare results, gameState ${room.gameState} is not FINISHED`,
+        );
       }
 
       room.prepareResults();
