@@ -1,6 +1,7 @@
 import { DefaultEventsMap, Server } from "socket.io";
-import { User } from "../types";
+import { Restaurant, User } from "../types";
 import { RoomService } from "../rooms/room.service";
+import { getUnswRestaurants } from "../services/unsw.service";
 
 export type SocketState = {
   userId: string;
@@ -62,9 +63,50 @@ export default function setUpSocketListeners(
       socket.leave(roomId);
     });
 
-    // TODO:
     // change state of every User to be VOTING
+    // add a guard here to check that the user calling is the owner of the room
     socket.on("room:startVoting", () => {
+      const roomId = socket.data.roomId;
+      
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      const ownerId = room.owner.userId;
+      if (ownerId !== socket.data.userId) {
+        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot start voting`);
+      }
+
+      room.startVoting();
+      io.in(roomId).emit("syncState", room.toObject());
+    });
+
+    // moves every user to be "DONE state"
+    // and changes the state of the room to be "FINISHED"
+    socket.on("room:endVoting", () => {
+      const roomId = socket.data.roomId;
+      
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      const ownerId = room.owner.userId;
+      if (ownerId !== socket.data.userId) {
+        throw Error(`userId ${socket.data.userId} is not the owner of the room, cannot end voting`);
+      }
+
+      room.endVoting();
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     // TODO:
@@ -73,15 +115,61 @@ export default function setUpSocketListeners(
     socket.on("room:findRestaurants", () => {
     });
 
-    // TODO:
-    // vote for a restaurant, vote must be: -1 or 1 or 2
-    socket.on("room:voteRestaurant", (payload: { restaurantId: number, vote: number}) => {
+    // vote for a restaurant, vote must be: -1 or 1 or 2 (no, yes, superyes)
+    socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
+      const { restaurantId, vote } = payload;
+
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.voteRestaurant(restaurantId, vote);
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
-    // TODO:
+    // add a restaurant to a room's list of Restaurants
+    socket.on("room:addRestaurant", (payload: { restaurant: Restaurant }) => {
+      const { restaurant } = payload;
+
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      room.addRestaurant(restaurant);
+      io.in(roomId).emit("syncState", room.toObject());
+    }); 
+
     // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to 
     // their votes.
     socket.on("room:prepareResults", () => {
+      const roomId = socket.data.roomId;
+      if (roomId === null) {
+        throw Error(`roomId on socket ${socket.data.userId} could not be found`);
+      }
+
+      const room = roomService.getRoom(roomId);
+      if (room === undefined) {
+        throw Error(`room with roomId ${roomId} could not be found`);
+      }
+
+      if (room.gameState !== "FINISHED") {
+        throw Error(`cant prepare results, gameState ${room.gameState} is not FINISHED`);
+      }
+
+      room.prepareResults();
+      io.in(roomId).emit("syncState", room.toObject());
     });
 
     socket.on("disconnect", () => {
@@ -96,7 +184,7 @@ export default function setUpSocketListeners(
         const room = roomService.getRoom(socket.data.roomId);
 
         if (room !== undefined) {
-          room?.removeUser(userId);
+          room.removeUser(userId);
           io.in(roomId).emit("syncState", room.toObject());
         }
       }
