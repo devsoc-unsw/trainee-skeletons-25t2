@@ -115,7 +115,7 @@ export default function setUpSocketListeners(
     socket.on("room:findRestaurants", () => {
     });
 
-    // vote for a restaurant, vote must be: -1 or 1 or 2
+    // vote for a restaurant, vote must be: -1 or 1 or 2 (no, yes, superyes)
     socket.on("room:voteRestaurant", (payload: { restaurantId: string, vote: number}) => {
       const { restaurantId, vote } = payload;
 
@@ -133,6 +133,7 @@ export default function setUpSocketListeners(
       io.in(roomId).emit("syncState", room.toObject());
     });
 
+    // add a restaurant to a room's list of Restaurants
     socket.on("room:addRestaurant", (payload: { restaurant: Restaurant }) => {
       const { restaurant } = payload;
 
