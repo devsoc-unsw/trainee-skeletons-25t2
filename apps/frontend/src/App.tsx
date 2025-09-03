@@ -13,7 +13,7 @@ import type { User } from "./types";
 import { SocketProvider } from "./contexts";
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, _setUser] = useState<User | null>(null);
 
   return (
     <SocketProvider user={user}>

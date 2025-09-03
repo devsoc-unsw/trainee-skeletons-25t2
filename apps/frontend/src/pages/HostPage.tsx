@@ -14,9 +14,9 @@ export default function HostPage() {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("user:join", (userId: string) => {});
-    socket.on("user:leave", (userId: string) => {});
-    socket.on("game:state_updated", (gameState: GameState) => {});
+    socket.on("user:join", (_userId: string) => {});
+    socket.on("user:leave", (_userId: string) => {});
+    socket.on("game:state_updated", (_gameState: GameState) => {});
     // TODO: add params
     socket.on("game:vote_restaurant", () => {});
 

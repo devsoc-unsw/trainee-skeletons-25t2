@@ -14,7 +14,7 @@ export default function SwipePage() {
 
   useEffect(() => {
     if (!socket) return;
-    socket.on("game:state_updated", (gameState: GameState) => {});
+    socket.on("game:state_updated", (_gameState: GameState) => {});
     return () => {
       socket.off("game:state_updated");
     };
