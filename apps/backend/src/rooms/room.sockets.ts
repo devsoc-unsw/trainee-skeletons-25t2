@@ -31,12 +31,12 @@ export function setUpRoomSocketListeners(
     socket.on("room:leave", (roomId: string) => {
       try {
         roomService.removeUserFromRoom(roomId, userId);
+
         // sync before the socket leaves so that it has the room object.
         socket.leave(roomId);
         io.in(roomId).emit("user:leave", userId);
       } catch (error) {
         console.error(`Error leaving room ${roomId}:`, error);
-        throw Error(`room with roomId ${roomId} could not be found`);
       }
     });
 
@@ -56,7 +56,6 @@ export function setUpRoomSocketListeners(
         io.in(roomId).emit("game:state_update", "STARTED");
       } catch (error) {
         console.error(`Error starting voting in room ${roomId}:`, error);
-        throw error;
       }
     });
 
@@ -76,7 +75,6 @@ export function setUpRoomSocketListeners(
         io.in(roomId).emit("game:state_update", "ENDED");
       } catch (error) {
         console.error(`Error ending voting in room ${roomId}:`, error);
-        throw error;
       }
     });
 
@@ -101,7 +99,6 @@ export function setUpRoomSocketListeners(
             `Error voting for restaurant in room ${roomId}:`,
             error,
           );
-          throw error;
         }
       },
     );
@@ -122,7 +119,6 @@ export function setUpRoomSocketListeners(
         io.in(roomId).emit("syncState", room.toRoomResponse());
       } catch (error) {
         console.error(`Error preparing results for room ${roomId}:`, error);
-        throw error;
       }
     });
 
@@ -137,10 +133,11 @@ export function setUpRoomSocketListeners(
 
         try {
           roomService.removeUserFromRoom(roomId, userId);
-          io.in(roomId).emit("user:leave", userId);
         } catch (error) {
           console.error(`Error removing user from room on disconnect:`, error);
         }
+        socket.leave(roomId);
+        io.in(roomId).emit("user:leave", userId);
       }
 
       console.log(`User disconnected ${userId} ${name}`);
