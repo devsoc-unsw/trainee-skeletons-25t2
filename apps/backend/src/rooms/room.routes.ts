@@ -1,10 +1,10 @@
 import express from "express";
 import { createRoomController, joinRoomController } from "./room.controller";
-import { RoomStore } from "./room.store";
+import { RoomService } from "./room.service";
 
-export function createRoomRouter(roomStore: RoomStore) {
+export function createRoomRouter(roomService: RoomService) {
   return express
     .Router()
-    .post("/room", createRoomController(roomStore))
-    .post("/room/:roomCode", joinRoomController(roomStore));
+    .post("/room", createRoomController(roomService))
+    .post("/room/:roomCode", joinRoomController(roomService));
 }

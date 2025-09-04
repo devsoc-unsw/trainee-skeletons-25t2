@@ -7,7 +7,7 @@ import {
   createRoomRouter,
   setUpRoomSocketListeners,
   SocketState,
-  RoomStore,
+  RoomService,
 } from "./rooms";
 
 const app = express();
@@ -24,10 +24,10 @@ const io = new Server<
   },
 });
 
-// Create roomStore instance and inject it
-const roomStore = new RoomStore();
-setUpRoomSocketListeners(io, roomStore);
+// Create roomService instance and inject it
+const roomService = new RoomService();
+setUpRoomSocketListeners(io, roomService);
 
-app.use(cors()).use(express.json()).use("", createRoomRouter(roomStore));
+app.use(cors()).use(express.json()).use("", createRoomRouter(roomService));
 
 export { httpServer, io, app };

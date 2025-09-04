@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
 import { CreateRoomRequest, JoinRoomRequest } from "./room.types";
 import { v4 as uuidv4 } from "uuid";
-import { RoomStore } from "./room.store";
+import { RoomService } from "./room.service";
 import { User } from "../types";
 
-export function createRoomController(roomStore: RoomStore) {
+export function createRoomController(roomService: RoomService) {
   return async function createRoom(
     req: Request<{}, {}, CreateRoomRequest>,
     res: Response,
@@ -25,7 +25,7 @@ export function createRoomController(roomStore: RoomStore) {
         minRating,
       };
 
-      const newRoom = await roomStore.createRoomWithSearch(
+      const newRoom = await roomService.createRoomWithSearch(
         newUser,
         searchParams,
       );
@@ -41,7 +41,7 @@ export function createRoomController(roomStore: RoomStore) {
   };
 }
 
-export function joinRoomController(roomStore: RoomStore) {
+export function joinRoomController(roomService: RoomService) {
   return async function joinRoom(
     req: Request<{ roomCode: string }, {}, JoinRoomRequest>,
     res: Response,
@@ -54,7 +54,7 @@ export function joinRoomController(roomStore: RoomStore) {
         return res.status(400).json({ error: "User name is required" });
       }
 
-      const { user, room } = roomStore.joinRoom(roomCode, userName);
+      const { user, room } = roomService.joinRoom(roomCode, userName);
 
       return res.json({
         user,

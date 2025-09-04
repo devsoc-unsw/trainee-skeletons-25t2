@@ -1,6 +1,6 @@
 import { DefaultEventsMap, Server } from "socket.io";
 import { User } from "../types";
-import { RoomStore } from "./room.store";
+import { RoomService } from "./room.service";
 
 export type SocketState = {
   userId: string;
@@ -10,7 +10,7 @@ export type SocketState = {
 
 export function setUpRoomSocketListeners(
   io: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, SocketState>,
-  roomStore: RoomStore,
+  roomService: RoomService,
 ) {
   io.on("connection", (socket) => {
     // their userId and name is in the socket.handshake.query
@@ -30,7 +30,7 @@ export function setUpRoomSocketListeners(
     // should only be called if the room actually exists
     socket.on("room:leave", (roomId: string) => {
       try {
-        roomStore.removeUserFromRoom(roomId, userId);
+        roomService.removeUserFromRoom(roomId, userId);
         // sync before the socket leaves so that it has the room object.
         socket.leave(roomId);
         io.in(roomId).emit("user:leave", userId);
@@ -52,7 +52,7 @@ export function setUpRoomSocketListeners(
       }
 
       try {
-        roomStore.startVoting(roomId, socket.data.userId);
+        roomService.startVoting(roomId, socket.data.userId);
         io.in(roomId).emit("game:state_update", "STARTED");
       } catch (error) {
         console.error(`Error starting voting in room ${roomId}:`, error);
@@ -72,7 +72,7 @@ export function setUpRoomSocketListeners(
       }
 
       try {
-        roomStore.endVoting(roomId, socket.data.userId);
+        roomService.endVoting(roomId, socket.data.userId);
         io.in(roomId).emit("game:state_update", "ENDED");
       } catch (error) {
         console.error(`Error ending voting in room ${roomId}:`, error);
@@ -94,7 +94,7 @@ export function setUpRoomSocketListeners(
         }
 
         try {
-          const result = roomStore.voteRestaurant(roomId, restaurantId, vote);
+          const result = roomService.voteRestaurant(roomId, restaurantId, vote);
           io.in(roomId).emit("game:restaurant_voted", result);
         } catch (error) {
           console.error(
@@ -118,7 +118,7 @@ export function setUpRoomSocketListeners(
       }
 
       try {
-        const room = roomStore.prepareResults(roomId);
+        const room = roomService.prepareResults(roomId);
         io.in(roomId).emit("syncState", room.toRoomResponse());
       } catch (error) {
         console.error(`Error preparing results for room ${roomId}:`, error);
@@ -128,7 +128,7 @@ export function setUpRoomSocketListeners(
 
     socket.on("disconnect", () => {
       // socket.io kicks out the user from every (socket) room they're in, but
-      // user also needs to leave every room they're in (our roomStore that is)
+      // user also needs to leave every room they're in (our roomService that is)
       // assume for now that the user is not in multiple rooms.
 
       // remove the user from the room as well
@@ -136,7 +136,7 @@ export function setUpRoomSocketListeners(
         const roomId = socket.data.roomId;
 
         try {
-          roomStore.removeUserFromRoom(roomId, userId);
+          roomService.removeUserFromRoom(roomId, userId);
           io.in(roomId).emit("user:leave", userId);
         } catch (error) {
           console.error(`Error removing user from room on disconnect:`, error);
