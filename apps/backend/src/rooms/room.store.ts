@@ -1,6 +1,6 @@
 import { Room } from "./room";
 import { User } from "../types";
-import { Restaurant } from "./room.types";
+import { Restaurant } from "../restaurants";
 
 export class RoomStore {
   private rooms: Map<string, Room> = new Map();

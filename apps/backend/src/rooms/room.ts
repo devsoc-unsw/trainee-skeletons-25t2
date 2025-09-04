@@ -1,5 +1,6 @@
 import type { User } from "../types";
-import type { GameState, Restaurant, RoomResponse } from "./room.types";
+import type { GameState, RoomResponse } from "./room.types";
+import { Restaurant } from "../restaurants";
 import { v4 as uuidv4 } from "uuid";
 
 export class Room {
