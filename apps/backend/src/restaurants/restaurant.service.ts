@@ -5,7 +5,7 @@ import mockRestaurantData from "./restaurants-mock.json";
 import { google } from "@googlemaps/places/build/protos/protos";
 
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
-const USE_MOCK_RESTAURANTS = true; // Can be made configurable via env
+const USE_MOCK_RESTAURANTS = process.env.USE_MOCK_RESTAURANTS; // Can be made configurable via env
 
 export class RestaurantService {
   /**
