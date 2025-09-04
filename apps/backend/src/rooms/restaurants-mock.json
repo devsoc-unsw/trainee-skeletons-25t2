@@ -1,13 +1,14 @@
 {
-  "restaurantsWithPhotoUrls": [
+  "restaurants": [
     {
+      "id": "ChIJBdzg226xEmsRoAcyaTmKvdo",
       "name": "The Lounge UNSW",
       "address": "Level 11, Library (F21), Library Rd, UNSW Sydney, Kensington NSW 2033, Australia",
       "rating": 4.4,
       "minPrice": "20",
       "maxPrice": "40",
       "mapLink": "https://maps.google.com/?cid=15761906250049259424&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 5,
@@ -38,13 +39,14 @@
       ]
     },
     {
+      "id": "ChIJJYsI7MaxEmsRQuvaCtFM5e4",
       "name": "PappaRich UNSW",
       "address": "Quadrangle Building, College Rd, Kensington NSW 2052, Australia",
       "rating": 4,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=17214249611407584066&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 1,
@@ -75,13 +77,14 @@
       ]
     },
     {
+      "id": "ChIJ5-TCPV-xEmsRHzlDkmTCdzA",
       "name": "Alleyway Kitchen UNSW",
       "address": "Quad Food Court, Quadrangle Building, College Rd, Kensington NSW 2033, Australia",
       "rating": 4.9,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=3492473773255506207&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 5,
@@ -106,19 +109,20 @@
       ],
       "photos": [
         "https://lh3.googleusercontent.com/places/ANXAkqHC3LEKb2zZjGuq9Y9MG_vjFtHhBgcGHJvJal6DXbuAekw9_VtQ1K50s9E1pe7B9hzkYu9jqbE-l03jY8X_QoQTSet3rmcDcNA=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cxvSXQzJtErir8pZlsY95UyaXmrE461xB48mptNnbJkp9PNacKdt0gxJNQPlLDwDFqFUizmxsEqq8DK4YML4d_qdWGH2wOsBO-Mcob8xNwQCJLlmGAUJILrl1rwAuNvqCmtzx933oSlY1R1S8szQJmyHw=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2czSeIuMt0zw4nwvis-F8JBQ7xQ8RxYi_OqV4bGtdnBJDLWXLUDKMN9qWkOCYaJR8gdCk73IhGCCWc9r8ZZGeIvWmjCu0m4eY15ZCIYGwYWUJmZAdJDwtjQDUvmPQaAvGuPGi-qRQbIhec8GjBYRLe3y5A=s4800-w800",
         "https://lh3.googleusercontent.com/place-photos/AJnk2cyOCU1aq5pIxUkx47smts3C9g3Cweq3RIpK6KKxzyGLs_aUNKDp-1nTBqOkLA6poAvzpcW8XAqiw6O_QsWK1IJEkN3OYk6lsUlWtWlp4FsGYLN6J9_7LJYntbvGWyZtBPYgXI-cdOFhFhTFTmqhuK26Pw=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cyRqyUUavvy79D5kFqmUrlTiHy6KLfSFMvoTyv58_Eolr7xglz2YWv_xYJtut8zqEcpXhuueyJAsK0BBIYS2UhLBLBHGDq1ykBuebk_j9uk8l_YY8MW8DktjwOwu4D3dxjob9ksy07IV9-fAstYyBMl=s4800-w800"
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxvgzhu4fZgbCMbZJKjCa5iWMLp2qbslfmptidYVcTPHMYnEa2TKPObTZJ1wK_33T1IsXXchsyNjtlh6Pc9YolzSkIaCoAde0udyElVyigdKZWz-Iy_6gP05uTERx9RnTw2S9iySdaWpOkgBYE6OXdP=s4800-w800"
       ]
     },
     {
+      "id": "ChIJMQHavIqxEmsR2Xqg3z2a8dE",
       "name": "Southern Wok",
       "address": "LG 58 Morven Brown Building University of, Kensington NSW 2033, Australia",
       "rating": 4.3,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=15128042213849725657&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 4,
@@ -142,13 +146,14 @@
         }
       ],
       "photos": [
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cwqxQ4rJQNYkpp13oIDjmwOY8_gZgjyo2UQ0xd8hQNoTq0W9efh-s8mbvy7WJPIqdzX0tdlvJHM4lRkB7tsAL99a7MOIrK_J_ivwDktEvxpp3iAEKOjKncEfg8uxLZ6k-e6NFlIdbKaT7nVww=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cwpQwiKtCOJ7jtQeWojaBjodWrugwkssuBgchXdL66lsBQl52a2p6eM_pJteb2-5b3T1zcbl9FRMu6CBuvUO_zYGhCxZ4uK9aunWfEW4liY3qDgPZt0RfNAQMfEREN7MhXXp5cXkK3o3vXu2A=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyMXDPL_Y401jpM9-9ExF6Hb-eoK9rLxj8bgMM0pSqBPTHxsQ4QwB834kv5HYIaDgeAN-q01bpEP9Ux84L7af6gDLf5JOsBs-8YE2My5XY6TR76X1bdMedNdVjIoD5C7ls4OVNscPpPlLcwOA=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyDJHVJEEq5cLJAvegfRI2T-O7xkhCY_NkwN1uzBgBs-1bOK6N4bAH2ZcvLJfWnXn683tixWsK6zc9P_vLrBpZdHHjIi-gkYVmJVey8cqL3IVRVdLNV5yv8JFLWdvYxDrZ3p2RhQcK9x7W9fw=s4800-w800",
         "https://lh3.googleusercontent.com/place-photos/AJnk2czSl1mmIGhh33DF3XEeMOo050LSo2jm2B-Y-HxkZBkvF4rXXJtdcNsVtX_k6oZB8wC0q_PS4yLp1H9yem1jrEScTqdV39xEpUY07554Df2nh7TIlrMh1P6Ql-ej7M9lzTbi7Kv6JUsR4SnD0KY=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cxOyqF56IvIQmqHJcAXhWViv8Up5qTrk18HlaOI9VyNN4-QP5i2-rm5dpB7Wqob_2HlXX-7DD61ibz_6f1j-5NSbkr1PdurN5QXq-JaafP7Ci8w1CQn66LbSUxH6q_jjlwKI91tubH4WIG52g=s4800-w800"
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwmVCCKo_eggITzTuaJGU7P2jcnKryFk3RLtMnMwTqATIBpHCwY99Z82YtxvySk94bXeT0Tw8_v77ysedsmgCEOuqaA3bwXhDfZMRu3VQvQ19dYLj86C4ILmizs8y_K1k-onoqbX9jVB2OAdQ=s4800-w800"
       ]
     },
     {
+      "id": "ChIJ40cwiE6zEmsR17fKQLjRWnc",
       "name": "Dolce Fiori",
       "address": "52 St Pauls St, Randwick NSW 2031, Australia",
       "rating": 4.6,
@@ -186,13 +191,14 @@
       ]
     },
     {
+      "id": "ChIJ0WgQBIuxEmsRN-F0k9CDPbI",
       "name": "Laksa Delight",
       "address": "Mathew's Arcade, University of New South Wales, High St, Kensington NSW 2033, Australia",
       "rating": 4.2,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=12843566644180869431&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 1,
@@ -223,58 +229,60 @@
       ]
     },
     {
-      "name": "Stellini Pasta Bar",
-      "address": "Gate 2, 11 High St, Kensington NSW 2033, Australia",
-      "rating": 4.2,
+      "id": "ChIJYWgKtu2zEmsRy0m4DuazaAc",
+      "name": "XS Espresso - UNSW",
+      "address": "G05 & G05a Ground Floor Biological Science (D26, Kensington NSW 2033, Australia",
+      "rating": 3.4,
       "minPrice": "1",
       "maxPrice": "20",
-      "mapLink": "https://maps.google.com/?cid=395595389448355943&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "mapLink": "https://maps.google.com/?cid=533874356514212299&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
+      "openNow": true,
       "reviews": [
         {
           "rating": 4,
-          "text": "Tried this spot for the first time and overall it was a decent experience. We ordered a bacon pizza and a chicken one. Both were alright—not bad, but nothing particularly memorable either. The crust was cooked well and the cheese was gooood, but the flavours didn’t quite pop the way we were hoping. Service was friendly and quick, and the place was clean with a nice vibe. Might give it another shot to try something different on the menu. Solid, but room for improvement."
+          "text": "The burger is nice and chips are good. But the waiting time is a little bit long. Also, if you don't ask, they won't serve you tap water or tomato source. The price is slightly higher compared to other campus food."
         },
         {
           "rating": 5,
-          "text": "This place is incredible!! I’ve been looking for a new pasta place since every other Italian restaurant is way too overpriced these days (and hardly authentic), so I ordered from here and it’s AMAZING. This is the most authentic tasting pasta I’ve had since my trip to Italy. Huge portions and you can tell they don’t cut corners with their ingredients. Best part is that it’s reasonably priced!"
+          "text": "One of my favorite cafe in Randwick. I often visited here during lunch. It could be crowded but you still get a table. We often sit outside. I had pistachio latte, for me it’s too sweet. Almond croissant is great. Brownie gluten-free is ok. Mocha is great too."
         },
         {
           "rating": 5,
-          "text": "Absolutely incredible food and coffee! Nimesh is super friendly and always goes above and beyond – not to mention he makes amazing food. The atmosphere is cozy, and everything on the menu is full of flavor. Easily one of my favorite spots – highly recommend!"
+          "text": "I love this cafe! A bit more on the expensive side but it's cute, and both the coffee and the food is good."
+        },
+        {
+          "rating": 1,
+          "text": "Terrible Ordering Experience – Paid but No Food!\nI placed an order using the self-service machine, and my card was charged (showing as pending). However, I never received an order number. When I asked the staff, they claimed they didn’t get my order because the payment was \"pending.\" But this makes no sense—I’ve been to another Vietnamese restaurant where my payment also showed as pending, yet I got my food immediately. Even past transactions here were pending at first, but the orders went through.\n\nThe staff said my money would be refunded in 7 days, but in my experience, refunds usually require another card swipe—I doubt I’ll actually get it back. Now I’m out of money with no food, and no real solution. Awful service and a complete waste of time. Never coming back!"
         },
         {
           "rating": 5,
-          "text": "I don't study at UNSW, but this pasta place is just the best in town for what the price is. My go-to pastas are carbonara and bolognese. PLUS their soup of the day (it's always pumpkin soup) sooo yummy!"
-        },
-        {
-          "rating": 5,
-          "text": "Had pesto and carbonara. Very authentic and delicious food with decent portion and price! Definitely good choice for weekday meals!\nFungi is great as well! This has been our all time fav lunch spot on campus!\nUpdate: Spinachi is my new fav now! It goes really well with penne because the sauce will be stuffed inside the noodles! Go try it!"
+          "text": "Staff were nice and welcoming!\n\nNice place for breakfast, we tried the XS stack and three-topping omelet and both were delicious.\n\nThe Berry Blast was great.\n\nWe are yet to try the coffee at this branch. But the other branch in Bondi had a great coffee.\n\nWould love to come again for sure."
         }
       ],
       "photos": [
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cw48WEOTEhDLpnMMEiIdiC9E-vTzo43NdY7r3c1xJJPZvdJDI8e_sL2d6i4nzrI-d1HHr807MEiG7gyU5lKNCfo0tF8f5j65qx6TYUbzLMLadq9qe9IBl5qxGZqbdebmuCTDIVZq_MmfUKbD6s=s4800-w800",
-        "https://lh3.googleusercontent.com/places/ANXAkqHDwdX5YV6XUckSI4-WyoDEDPlEQGFQ7UsqMjzUNlBHOkrZA4JKk1bxNLIyu8YolOshsNOjR_11_D9BPENY3klefyLWzBpFhoI=s4800-w800",
-        "https://lh3.googleusercontent.com/places/ANXAkqHE0URBGSr1hh_j1gdKahZK87yeB3Czag5rzf77Z729BcyN8KnKqEpvki0_4XJyup5TUsNsWidny_sS58OVbaEVG2PI-5SEHTM=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cymAq_5XikY2gj9AoJEUXv3rMZFLGiN1qdk8PLcpaK9XV3q60gE4cinT3yN5NFZQp-V_6Rwuy-J25Hd6etaNgdPW8FHDbnhh_KJQi5oHwkGJcvuwxcoET88EQs1yUvmKgy2HMnYmuoPja2g=s4800-w800"
+        "https://lh3.googleusercontent.com/places/ANXAkqFSlyvp9U9J7YAVG8ryKdjb7cH6H8kip_7Feot2vl1SwOq1coBEnV4T0HCxPWafhOvvW84idBckTCS5jAo4lfZz7oANdFf7bJA=s4800-w768",
+        "https://lh3.googleusercontent.com/places/ANXAkqHacZGKgBMkb8udGzct9-eIj_OoVPVVBayb8jo-RhN6cpWcEs5UkHwLokHDRKHZy_Z1D7BCsICRSybbGkwkr7IZqGSamQsrbSs=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cwUMzco5D9iFKkLc6NW-ZM6yqOyoiVW2E7rV2YEf8QOnk4ZS4pCSEFzvZ4Ln679giiV4M8sD63JhAbck_pGLr4p9gDOhUYB8J4sPJSN9L9CEQ_aEvqFLnq4Yt_vkk9TBV94VFgMFZXZ3yATB9w=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cyjsr6awvcCsgyl-DKeI2UISjHscVenqF28GigangxZUlTjGj5LemnPaXs19FWmQxx36mGKXwHO4veMJZjQoEPinBoOfSyTyFwj6t8MlgEW26fVGdHkZEqOeJKhFlNwq856ecHWXoHq3eHP5w=s4800-w800"
       ]
     },
     {
+      "id": "ChIJ3yBeEiCyEmsR3Z_qiVlVJW0",
       "name": "Gradueat",
       "address": "Kensington NSW 2033, Australia",
       "rating": 4.2,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=7864786167326744541&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
-        {
-          "rating": 5,
-          "text": "I seriously love everything about this place. It’s run by the sweetest older couple who are always so friendly and chatty. You can tell they work really hard and genuinely care about what they do which just makes the vibe even better.\n\nThe coffee is always spot on. Smooth, strong, and just consistently good. It’s the kind of place where you can rely on your order being perfect every time. Their food is just as good. I always recommend the bacon and egg roll. And the huge muffins which are the best afternoon snack. You honestly can’t go wrong with anything on the menu.\n\nI come here pretty much every day. It’s cozy, welcoming, and reminds me of home. I really wish more people knew about this place and the university needs more independent places like this. If you’re in the area, definitely check it out."
-        },
         {
           "rating": 1,
           "text": "Waited in line with two others, and the owner seemed rushed and flustered—just tapping cards and moving people along without saying a single word. Zero interaction, zero courtesy. Ordered a ham croissant, which was reheated by squashing it into a flat, soggy mess. Easily the worst croissant I’ve ever had. Thanks for wasting my $8."
+        },
+        {
+          "rating": 5,
+          "text": "I seriously love everything about this place. It’s run by the sweetest older couple who are always so friendly and chatty. You can tell they work really hard and genuinely care about what they do which just makes the vibe even better.\n\nThe coffee is always spot on. Smooth, strong, and just consistently good. It’s the kind of place where you can rely on your order being perfect every time. Their food is just as good. I always recommend the bacon and egg roll. And the huge muffins which are the best afternoon snack. You honestly can’t go wrong with anything on the menu.\n\nI come here pretty much every day. It’s cozy, welcoming, and reminds me of home. I really wish more people knew about this place and the university needs more independent places like this. If you’re in the area, definitely check it out."
         },
         {
           "rating": 2,
@@ -291,19 +299,20 @@
       ],
       "photos": [
         "https://lh3.googleusercontent.com/place-photos/AJnk2cwb7Vbif6n0TOHJECIrvtLKPMlfGSxbPaazkiC6IqguBKJ4mjIvm_3raYrtSctPgVPTY1bnQQFz23khLEBvaX7KPSCLQ231XjNsKv4mNsPH8hNHYIUE50VEy1GbBeP4_fVLBCZ04Zxk1qpj=s4800-w800",
-        "https://lh3.googleusercontent.com/place-photos/AJnk2cwE_EII6r7H7zag2QjCeQ924R6MZo0FQs5s78SYYohwECrWyWVtLQuy8N8K8azP9FyTHalbmD8aaIS6VGpEWRgZIKVD5ejlKW6hn6ZvDTWBtutXQGRmLfciEdpbd5lQr8sYqZnpYnlpmWxpzio=s4800-w800",
+        "https://lh3.googleusercontent.com/place-photos/AJnk2cxb2N4Q0mudEXuTzBzxgPvLDMCEni4FJqkhCaBOfTvLNJREno_YduMMo4MejIv4dtxM9ty-I3StoQI6MprezlgGXQ1_9bFFmAVjgvEEx25SyTk0okv89qSyG_hDUyAhwnSgD-UVaH5cEId_OM4=s4800-w800",
         "https://lh3.googleusercontent.com/place-photos/AJnk2cwLcFfIId4CKZYr97gPyc-cwq0ymFxzLdGUIkr_1k3UAI8R3imIgnVaROsMNEqEq5fZV87Z7OlEhB79ZT6GHGfi8B4upCn3cw1EjNfxqVmdfJTbumk0tLIjmM34g-x5bY5MsW1VDcD_DtGlCg=s4800-w800",
         "https://lh3.googleusercontent.com/place-photos/AJnk2cy70_kwWpyUebRFdhxDDTX4lrrcWLGSmvY6nbRt2yutUmL873Z2YwIxPAssZ-xrlzhG1WlB3CER5zL-s9t7s2H4GG-lIAxArkN9L0RvAeqBSc-GA-qnYvbYwzP4fKd21pJyGKONofMwYNmG7g=s4800-w800"
       ]
     },
     {
+      "id": "ChIJVy74Y5-xEmsRx4fMuam9AGE",
       "name": "Soul Origin UNSW",
       "address": "Quadrangle Building, College Rd, Kensington NSW 2033, Australia",
       "rating": 3.5,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=6989795158343321543&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 5,
@@ -334,13 +343,14 @@
       ]
     },
     {
+      "id": "ChIJeRzML4uxEmsRySrUd30ArIo",
       "name": "Guzman y Gomez - UNSW",
       "address": "University Terraces Lower Kensington Campus, High St, Kensington NSW 2033, Australia",
       "rating": 3.8,
       "minPrice": "1",
       "maxPrice": "20",
       "mapLink": "https://maps.google.com/?cid=9992362212109593289&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQABgEIAA",
-      "openNow": false,
+      "openNow": true,
       "reviews": [
         {
           "rating": 1,

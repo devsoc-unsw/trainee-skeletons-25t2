@@ -36,7 +36,7 @@ export default function setUpSocketListeners(
 
       // This should get returned to the frontend, we want to use "syncState" to sync up the state of our backend
       // to the frontend in real-time.
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     socket.on("room:join", (payload: { roomId: string }) => {
@@ -50,7 +50,7 @@ export default function setUpSocketListeners(
         throw Error(`room with roomId ${roomId} could not be found`);
       }
       room.addUser({ userId, name, userState: "WAITING" });
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     socket.on("room:leave", (payload: { roomId: string }) => {
@@ -61,7 +61,7 @@ export default function setUpSocketListeners(
         throw Error(`room with roomId ${roomId} could not be found`);
       }
       room.removeUser(userId);
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
 
       // sync before the socket leaves so that it has the room object.
       socket.leave(roomId);
@@ -91,7 +91,7 @@ export default function setUpSocketListeners(
       }
 
       room.startVoting();
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     // moves every user to be "DONE state"
@@ -118,7 +118,7 @@ export default function setUpSocketListeners(
       }
 
       room.endVoting();
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     // TODO:
@@ -145,7 +145,7 @@ export default function setUpSocketListeners(
         }
 
         room.voteRestaurant(restaurantId, vote);
-        io.in(roomId).emit("syncState", room.toObject());
+        io.in(roomId).emit("syncState", room.toRoomObject());
       },
     );
 
@@ -166,7 +166,7 @@ export default function setUpSocketListeners(
       }
 
       room.addRestaurant(restaurant);
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     // when expiry date has passed, or every user is in DONE, get the top 5 restaurants according to
@@ -191,7 +191,7 @@ export default function setUpSocketListeners(
       }
 
       room.prepareResults();
-      io.in(roomId).emit("syncState", room.toObject());
+      io.in(roomId).emit("syncState", room.toRoomObject());
     });
 
     socket.on("disconnect", () => {
@@ -207,7 +207,7 @@ export default function setUpSocketListeners(
 
         if (room !== undefined) {
           room.removeUser(userId);
-          io.in(roomId).emit("syncState", room.toObject());
+          io.in(roomId).emit("syncState", room.toRoomObject());
         }
       }
 
