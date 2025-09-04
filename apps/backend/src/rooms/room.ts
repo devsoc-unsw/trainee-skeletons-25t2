@@ -38,7 +38,7 @@ export class Room {
 
   voteRestaurant(restaurantId: string, vote: number) {
     const prev = this.restaurantVotes.get(restaurantId);
-    if (!prev) return;
+    if (prev === undefined) return;
     this.restaurantVotes.set(restaurantId, prev + vote);
   }
 
