@@ -1,5 +1,6 @@
 import { User } from "../types";
 
+// TODO: Add timer
 export type CreateRoomRequest = {
   ownerName: string;
   location: string;
