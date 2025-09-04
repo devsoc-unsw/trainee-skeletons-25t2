@@ -9,6 +9,13 @@ export type CreateRoomRequest = {
   minRating?: 3.5 | 4 | 4.5;
 };
 
+export type RestaurantSearchParams = {
+  location: string;
+  cuisine: string;
+  priceLevel: "$" | "$$" | "$$$" | "$$$$";
+  minRating?: 3.5 | 4 | 4.5;
+};
+
 export type JoinRoomRequest = {
   userName: string;
 };

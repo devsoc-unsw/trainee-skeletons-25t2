@@ -3,8 +3,12 @@ import cors from "cors";
 import "dotenv/config";
 import { DefaultEventsMap, Server } from "socket.io";
 import { createServer } from "node:http";
-import setUpSocketListeners, { SocketState } from "./sockets";
-import { roomRouter } from "./rooms";
+import {
+  createRoomRouter,
+  setUpRoomSocketListeners,
+  SocketState,
+  RoomStore,
+} from "./rooms";
 
 const app = express();
 const httpServer = createServer(app);
@@ -20,8 +24,10 @@ const io = new Server<
   },
 });
 
-setUpSocketListeners(io);
+// Create roomStore instance and inject it
+const roomStore = new RoomStore();
+setUpRoomSocketListeners(io, roomStore);
 
-app.use(cors()).use(express.json()).use("", roomRouter);
+app.use(cors()).use(express.json()).use("", createRoomRouter(roomStore));
 
 export { httpServer, io, app };
