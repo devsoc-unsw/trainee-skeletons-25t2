@@ -25,6 +25,8 @@
     "@types/node": "^24.1.0",
     "@types/pg": "^8.15.5",
     "@types/supertest": "^6.0.2",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/yamljs": "^0.2.34",
     "dotenv": "^17.2.1",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.4",
@@ -47,6 +49,8 @@
     "express": "^5.1.0",
     "postgres": "^3.4.7",
     "socket.io": "^4.8.1",
-    "uuid": "^11.1.0"
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.1.0",
+    "yamljs": "^0.3.0"
   }
 }
