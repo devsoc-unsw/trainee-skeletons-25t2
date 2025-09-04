@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import "dotenv/config";
 import { DefaultEventsMap, Server } from "socket.io";
 import { createServer } from "node:http";
 import {
@@ -9,6 +8,7 @@ import {
   SocketState,
   RoomService,
 } from "./rooms";
+import { config } from "./config";
 
 const app = express();
 const httpServer = createServer(app);
@@ -18,9 +18,8 @@ const io = new Server<
   DefaultEventsMap,
   SocketState
 >(httpServer, {
-  // TODO: put this in env variable
   cors: {
-    origin: "http://localhost:5173",
+    origin: config.cors.origin,
   },
 });
 

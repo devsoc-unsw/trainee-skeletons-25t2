@@ -3,9 +3,7 @@ import { Restaurant, RestaurantSearchParams } from "./restaurant.types";
 import { v4 as uuidv4 } from "uuid";
 import mockRestaurantData from "./restaurants-mock.json";
 import { google } from "@googlemaps/places/build/protos/protos";
-
-const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
-const USE_MOCK_RESTAURANTS = process.env.USE_MOCK_RESTAURANTS; // Can be made configurable via env
+import { config } from "../config";
 
 export class RestaurantService {
   /**
@@ -15,7 +13,7 @@ export class RestaurantService {
   async searchRestaurants(
     params: RestaurantSearchParams,
   ): Promise<Restaurant[]> {
-    if (USE_MOCK_RESTAURANTS) {
+    if (config.googlePlaces.useMockRestaurants) {
       return mockRestaurantData.restaurants;
     }
 
@@ -28,7 +26,7 @@ export class RestaurantService {
   private async searchRestaurantsFromGoogle(
     params: RestaurantSearchParams,
   ): Promise<Restaurant[]> {
-    if (!GOOGLE_PLACES_API_KEY) {
+    if (!config.googlePlaces.apiKey) {
       throw new Error("Google Places API key is not configured");
     }
 
@@ -51,7 +49,7 @@ export class RestaurantService {
     };
 
     const googlePriceLevel = getGooglePriceLevel(priceLevel);
-    const client = new v1.PlacesClient({ apiKey: GOOGLE_PLACES_API_KEY });
+    const client = new v1.PlacesClient({ apiKey: config.googlePlaces.apiKey });
 
     const [searchResponse] = await client.searchText(
       {

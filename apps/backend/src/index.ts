@@ -1,10 +1,11 @@
 import { httpServer } from "./server";
-import "dotenv/config";
+import { config, validateConfig } from "./config";
 
-const port = process.env.PORT || "3000";
+// Validate configuration on startup
+validateConfig();
 
-httpServer.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+httpServer.listen(config.port, () => {
+  console.log(`Server listening on port ${config.port}`);
 });
 
 process.on("SIGINT", async () => {
