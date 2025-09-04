@@ -1,5 +1,5 @@
 import { v1 } from "@googlemaps/places";
-import { Restaurant, RestaurantSearchParams } from "./room.types";
+import { Restaurant, RestaurantSearchParams } from "./restaurant.types";
 import { v4 as uuidv4 } from "uuid";
 import mockRestaurantData from "./restaurants-mock.json";
 import { google } from "@googlemaps/places/build/protos/protos";

@@ -1,7 +1,10 @@
 import { Room } from "./room";
 import { User } from "../types";
-import { Restaurant, RestaurantSearchParams } from "./room.types";
-import { RestaurantService } from "./restaurant.service";
+import {
+  Restaurant,
+  RestaurantSearchParams,
+  RestaurantService,
+} from "../restaurants";
 import { RoomStore } from "./room.store";
 import { v4 as uuidv4 } from "uuid";
 

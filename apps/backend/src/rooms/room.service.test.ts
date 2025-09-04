@@ -1,13 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { RoomService } from "./room.service";
 import { RoomStore } from "./room.store";
-import { RestaurantService } from "./restaurant.service";
 import { User } from "../types";
-import { RestaurantSearchParams } from "./room.types";
-import mockRestaurantData from "./restaurants-mock.json";
+import mockRestaurantData from "../restaurants/restaurants-mock.json";
+import { RestaurantSearchParams, RestaurantService } from "../restaurants";
 
 // Mock the RestaurantService
-vi.mock("./restaurant.service");
+vi.mock("../restaurants/restaurant.service");
 
 describe("RoomService", () => {
   let roomService: RoomService;
