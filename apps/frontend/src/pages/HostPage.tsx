@@ -1,7 +1,7 @@
 import { Navigate, useParams } from "react-router-dom";
 import { useSocket } from "../contexts";
 import { useEffect } from "react";
-import type { GameState } from "../types";
+import type { GameState, NewVote } from "../types";
 
 export default function HostPage() {
   // IF HOST -> option to share link, play the game, Host control panel where you can see how many people completed + end vote early + timer of when it ends
@@ -18,7 +18,7 @@ export default function HostPage() {
     socket.on("user:leave", (_userId: string) => {});
     socket.on("game:state_updated", (_gameState: GameState) => {});
     // TODO: add params
-    socket.on("game:vote_restaurant", () => {});
+    socket.on("game:restaurant_voted", (_newVote: NewVote) => {});
 
     return () => {
       socket.off("user:join");

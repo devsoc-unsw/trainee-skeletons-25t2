@@ -15,4 +15,10 @@ export type Room = {
 
 export type GameState = "WAITING" | "STARTED" | "FINISHED";
 
+export type NewVote = {
+  restaurantId: string;
+  newVoteCount: number;
+  gameState: GameState;
+};
+
 // TODO: define type for restaraunt
