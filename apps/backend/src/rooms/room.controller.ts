@@ -60,7 +60,6 @@ export function joinRoomController(roomService: RoomService) {
         room: room.toRoomResponse(),
       });
     } catch (error) {
-      console.error("Error joining room:", error);
       if (error instanceof Error && error.message === "Room not found") {
         return res.status(404).json({ error: "Room not found" });
       }
