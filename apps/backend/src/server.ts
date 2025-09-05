@@ -26,15 +26,12 @@ const io = new Server<
   },
 });
 
-// Load Swagger specification
 const swaggerDocument = YAML.load(path.join(__dirname, "../swagger.yaml"));
 
-// Create roomService instance and inject it
 const roomService = new RoomService();
 setUpRoomSocketListeners(io, roomService);
 
-// Setup Swagger UI
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(cors()).use(express.json()).use("", createRoomRouter(roomService));
 
