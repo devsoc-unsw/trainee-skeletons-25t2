@@ -1,5 +1,6 @@
 import { DefaultEventsMap, Server } from "socket.io";
 import { RoomService } from "./room.service";
+import { config } from "../config";
 
 export type SocketState = {
   userId: string;
@@ -24,7 +25,23 @@ export function setUpRoomSocketListeners(
     socket.join(roomId);
     socket.data.roomId = roomId;
     io.in(roomId).emit("user:join", userId);
-    console.log(`User connected ${userId} ${name}`);
+
+    if (config.nodeEnv !== "test") {
+      console.log(
+        `[${new Date().toISOString()}] User connected ${userId} ${name}`,
+      );
+    }
+
+    if (config.nodeEnv !== "test") {
+      socket.onAny((event, ...args) => {
+        console.log(`[${new Date().toISOString()}] [SOCKET] ${event}:`, {
+          socketId: socket.id,
+          userId,
+          roomId,
+          payload: args,
+        });
+      });
+    }
 
     socket.on("room:leave", (roomId: string) => {
       try {
@@ -92,14 +109,19 @@ export function setUpRoomSocketListeners(
       // user also needs to leave every room they're in (our roomService that is)
       // assume for now that the user is not in multiple rooms.
 
-      // remove the user from the room as well (only if room exists and user is in it)
       try {
+        // remove the user from the room as well (only if room exists and user is in it)
         // roomId in socket context is actually the room code
         const room = roomService.getRoom(roomId);
         roomService.removeUserFromRoom(roomId, userId);
         io.in(roomId).emit("user:leave", userId);
         socket.leave(roomId);
-        console.log(`User disconnected ${userId} ${name}`);
+
+        if (config.nodeEnv !== "test") {
+          console.log(
+            `[${new Date().toISOString()}] User disconnected ${userId} ${name}`,
+          );
+        }
       } catch (error) {
         console.error(`Error removing user from room on disconnect:`, error);
       }

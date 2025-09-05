@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import { DefaultEventsMap, Server } from "socket.io";
 import { createServer } from "node:http";
 import swaggerUi from "swagger-ui-express";
@@ -31,6 +32,9 @@ const swaggerDocument = YAML.load(path.join(__dirname, "../swagger.yaml"));
 const roomService = new RoomService();
 setUpRoomSocketListeners(io, roomService);
 
+if (config.nodeEnv !== "test") {
+  app.use(morgan("combined"));
+}
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(cors()).use(express.json()).use("", createRoomRouter(roomService));
