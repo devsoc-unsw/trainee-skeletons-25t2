@@ -35,7 +35,6 @@ export function createRoomController(roomService: RoomService) {
         room: newRoom.toRoomResponse(),
       });
     } catch (error) {
-      console.error("Error creating room:", error);
       return res.status(500).json({ error: "Failed to create room" });
     }
   };
