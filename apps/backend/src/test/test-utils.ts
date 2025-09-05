@@ -132,10 +132,3 @@ export const createSocket = (
 
   return socket;
 };
-
-/**
- * Helper function to wait between operations
- */
-export const wait = (ms: number): Promise<void> => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};

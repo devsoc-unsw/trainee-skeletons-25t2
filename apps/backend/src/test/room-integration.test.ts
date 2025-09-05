@@ -18,7 +18,6 @@ import {
   disconnectAllSockets,
   waitForSocketEvents,
   createSocket,
-  wait,
   TestServer,
 } from "./test-utils";
 
@@ -40,15 +39,8 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Clear any existing socket connections
     disconnectAllSockets(testServer.io);
-    // Clear all rooms from the room service
     clearAllRooms(testServer.roomService);
-  });
-
-  afterEach(async () => {
-    // Wait a bit between tests to ensure cleanup
-    await wait(100);
   });
 
   it("should join room and establish socket connection", async () => {
@@ -56,7 +48,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       mockRestaurantData.restaurants,
     );
 
-    // 1. Create a room via API
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -71,7 +62,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     const roomCode = createRes.body.room.code;
     expect(roomCode).toBeDefined();
 
-    // 2. Join room via API
     const joinRes = await request(testServer.baseUrl)
       .post(`/room/${roomCode}`)
       .send({ userName: "Bob" })
@@ -81,7 +71,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     expect(joinRes.body.room).toBeDefined();
     expect(joinRes.body.user.name).toBe("Bob");
 
-    // 3. Connect socket using join response details
     const socket = createSocket(
       testServer.baseUrl,
       roomCode,
@@ -89,7 +78,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       joinRes.body.user.name,
     );
 
-    // 4. Wait for socket connection and verify events
     socket.on("connect", () => {
       expect(socket.connected).toBe(true);
     });
@@ -108,7 +96,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       mockRestaurantData.restaurants,
     );
 
-    // 1. Create a room
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -122,7 +109,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     const roomCode = createRes.body.room.code;
 
-    // 2. Join multiple users
     const user1Res = await request(testServer.baseUrl)
       .post(`/room/${roomCode}`)
       .send({ userName: "User1" })
@@ -133,7 +119,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .send({ userName: "User2" })
       .expect(200);
 
-    // 3. Connect first socket
     const socket1 = createSocket(
       testServer.baseUrl,
       roomCode,
@@ -142,9 +127,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     );
     await waitForSocketEvents(socket1, ["connect", "user:join"]);
     expect(socket1.connected).toBe(true);
-
-    // 4. Wait a bit before connecting second socket
-    await wait(100);
 
     // 5. Connect second socket
     const socket2 = createSocket(
@@ -264,7 +246,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     await waitForSocketEvents(ownerSocket, ["connect", "user:join"]);
 
-    // 3. Start voting
     let stateUpdateCount = 0;
     ownerSocket.emit("room:startVoting");
 
@@ -278,7 +259,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       });
     });
 
-    // 4. End voting
     ownerSocket.emit("room:endVoting");
 
     await new Promise<void>((resolve) => {
@@ -298,7 +278,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       mockRestaurantData.restaurants,
     );
 
-    // 1. Create room and join
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -317,7 +296,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .send({ userName: "Leaver" })
       .expect(200);
 
-    // 2. Connect socket
     const socket = createSocket(
       testServer.baseUrl,
       roomCode,
@@ -327,20 +305,14 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     await waitForSocketEvents(socket, ["connect", "user:join"]);
 
-    // 3. Leave room - just verify the socket can emit the event without errors
     socket.emit("room:leave", roomCode);
 
-    // Wait a bit for the event to be processed
-    await wait(100);
-
-    // Verify the socket is still connected (the leave event should not disconnect it)
     expect(socket.connected).toBe(true);
 
     socket.disconnect();
   });
 
   it("should handle invalid room code when joining", async () => {
-    // Try to join non-existent room
     const joinRes = await request(testServer.baseUrl)
       .post("/room/INVALID123")
       .send({ userName: "Tester" })
@@ -354,7 +326,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       mockRestaurantData.restaurants,
     );
 
-    // Create a room first
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -368,7 +339,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     const roomCode = createRes.body.room.code;
 
-    // Try to join without user name
     const joinRes = await request(testServer.baseUrl)
       .post(`/room/${roomCode}`)
       .send({})
@@ -378,12 +348,10 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
   });
 
   it("should handle restaurant service errors during room creation", async () => {
-    // Mock the restaurant service to throw an error
     vi.mocked(RestaurantService.prototype.searchRestaurants).mockRejectedValue(
       new Error("Google Places API Error"),
     );
 
-    // Attempt to create a room should fail
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -403,7 +371,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       mockRestaurantData.restaurants,
     );
 
-    // 1. Create room and join
     const createRes = await request(testServer.baseUrl)
       .post("/room")
       .send({
@@ -422,7 +389,6 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .send({ userName: "Disconnector" })
       .expect(200);
 
-    // 2. Connect socket
     const socket = createSocket(
       testServer.baseUrl,
       roomCode,
@@ -432,11 +398,8 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     await waitForSocketEvents(socket, ["connect", "user:join"]);
 
-    // 3. Disconnect socket
     socket.disconnect();
 
-    // The disconnect handler should be called automatically
-    // This test verifies that the socket disconnects without errors
     expect(socket.connected).toBe(false);
   });
 });
