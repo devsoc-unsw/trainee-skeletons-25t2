@@ -4,6 +4,7 @@ import { RoomStore } from "./room.store";
 import { User } from "../types";
 import mockRestaurantData from "../restaurants/restaurants-mock.json";
 import { RestaurantSearchParams, RestaurantService } from "../restaurants";
+import { IRoomTimerQueue } from "./queue";
 
 // Mock the RestaurantService
 vi.mock("../restaurants/restaurant.service");
@@ -12,6 +13,7 @@ describe("RoomService", () => {
   let roomService: RoomService;
   let mockRoomStore: RoomStore;
   let mockRestaurantService: RestaurantService;
+  let mockTimerQueue: IRoomTimerQueue;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -21,8 +23,20 @@ describe("RoomService", () => {
     mockRoomStore = new RoomStore();
     mockRestaurantService = new RestaurantService();
 
+    // Create mock timer queue
+    mockTimerQueue = {
+      scheduleRoomEnd: vi.fn().mockResolvedValue(undefined),
+      cancelRoomEnd: vi.fn().mockResolvedValue(undefined),
+      getRemainingTime: vi.fn().mockResolvedValue(null),
+      hasActiveTimer: vi.fn().mockResolvedValue(false),
+    };
+
     // Create RoomService with mocked dependencies
-    roomService = new RoomService(mockRoomStore, mockRestaurantService);
+    roomService = new RoomService({
+      roomStore: mockRoomStore,
+      restaurantService: mockRestaurantService,
+      timerQueue: mockTimerQueue,
+    });
   });
 
   describe("createRoomWithSearch", () => {
@@ -243,11 +257,8 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(
-        owner,
-        undefined,
-        new Date(Date.now() + 24 * 60 * 60 * 1000),
-      );
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      const room = roomService.createRoom(owner, undefined, endDate);
 
       // Act
       roomService.startVoting(room.id, owner.userId);
@@ -255,6 +266,10 @@ describe("RoomService", () => {
       // Assert
       expect(room.gameState).toBe("STARTED");
       expect(room.users.get(owner.userId)?.userState).toBe("VOTING");
+      expect(mockTimerQueue.scheduleRoomEnd).toHaveBeenCalledWith(
+        room.id,
+        endDate,
+      );
     });
 
     it("should throw error when non-owner tries to start voting", () => {
@@ -308,6 +323,7 @@ describe("RoomService", () => {
       // Assert
       expect(room.gameState).toBe("FINISHED");
       expect(room.users.get(owner.userId)?.userState).toBe("FINISHED");
+      expect(mockTimerQueue.cancelRoomEnd).toHaveBeenCalledWith(room.id);
     });
 
     it("should throw error when non-owner tries to end voting", () => {
@@ -506,6 +522,7 @@ describe("RoomService", () => {
       // Assert
       expect(result).toBe(true);
       expect(roomService.getRoom(room.id)).toBeUndefined();
+      expect(mockTimerQueue.cancelRoomEnd).toHaveBeenCalledWith(room.id);
     });
 
     it("should return false when deleting non-existent room", () => {

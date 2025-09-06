@@ -7,14 +7,23 @@ import {
 } from "../restaurants";
 import { RoomStore } from "./room.store";
 import { v4 as uuidv4 } from "uuid";
+import { IRoomTimerQueue } from "./queue";
+
+export interface RoomServiceDependencies {
+  roomStore: RoomStore;
+  restaurantService: RestaurantService;
+  timerQueue: IRoomTimerQueue;
+}
 
 export class RoomService {
   private roomStore: RoomStore;
   private restaurantService: RestaurantService;
+  private timerQueue: IRoomTimerQueue;
 
-  constructor(roomStore?: RoomStore, restaurantService?: RestaurantService) {
-    this.roomStore = roomStore || new RoomStore();
-    this.restaurantService = restaurantService || new RestaurantService();
+  constructor(dependencies: RoomServiceDependencies) {
+    this.roomStore = dependencies.roomStore;
+    this.restaurantService = dependencies.restaurantService;
+    this.timerQueue = dependencies.timerQueue;
   }
 
   /**
@@ -77,6 +86,7 @@ export class RoomService {
     }
 
     this.roomStore.startVotingInRoom(roomId);
+    this.timerQueue.scheduleRoomEnd(roomId, room.endDate);
   }
 
   /**
@@ -93,6 +103,7 @@ export class RoomService {
     }
 
     this.roomStore.endVotingInRoom(roomId);
+    this.timerQueue.cancelRoomEnd(roomId);
   }
 
   /**
@@ -149,6 +160,7 @@ export class RoomService {
    * Delete a room
    */
   deleteRoom(roomId: string): boolean {
+    this.timerQueue.cancelRoomEnd(roomId);
     return this.roomStore.deleteRoom(roomId);
   }
 

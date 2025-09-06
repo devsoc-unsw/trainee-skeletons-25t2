@@ -16,9 +16,9 @@ export const config = {
   },
 
   redis: {
-    port: process.env.REDIS_PORT || "6379",
+    port: parseInt(process.env.REDIS_PORT!) || 6379,
     host: process.env.REDIS_HOST || "localhost",
-  }
+  },
 
   // Google Places API configuration
   googlePlaces: {

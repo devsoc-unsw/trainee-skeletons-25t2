@@ -5,7 +5,6 @@ import {
   beforeAll,
   afterAll,
   beforeEach,
-  afterEach,
   vi,
 } from "vitest";
 import request from "supertest";

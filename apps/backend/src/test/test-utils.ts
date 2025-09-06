@@ -10,6 +10,7 @@ import {
   setUpRoomSocketListeners,
   SocketState,
   RoomService,
+  createRoomService,
 } from "../rooms";
 
 export interface TestServer {
@@ -38,7 +39,7 @@ export async function createTestServer(port: number): Promise<TestServer> {
     },
   });
 
-  const roomService = new RoomService();
+  const roomService = createRoomService(io);
   setUpRoomSocketListeners(io, roomService);
 
   app.use(cors()).use(express.json()).use("", createRoomRouter(roomService));
