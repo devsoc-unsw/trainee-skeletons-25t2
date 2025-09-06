@@ -4,16 +4,19 @@ import { RoomStore } from "./room.store";
 import { User } from "../types";
 import mockRestaurantData from "../restaurants/restaurants-mock.json";
 import { RestaurantSearchParams, RestaurantService } from "../restaurants";
-import { IRoomTimerQueue } from "./queue";
+import { RoomTimerQueue } from "./queue";
 
 // Mock the RestaurantService
 vi.mock("../restaurants/restaurant.service");
+
+// Mock the RoomTimerQueue
+vi.mock("./queue");
 
 describe("RoomService", () => {
   let roomService: RoomService;
   let mockRoomStore: RoomStore;
   let mockRestaurantService: RestaurantService;
-  let mockTimerQueue: IRoomTimerQueue;
+  let mockTimerQueue: RoomTimerQueue;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -23,13 +26,13 @@ describe("RoomService", () => {
     mockRoomStore = new RoomStore();
     mockRestaurantService = new RestaurantService();
 
-    // Create mock timer queue
+    // Create mock timer queue instance
     mockTimerQueue = {
       scheduleRoomEnd: vi.fn().mockResolvedValue(undefined),
       cancelRoomEnd: vi.fn().mockResolvedValue(undefined),
       getRemainingTime: vi.fn().mockResolvedValue(null),
       hasActiveTimer: vi.fn().mockResolvedValue(false),
-    };
+    } as unknown as RoomTimerQueue;
 
     // Create RoomService with mocked dependencies
     roomService = new RoomService({

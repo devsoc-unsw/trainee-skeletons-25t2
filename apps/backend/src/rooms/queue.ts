@@ -3,14 +3,7 @@ import { Server } from "socket.io";
 import { config } from "../config";
 import { RoomStore } from "./room.store";
 
-export interface IRoomTimerQueue {
-  scheduleRoomEnd(roomId: string, endDate: Date): Promise<void>;
-  cancelRoomEnd(roomId: string): Promise<void>;
-  getRemainingTime(roomId: string): Promise<number | null>;
-  hasActiveTimer(roomId: string): Promise<boolean>;
-}
-
-export class RoomTimerQueue implements IRoomTimerQueue {
+export class RoomTimerQueue {
   readonly queue = new Queue("room-timers", {
     connection: {
       host: config.redis.host,

@@ -7,18 +7,18 @@ import {
 } from "../restaurants";
 import { RoomStore } from "./room.store";
 import { v4 as uuidv4 } from "uuid";
-import { IRoomTimerQueue } from "./queue";
+import { RoomTimerQueue } from "./queue";
 
 export interface RoomServiceDependencies {
   roomStore: RoomStore;
   restaurantService: RestaurantService;
-  timerQueue: IRoomTimerQueue;
+  timerQueue: RoomTimerQueue;
 }
 
 export class RoomService {
   private roomStore: RoomStore;
   private restaurantService: RestaurantService;
-  private timerQueue: IRoomTimerQueue;
+  private timerQueue: RoomTimerQueue;
 
   constructor(dependencies: RoomServiceDependencies) {
     this.roomStore = dependencies.roomStore;
