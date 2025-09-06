@@ -269,7 +269,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     await new Promise<void>((resolve) => {
       ownerSocket.on("game:state_update", (state: string) => {
         if (stateUpdateCount === 2) {
-          expect(state).toBe("ENDED");
+          expect(state).toBe("FINISHED");
           resolve();
         }
       });
