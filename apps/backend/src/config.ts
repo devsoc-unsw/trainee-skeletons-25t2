@@ -15,6 +15,11 @@ export const config = {
     url: process.env.DATABASE_URL!,
   },
 
+  redis: {
+    port: process.env.REDIS_PORT || "6379",
+    host: process.env.REDIS_HOST || "localhost",
+  }
+
   // Google Places API configuration
   googlePlaces: {
     apiKey: process.env.GOOGLE_PLACES_API_KEY,
