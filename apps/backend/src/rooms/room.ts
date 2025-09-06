@@ -13,16 +13,21 @@ export class Room {
   restaurantVotes: Map<string, number>;
   gameState: GameState = "LOBBY";
 
-  constructor(owner: User, restaurants?: Restaurant[]) {
+  constructor(owner: User, restaurants?: Restaurant[], endDate?: Date) {
     this.id = uuidv4();
     this.owner = owner;
     this.addUser(owner);
     this.code = uuidv4().slice(0, 4); // could (should) add collision checking
     this.restaurants = new Map(restaurants?.map((r) => [r.id, r]));
     this.restaurantVotes = new Map(restaurants?.map((r) => [r.id, 0]));
-    const defaultDate = new Date();
-    defaultDate.setDate(defaultDate.getDate() + 1);
-    this.endDate = defaultDate;
+
+    if (endDate) {
+      this.endDate = endDate;
+    } else {
+      const defaultDate = new Date();
+      defaultDate.setDate(defaultDate.getDate() + 1);
+      this.endDate = defaultDate;
+    }
   }
 
   addUser(user: User) {
@@ -82,7 +87,7 @@ export class Room {
       owner: this.owner,
       users: Array.from(this.users.values()),
       code: this.code,
-      endDate: this.endDate,
+      endDate: this.endDate.toISOString(),
       restaurants: Array.from(this.restaurants.values()),
       restaurantVotes: Object.fromEntries(this.restaurantVotes),
       gameState: this.gameState,

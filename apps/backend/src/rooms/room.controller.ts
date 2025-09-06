@@ -10,7 +10,8 @@ export function createRoomController(roomService: RoomService) {
     res: Response,
   ) {
     try {
-      const { ownerName, location, cuisine, priceLevel, minRating } = req.body;
+      const { ownerName, location, cuisine, priceLevel, minRating, endDate } =
+        req.body;
 
       const newUser: User = {
         userId: uuidv4(),
@@ -28,6 +29,7 @@ export function createRoomController(roomService: RoomService) {
       const newRoom = await roomService.createRoomWithSearch(
         newUser,
         searchParams,
+        new Date(endDate),
       );
 
       return res.status(200).json({
