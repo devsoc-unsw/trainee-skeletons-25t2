@@ -23,7 +23,7 @@ export class RoomTimerQueue implements IRoomTimerQueue {
     async (job) => {
       const { roomId } = job.data;
       this.roomStore.endVotingInRoom(roomId);
-      this.io.in(roomId).emit("game:state_change", "ENDED");
+      this.io.in(roomId).emit("game:state_change", "FINISHED");
     },
     {
       connection: {
