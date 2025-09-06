@@ -23,17 +23,18 @@ export class RoomService {
   async createRoomWithSearch(
     owner: User,
     searchParams: RestaurantSearchParams,
+    endDate?: Date,
   ): Promise<Room> {
     const restaurants =
       await this.restaurantService.searchRestaurants(searchParams);
-    return this.roomStore.createRoom(owner, restaurants);
+    return this.roomStore.createRoom(owner, restaurants, endDate);
   }
 
   /**
    * Create a new room with the given owner and restaurants
    */
-  createRoom(owner: User, restaurants?: Restaurant[]): Room {
-    return this.roomStore.createRoom(owner, restaurants);
+  createRoom(owner: User, restaurants?: Restaurant[], endDate?: Date): Room {
+    return this.roomStore.createRoom(owner, restaurants, endDate);
   }
 
   /**

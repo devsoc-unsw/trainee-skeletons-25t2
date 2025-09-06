@@ -147,6 +147,7 @@ components:
         - location
         - cuisine
         - priceLevel
+        - endDate
       properties:
         ownerName:
           type: string
@@ -160,6 +161,11 @@ components:
           type: string
           description: Type of cuisine to search for
           example: "Italian"
+        endDate:
+          type: string
+          format: date-time
+          description: When the voting session ends, must be some time in the future
+          example: "2025-01-01T12:00:00.000Z"
         priceLevel:
           type: string
           enum: ["$", "$$", "$$$", "$$$$"]
