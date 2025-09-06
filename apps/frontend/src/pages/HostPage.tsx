@@ -3,6 +3,7 @@ import { useSocket } from "../contexts";
 import { useEffect } from "react";
 import type { GameState, NewVote } from "../types";
 
+// bleh
 export default function HostPage() {
   // IF HOST -> option to share link, play the game, Host control panel where you can see how many people completed + end vote early + timer of when it ends
   // IF ATTENDEE -> play the game.
