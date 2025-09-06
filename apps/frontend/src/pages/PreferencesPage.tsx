@@ -44,7 +44,7 @@ export default function PreferencePage() {
               <button
                 key={p}
                 className={`flex-1 py-2 rounded-lg border ${
-                  price === p ? "bg-blue-500 " : "bg-gray-100 hover:bg-gray-200"
+                  price === p ? "bg-gray-500 " : "bg-gray-100 hover:bg-gray-200"
                 }`}
                 onClick={() => setPrice(p as "$" | "$$" | "$$$")}
               >
@@ -75,7 +75,7 @@ export default function PreferencePage() {
                 key={r}
                 className={`py-2 rounded-lg border ${
                   rating === r
-                    ? "bg-green-500 "
+                    ? "bg-gray-500 "
                     : "bg-gray-100 hover:bg-gray-200"
                 }`}
                 onClick={() => setRating(r as "Any" | "3.5+" | "4" | "4.5+")}
@@ -90,7 +90,7 @@ export default function PreferencePage() {
         <hr className="border-t border-gray-300 my-4" />
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-500 py-2 rounded-lg hover:bg-blue-600"
+          className="w-full bg-gray-500 py-2 rounded-lg hover:bg-gray-600"
         >
           Confirm Preferences
         </button>

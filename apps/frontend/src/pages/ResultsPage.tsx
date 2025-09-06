@@ -135,9 +135,9 @@ export default function ResultPage({ mode }: ResultPageProps) {
                     <span>Yes ({restaurant.votesYes})</span>
                     <span>No ({restaurant.votesNo})</span>
                   </div>
-                  <div className="w-full h-4 bg-red-200 rounded-full relative">
+                  <div className="w-full h-4 bg-gray-200 rounded-full relative">
                     <div
-                      className="h-4 bg-green-500 rounded-l-full absolute left-0 top-0"
+                      className="h-4 bg-gray-500 rounded-l-full absolute left-0 top-0"
                       style={{
                         width: `${
                           (restaurant.votesYes /
@@ -147,7 +147,7 @@ export default function ResultPage({ mode }: ResultPageProps) {
                       }}
                     />
                     <div
-                      className="h-4 bg-red-500 rounded-r-full absolute right-0 top-0"
+                      className="h-4 bg-gray-500 rounded-r-full absolute right-0 top-0"
                       style={{
                         width: `${
                           (restaurant.votesNo /
@@ -191,11 +191,11 @@ export default function ResultPage({ mode }: ResultPageProps) {
             <div className="flex gap-4 w-full max-w-lg">
               <button
                 onClick={() => navigate("/")}
-                className="flex-1 bg-blue-500  py-2 rounded-lg hover:bg-blue-600"
+                className="flex-1 bg-gray-500  py-2 rounded-lg hover:bg-gray-600"
               >
                 Create New Game
               </button>
-              <button className="flex-1 bg-green-500  py-2 rounded-lg hover:bg-green-600">
+              <button className="flex-1 bg-gray-500  py-2 rounded-lg hover:bg-gray-600">
                 Share Result
               </button>
             </div>

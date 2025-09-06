@@ -101,7 +101,7 @@ export default function HostPage() {
           <button
             onClick={handleCopyCode}
             className={`flex items-center gap-1 px-3 py-1 rounded transition ${
-              copied ? "bg-green-500 " : "bg-blue-500  hover:bg-blue-600"
+              copied ? "bg-gray-500 " : "bg-gray-500  hover:bg-gray-600"
             }`}
           >
             {copied ? (
@@ -121,7 +121,7 @@ export default function HostPage() {
         <div className="flex">
           <button
             className={`flex-1 py-2 rounded-l-lg ${
-              activeTab === "players" ? "bg-blue-500 " : "bg-gray-200"
+              activeTab === "players" ? "bg-gray-500 " : "bg-gray-200"
             }`}
             onClick={() => setActiveTab("players")}
           >
@@ -129,7 +129,7 @@ export default function HostPage() {
           </button>
           <button
             className={`flex-1 py-2 ${
-              activeTab === "progress" ? "bg-blue-500 " : "bg-gray-200"
+              activeTab === "progress" ? "bg-gray-500 " : "bg-gray-200"
             }`}
             onClick={() => setActiveTab("progress")}
           >
@@ -137,7 +137,7 @@ export default function HostPage() {
           </button>
           <button
             className={`flex-1 py-2 rounded-r-lg ${
-              activeTab === "controls" ? "bg-blue-500 " : "bg-gray-200"
+              activeTab === "controls" ? "bg-gray-500 " : "bg-gray-200"
             }`}
             onClick={() => setActiveTab("controls")}
           >
@@ -191,7 +191,7 @@ export default function HostPage() {
         {/* Start Game FOR HOST Button */}
         <button
           onClick={handleStartGame}
-          className="w-full bg-green-500  py-2 rounded-lg hover:bg-green-600"
+          className="w-full bg-gray-500  py-2 rounded-lg hover:bg-gray-600"
         >
           Start Game
         </button>

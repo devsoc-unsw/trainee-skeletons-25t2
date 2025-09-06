@@ -196,19 +196,19 @@ export default function SwipePage() {
         <div className="flex gap-6 mt-4">
           <button
             onClick={() => handleAction("dislike")}
-            className="bg-red-500  p-4 rounded-full hover:bg-red-600"
+            className="bg-gray-500  p-4 rounded-full hover:bg-gray-600"
           >
             <X size={24} />
           </button>
           <button
             onClick={() => handleAction("superlike")}
-            className="bg-blue-500  p-4 rounded-full hover:bg-blue-600"
+            className="bg-gray-500  p-4 rounded-full hover:bg-gray-600"
           >
             <Star size={24} />
           </button>
           <button
             onClick={() => handleAction("like")}
-            className="bg-green-500  p-4 rounded-full hover:bg-green-600"
+            className="bg-gray-500  p-4 rounded-full hover:bg-gray-600"
           >
             <Heart size={24} />
           </button>

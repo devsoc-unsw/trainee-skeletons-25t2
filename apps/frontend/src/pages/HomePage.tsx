@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="flex mb-6">
           <button
             className={`flex-1 py-2 rounded-l-lg ${
-              mode === "create" ? "bg-blue-500" : "bg-blue-200"
+              mode === "create" ? "bg-white-500" : "bg-gray-200"
             }`}
             onClick={() => setMode("create")}
           >
@@ -35,7 +35,7 @@ export default function HomePage() {
           </button>
           <button
             className={`flex-1 py-2 rounded-r-lg ${
-              mode === "join" ? "bg-blue-500" : "bg-gray-200"
+              mode === "join" ? "bg-white-500" : "bg-gray-200"
             }`}
             onClick={() => setMode("join")}
           >
@@ -69,7 +69,7 @@ export default function HomePage() {
 
             <button
               onClick={handleCreateGame}
-              className="w-full bg-blue-500  py-2 rounded-lg hover:bg-blue-600"
+              className="w-full bg-gray-500  py-2 rounded-lg hover:bg-gray-600"
             >
               Create Game
             </button>
@@ -104,7 +104,7 @@ export default function HomePage() {
 
             <button
               onClick={handleJoinGame}
-              className="w-full bg-green-500  py-2 rounded-lg hover:bg-green-600"
+              className="w-full bg-gray-500  py-2 rounded-lg hover:bg-gray-600"
             >
               Join Game
             </button>
