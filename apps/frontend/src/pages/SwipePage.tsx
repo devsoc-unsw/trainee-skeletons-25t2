@@ -10,15 +10,20 @@ export default function SwipePage() {
   // Event for handling index change maybe?
   // Event for handling game end state
   const { roomId } = useParams();
-  const { socket } = useSocket();
+  const { socket, connectToRoom } = useSocket();
 
   useEffect(() => {
     if (!socket) return;
+
+    // Check if the room actually exists on the backend first and use the room id from whatever is obtained from the backend
+    if (roomId) {
+      connectToRoom(roomId);
+    }
     socket.on("game:state_updated", (_gameState: GameState) => {});
     return () => {
       socket.off("game:state_updated");
     };
-  }, [socket]);
+  }, [socket, roomId, connectToRoom]);
 
   if (!socket) {
     return <Navigate to="/404" replace />;
