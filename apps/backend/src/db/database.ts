@@ -1,9 +1,9 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import "dotenv/config";
+import { config } from "../config";
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString: config.database.url,
 });
 
 // This is what you'll be using to interact with the database, you can import it into other

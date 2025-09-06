@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: Restaurant Voting API
+  description: API for creating and joining restaurant voting rooms
+  version: 1.0.0
+  contact:
+    name: API Support
+servers:
+  - url: http://localhost:3000
+    description: Development server
+paths:
+  /room:
+    post:
+      summary: Create a new room
+      description: Creates a new restaurant voting room with search parameters
+      tags:
+        - Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomRequest'
+            example:
+              ownerName: "John Doe"
+              location: "Sydney, Australia"
+              cuisine: "Italian"
+              priceLevel: "$$"
+              minRating: 4
+      responses:
+        '200':
+          description: Room created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoomResponse'
+              example:
+                user:
+                  userId: "123e4567-e89b-12d3-a456-426614174000"
+                  name: "John Doe"
+                  userState: "WAITING"
+                room:
+                  id: "room-123"
+                  owner:
+                    userId: "123e4567-e89b-12d3-a456-426614174000"
+                    name: "John Doe"
+                    userState: "WAITING"
+                  users:
+                    - userId: "123e4567-e89b-12d3-a456-426614174000"
+                      name: "John Doe"
+                      userState: "WAITING"
+                  code: "ABC123"
+                  endDate: "2024-01-01T12:00:00.000Z"
+                  restaurants: []
+                  restaurantVotes: {}
+                  gameState: "LOBBY"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Failed to create room"
+  /room/{roomCode}:
+    post:
+      summary: Join an existing room
+      description: Join an existing restaurant voting room using the room code
+      tags:
+        - Rooms
+      parameters:
+        - name: roomCode
+          in: path
+          required: true
+          description: The room code to join
+          schema:
+            type: string
+          example: "ABC123"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinRoomRequest'
+            example:
+              userName: "Jane Doe"
+      responses:
+        '200':
+          description: Successfully joined room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinRoomResponse'
+              example:
+                user:
+                  userId: "456e7890-e89b-12d3-a456-426614174001"
+                  name: "Jane Doe"
+                  userState: "WAITING"
+                room:
+                  id: "room-123"
+                  owner:
+                    userId: "123e4567-e89b-12d3-a456-426614174000"
+                    name: "John Doe"
+                    userState: "WAITING"
+                  users:
+                    - userId: "123e4567-e89b-12d3-a456-426614174000"
+                      name: "John Doe"
+                      userState: "WAITING"
+                    - userId: "456e7890-e89b-12d3-a456-426614174001"
+                      name: "Jane Doe"
+                      userState: "WAITING"
+                  code: "ABC123"
+                  endDate: "2024-01-01T12:00:00.000Z"
+                  restaurants: []
+                  restaurantVotes: {}
+                  gameState: "LOBBY"
+        '400':
+          description: Bad request - User name is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "User name is required"
+        '404':
+          description: Room not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Room not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Internal server error"
+components:
+  schemas:
+    CreateRoomRequest:
+      type: object
+      required:
+        - ownerName
+        - location
+        - cuisine
+        - priceLevel
+      properties:
+        ownerName:
+          type: string
+          description: Name of the room owner
+          example: "John Doe"
+        location:
+          type: string
+          description: Location for restaurant search
+          example: "Sydney, Australia"
+        cuisine:
+          type: string
+          description: Type of cuisine to search for
+          example: "Italian"
+        priceLevel:
+          type: string
+          enum: ["$", "$$", "$$$", "$$$$"]
+          description: Price level for restaurants
+          example: "$$"
+        minRating:
+          type: number
+          enum: [3.5, 4, 4.5]
+          description: Minimum rating for restaurants
+          example: 4
+    JoinRoomRequest:
+      type: object
+      required:
+        - userName
+      properties:
+        userName:
+          type: string
+          description: Name of the user joining the room
+          example: "Jane Doe"
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier for the user
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        name:
+          type: string
+          description: Display name of the user
+          example: "John Doe"
+        userState:
+          type: string
+          enum: ["WAITING", "VOTING", "FINISHED"]
+          description: Current state of the user in the game
+          example: "WAITING"
+    Restaurant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the restaurant
+          example: "rest-123"
+        name:
+          type: string
+          description: Name of the restaurant
+          example: "Mario's Italian"
+        address:
+          type: string
+          description: Address of the restaurant
+          example: "123 Main St, Sydney NSW 2000"
+        rating:
+          type: number
+          description: Average rating of the restaurant
+          example: 4.5
+        minPrice:
+          type: string
+          description: Minimum price range
+          example: "$15"
+        maxPrice:
+          type: string
+          description: Maximum price range
+          example: "$30"
+        mapLink:
+          type: string
+          nullable: true
+          description: Link to restaurant on maps
+          example: "https://maps.google.com/..."
+        openNow:
+          type: boolean
+          description: Whether the restaurant is currently open
+          example: true
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+        photos:
+          type: array
+          items:
+            type: string
+          description: URLs of restaurant photos
+          example: ["https://example.com/photo1.jpg"]
+    Review:
+      type: object
+      properties:
+        rating:
+          type: number
+          description: Rating given in the review
+          example: 5
+        text:
+          type: string
+          description: Review text
+          example: "Great food and service!"
+    RoomResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the room
+          example: "room-123"
+        owner:
+          $ref: '#/components/schemas/User'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: List of users in the room
+        code:
+          type: string
+          description: Room code for joining
+          example: "ABC123"
+        endDate:
+          type: string
+          format: date-time
+          description: When the voting session ends
+          example: "2024-01-01T12:00:00.000Z"
+        restaurants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+          description: List of restaurants in the voting pool
+        restaurantVotes:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Vote counts for each restaurant
+          example:
+            "rest-123": 3
+            "rest-456": 1
+        gameState:
+          type: string
+          enum: ["LOBBY", "STARTED", "FINISHED"]
+          description: Current state of the game
+          example: "LOBBY"
+    CreateRoomResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        room:
+          $ref: '#/components/schemas/RoomResponse'
+    JoinRoomResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        room:
+          $ref: '#/components/schemas/RoomResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Failed to create room"
+tags:
+  - name: Rooms
+    description: Operations related to room management

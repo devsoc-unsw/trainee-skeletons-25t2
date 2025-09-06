@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test:unsw": "tsx --require dotenv/config src/tests/some.test.ts",
     "test": "vitest run",
     "build": "tsc",
     "lint": "eslint .",
@@ -22,8 +21,12 @@
     "@eslint/js": "^9.32.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.1.0",
     "@types/pg": "^8.15.5",
+    "@types/supertest": "^6.0.2",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@types/yamljs": "^0.2.34",
     "dotenv": "^17.2.1",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.4",
@@ -32,17 +35,23 @@
     "pg": "^8.16.3",
     "prettier": "^3.6.2",
     "socket.io-client": "^4.8.1",
+    "supertest": "^7.1.4",
     "tsx": "^4.20.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.38.0",
     "vitest": "^3.2.4"
   },
   "dependencies": {
+    "@googlemaps/places": "^2.1.0",
     "@types/cors": "^2.8.19",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "morgan": "^1.10.1",
     "postgres": "^3.4.7",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.1.0",
+    "yamljs": "^0.3.0"
   }
 }

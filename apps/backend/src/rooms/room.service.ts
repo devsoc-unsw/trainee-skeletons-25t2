@@ -1,36 +1,160 @@
 import { Room } from "./room";
 import { User } from "../types";
+import {
+  Restaurant,
+  RestaurantSearchParams,
+  RestaurantService,
+} from "../restaurants";
+import { RoomStore } from "./room.store";
+import { v4 as uuidv4 } from "uuid";
 
 export class RoomService {
-  private rooms: Map<string, Room> = new Map();
+  private roomStore: RoomStore;
+  private restaurantService: RestaurantService;
 
-  createRoom(roomId: string, owner: User): Room {
-    const room = new Room(roomId, owner);
-    this.rooms.set(roomId, room);
+  constructor(roomStore?: RoomStore, restaurantService?: RestaurantService) {
+    this.roomStore = roomStore || new RoomStore();
+    this.restaurantService = restaurantService || new RestaurantService();
+  }
+
+  /**
+   * Create a new room with the given owner and search parameters
+   */
+  async createRoomWithSearch(
+    owner: User,
+    searchParams: RestaurantSearchParams,
+  ): Promise<Room> {
+    const restaurants =
+      await this.restaurantService.searchRestaurants(searchParams);
+    return this.roomStore.createRoom(owner, restaurants);
+  }
+
+  /**
+   * Create a new room with the given owner and restaurants
+   */
+  createRoom(owner: User, restaurants?: Restaurant[]): Room {
+    return this.roomStore.createRoom(owner, restaurants);
+  }
+
+  /**
+   * Get a room by its code
+   */
+  getRoom(roomId: string): Room | undefined {
+    return this.roomStore.getRoomById(roomId);
+  }
+
+  /**
+   * Join a user to an existing room
+   */
+  joinRoom(roomCode: string, userName: string): { user: User; room: Room } {
+    const room = this.roomStore.getRoomByCode(roomCode);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    const newUser: User = {
+      userId: uuidv4(),
+      name: userName.trim(),
+      userState: "WAITING",
+    };
+
+    this.roomStore.addUserToRoom(room.id, newUser);
+    return { user: newUser, room };
+  }
+
+  /**
+   * Start voting in a room (only owner can do this)
+   */
+  startVoting(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    if (room.owner.userId !== userId) {
+      throw new Error("Only the room owner can start voting");
+    }
+
+    this.roomStore.startVotingInRoom(roomId);
+  }
+
+  /**
+   * End voting in a room (only owner can do this)
+   */
+  endVoting(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    if (room.owner.userId !== userId) {
+      throw new Error("Only the room owner can end voting");
+    }
+
+    this.roomStore.endVotingInRoom(roomId);
+  }
+
+  /**
+   * Vote for a restaurant in a room
+   */
+  voteRestaurant(
+    roomId: string,
+    restaurantId: string,
+    vote: number,
+  ): { restaurantId: string; newVoteCount: number; gameState: string } {
+    const room = this.roomStore.getRoomById(roomId);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    this.roomStore.voteRestaurantInRoom(roomId, restaurantId, vote);
+    return {
+      restaurantId,
+      newVoteCount: room.restaurantVotes.get(restaurantId) ?? 0,
+      gameState: room.gameState,
+    };
+  }
+
+  /**
+   * Prepare results for a room (only when game is finished)
+   */
+  prepareResults(roomId: string): Room {
+    const room = this.roomStore.getRoomById(roomId);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    if (room.gameState !== "FINISHED") {
+      throw new Error("Cannot prepare results, game is not finished");
+    }
+
+    this.roomStore.prepareResultsInRoom(roomId);
     return room;
   }
 
-  getRoom(roomId: string): Room | undefined {
-    return this.rooms.get(roomId);
+  /**
+   * Remove a user from a room
+   */
+  removeUserFromRoom(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
+    if (!room) {
+      throw new Error("Room not found");
+    }
+
+    this.roomStore.removeUserFromRoom(roomId, userId);
   }
 
-  // kind of just for testing -> can get rid of later?
-  getRooms(): Map<String, Room> {
-    return this.rooms;
-  }
-
+  /**
+   * Delete a room
+   */
   deleteRoom(roomId: string): boolean {
-    return this.rooms.delete(roomId);
+    return this.roomStore.deleteRoom(roomId);
   }
 
-  // go through rooms and kick out a user
-  // just assume that a User can only be in 1 room at a time so 
-  // dont need this rn
-  // disconnectUser(user: User)  {
-  //   this.rooms.forEach(room => {
-  //     room.removeUser(user)
-  //   })
-  // }
-
-  // TODO: add more operations here!
+  /**
+   * Get all rooms (for testing purposes)
+   */
+  getRooms(): Map<string, Room> {
+    return this.roomStore.getRooms();
+  }
 }
