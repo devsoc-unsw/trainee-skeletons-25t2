@@ -34,7 +34,10 @@ function App() {
               />
               <Route path="/room/:roomId/host" element={<HostPage />} />
               <Route path="/room/:roomId/swipe" element={<SwipePage />} />
-              <Route path="/room/:roomId/results" element={<ResultsPage />} />
+              <Route
+                path="/room/:roomId/results"
+                element={<ResultsPage mode="result" />}
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
