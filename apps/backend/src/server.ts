@@ -27,7 +27,7 @@ const io = new Server<
   },
 });
 
-const swaggerDocument = YAML.load(path.join(__dirname, "../swagger.yaml"));
+const swaggerDocument = YAML.load(path.join(__dirname, "../api-schema.yaml"));
 
 const roomService = new RoomService();
 setUpRoomSocketListeners(io, roomService);
