@@ -108,6 +108,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .expect(200);
 
     const roomCode = createRes.body.room.code;
+    const roomId = createRes.body.room.id;
 
     const user1Res = await request(testServer.baseUrl)
       .post(`/room/${roomCode}`)
@@ -121,7 +122,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     const socket1 = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       user1Res.body.user.userId,
       user1Res.body.user.name,
     );
@@ -131,7 +132,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     // 5. Connect second socket
     const socket2 = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       user2Res.body.user.userId,
       user2Res.body.user.name,
     );
@@ -160,6 +161,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .expect(200);
 
     const roomCode = createRes.body.room.code;
+    const roomId = createRes.body.room.id;
     const ownerId = createRes.body.user.userId;
 
     const joinRes = await request(testServer.baseUrl)
@@ -170,7 +172,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     // 2. Connect socket
     const socket = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       joinRes.body.user.userId,
       joinRes.body.user.name,
     );
@@ -180,7 +182,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     // 3. Start voting (as owner)
     const ownerSocket = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       ownerId,
       "Owner",
     );
@@ -233,13 +235,13 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       })
       .expect(200);
 
-    const roomCode = createRes.body.room.code;
+    const roomId = createRes.body.room.id;
     const ownerId = createRes.body.user.userId;
 
     // 2. Connect owner socket
     const ownerSocket = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       ownerId,
       "GameMaster",
     );
@@ -290,6 +292,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
       .expect(200);
 
     const roomCode = createRes.body.room.code;
+    const roomId = createRes.body.room.id;
 
     const joinRes = await request(testServer.baseUrl)
       .post(`/room/${roomCode}`)
@@ -298,7 +301,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
 
     const socket = createSocket(
       testServer.baseUrl,
-      roomCode,
+      roomId,
       joinRes.body.user.userId,
       joinRes.body.user.name,
     );

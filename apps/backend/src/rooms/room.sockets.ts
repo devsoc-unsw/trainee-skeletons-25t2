@@ -30,9 +30,7 @@ export function setUpRoomSocketListeners(
       console.log(
         `[${new Date().toISOString()}] User connected ${userId} ${name}`,
       );
-    }
 
-    if (config.nodeEnv !== "test") {
       socket.onAny((event, ...args) => {
         console.log(`[${new Date().toISOString()}] [SOCKET] ${event}:`, {
           socketId: socket.id,
@@ -109,21 +107,18 @@ export function setUpRoomSocketListeners(
       // user also needs to leave every room they're in (our roomService that is)
       // assume for now that the user is not in multiple rooms.
 
-      try {
-        // remove the user from the room as well (only if room exists and user is in it)
-        // roomId in socket context is actually the room code
-        const room = roomService.getRoom(roomId);
+      // Check if room exists before trying to remove user
+      const room = roomService.getRoom(roomId);
+      if (room) {
         roomService.removeUserFromRoom(roomId, userId);
         io.in(roomId).emit("user:leave", userId);
-        socket.leave(roomId);
+      }
+      socket.leave(roomId);
 
-        if (config.nodeEnv !== "test") {
-          console.log(
-            `[${new Date().toISOString()}] User disconnected ${userId} ${name}`,
-          );
-        }
-      } catch (error) {
-        console.error(`Error removing user from room on disconnect:`, error);
+      if (config.nodeEnv !== "test") {
+        console.log(
+          `[${new Date().toISOString()}] User disconnected ${userId} ${name}`,
+        );
       }
     });
   });

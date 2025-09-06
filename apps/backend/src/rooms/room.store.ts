@@ -4,92 +4,89 @@ import { Restaurant } from "../restaurants";
 
 export class RoomStore {
   private rooms: Map<string, Room> = new Map();
+  private roomCodeToId: Map<string, string> = new Map();
 
   /**
    * Create a new room with the given owner and restaurants
    */
   createRoom(owner: User, restaurants?: Restaurant[]): Room {
     const room = new Room(owner, restaurants);
-    this.rooms.set(room.code, room);
+    this.rooms.set(room.id, room);
+    this.roomCodeToId.set(room.code, room.id);
     return room;
+  }
+
+  /**
+   * Get a room by its id
+   */
+  getRoomById(roomId: string): Room | undefined {
+    return this.rooms.get(roomId);
   }
 
   /**
    * Get a room by its code
    */
-  getRoom(roomCode: string): Room | undefined {
-    return this.rooms.get(roomCode);
+  getRoomByCode(roomCode: string): Room | undefined {
+    return this.rooms.get(this.roomCodeToId.get(roomCode) ?? "");
   }
 
   /**
    * Add a user to a room
    */
-  addUserToRoom(roomCode: string, user: User): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.addUser(user);
-    }
+  addUserToRoom(roomId: string, user: User): void {
+    const room = this.getRoomById(roomId);
+    room?.addUser(user);
   }
 
   /**
    * Remove a user from a room
    */
-  removeUserFromRoom(roomCode: string, userId: string): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.removeUser(userId);
-    }
+  removeUserFromRoom(roomId: string, userId: string): void {
+    const room = this.getRoomById(roomId);
+    room?.removeUser(userId);
   }
 
   /**
    * Start voting in a room
    */
-  startVotingInRoom(roomCode: string): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.startVoting();
-    }
+  startVotingInRoom(roomId: string): void {
+    const room = this.getRoomById(roomId);
+    room?.startVoting();
   }
 
   /**
    * End voting in a room
    */
-  endVotingInRoom(roomCode: string): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.endVoting();
-    }
+  endVotingInRoom(roomId: string): void {
+    const room = this.getRoomById(roomId);
+    room?.endVoting();
   }
 
   /**
    * Vote for a restaurant in a room
    */
   voteRestaurantInRoom(
-    roomCode: string,
+    roomId: string,
     restaurantId: string,
     vote: number,
   ): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.voteRestaurant(restaurantId, vote);
-    }
+    const room = this.getRoomById(roomId);
+    room?.voteRestaurant(restaurantId, vote);
   }
 
   /**
    * Prepare results for a room
    */
-  prepareResultsInRoom(roomCode: string): void {
-    const room = this.getRoom(roomCode);
-    if (room) {
-      room.prepareResults();
-    }
+  prepareResultsInRoom(roomId: string): void {
+    const room = this.getRoomById(roomId);
+    room?.prepareResults();
   }
 
   /**
    * Delete a room
    */
-  deleteRoom(roomCode: string): boolean {
-    return this.rooms.delete(roomCode);
+  deleteRoom(roomId: string): boolean {
+    return this.rooms.delete(roomId);
   }
 
   /**

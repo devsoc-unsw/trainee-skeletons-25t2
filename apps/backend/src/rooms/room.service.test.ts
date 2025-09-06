@@ -146,7 +146,7 @@ describe("RoomService", () => {
       const room = roomService.createRoom(owner);
 
       // Act
-      const result = roomService.getRoom(room.code);
+      const result = roomService.getRoom(room.id);
 
       // Assert
       expect(result).toBeDefined();
@@ -226,7 +226,7 @@ describe("RoomService", () => {
       const room = roomService.createRoom(owner);
 
       // Act
-      roomService.startVoting(room.code, owner.userId);
+      roomService.startVoting(room.id, owner.userId);
 
       // Assert
       expect(room.gameState).toBe("STARTED");
@@ -246,7 +246,7 @@ describe("RoomService", () => {
 
       // Act & Assert
       expect(() => {
-        roomService.startVoting(room.code, nonOwnerId);
+        roomService.startVoting(room.id, nonOwnerId);
       }).toThrow("Only the room owner can start voting");
     });
 
@@ -268,10 +268,10 @@ describe("RoomService", () => {
       };
 
       const room = roomService.createRoom(owner);
-      roomService.startVoting(room.code, owner.userId);
+      roomService.startVoting(room.id, owner.userId);
 
       // Act
-      roomService.endVoting(room.code, owner.userId);
+      roomService.endVoting(room.id, owner.userId);
 
       // Assert
       expect(room.gameState).toBe("FINISHED");
@@ -291,7 +291,7 @@ describe("RoomService", () => {
 
       // Act & Assert
       expect(() => {
-        roomService.endVoting(room.code, nonOwnerId);
+        roomService.endVoting(room.id, nonOwnerId);
       }).toThrow("Only the room owner can end voting");
     });
 
@@ -318,7 +318,7 @@ describe("RoomService", () => {
       const vote = 1;
 
       // Act
-      const result = roomService.voteRestaurant(room.code, restaurantId, vote);
+      const result = roomService.voteRestaurant(room.id, restaurantId, vote);
 
       // Assert
       expect(result).toBeDefined();
@@ -340,9 +340,9 @@ describe("RoomService", () => {
       const restaurantId = restaurants[0].id;
 
       // Act
-      roomService.voteRestaurant(room.code, restaurantId, 1);
-      roomService.voteRestaurant(room.code, restaurantId, 2);
-      const result = roomService.voteRestaurant(room.code, restaurantId, -1);
+      roomService.voteRestaurant(room.id, restaurantId, 1);
+      roomService.voteRestaurant(room.id, restaurantId, 2);
+      const result = roomService.voteRestaurant(room.id, restaurantId, -1);
 
       // Assert
       expect(result.newVoteCount).toBe(2); // 1 + 2 - 1 = 2
@@ -367,11 +367,11 @@ describe("RoomService", () => {
 
       const restaurants = mockRestaurantData.restaurants.slice(0, 2);
       const room = roomService.createRoom(owner, restaurants);
-      roomService.startVoting(room.code, owner.userId);
-      roomService.endVoting(room.code, owner.userId);
+      roomService.startVoting(room.id, owner.userId);
+      roomService.endVoting(room.id, owner.userId);
 
       // Act
-      const result = roomService.prepareResults(room.code);
+      const result = roomService.prepareResults(room.id);
 
       // Assert
       expect(result).toBeDefined();
@@ -390,7 +390,7 @@ describe("RoomService", () => {
 
       // Act & Assert
       expect(() => {
-        roomService.prepareResults(room.code);
+        roomService.prepareResults(room.id);
       }).toThrow("Cannot prepare results, game is not finished");
     });
 
@@ -415,7 +415,7 @@ describe("RoomService", () => {
       const { user } = roomService.joinRoom(room.code, "Jane Smith");
 
       // Act
-      roomService.removeUserFromRoom(room.code, user.userId);
+      roomService.removeUserFromRoom(room.id, user.userId);
 
       // Assert
       expect(room.users.has(user.userId)).toBe(false);
@@ -441,11 +441,11 @@ describe("RoomService", () => {
       const room = roomService.createRoom(owner);
 
       // Act
-      const result = roomService.deleteRoom(room.code);
+      const result = roomService.deleteRoom(room.id);
 
       // Assert
       expect(result).toBe(true);
-      expect(roomService.getRoom(room.code)).toBeUndefined();
+      expect(roomService.getRoom(room.id)).toBeUndefined();
     });
 
     it("should return false when deleting non-existent room", () => {
@@ -480,8 +480,8 @@ describe("RoomService", () => {
 
       // Assert
       expect(rooms.size).toBe(2);
-      expect(rooms.has(room1.code)).toBe(true);
-      expect(rooms.has(room2.code)).toBe(true);
+      expect(rooms.has(room1.id)).toBe(true);
+      expect(rooms.has(room2.id)).toBe(true);
     });
   });
 });

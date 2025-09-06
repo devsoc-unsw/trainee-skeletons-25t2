@@ -39,15 +39,15 @@ export class RoomService {
   /**
    * Get a room by its code
    */
-  getRoom(roomCode: string): Room | undefined {
-    return this.roomStore.getRoom(roomCode);
+  getRoom(roomId: string): Room | undefined {
+    return this.roomStore.getRoomById(roomId);
   }
 
   /**
    * Join a user to an existing room
    */
   joinRoom(roomCode: string, userName: string): { user: User; room: Room } {
-    const room = this.roomStore.getRoom(roomCode);
+    const room = this.roomStore.getRoomByCode(roomCode);
     if (!room) {
       throw new Error("Room not found");
     }
@@ -58,15 +58,15 @@ export class RoomService {
       userState: "WAITING",
     };
 
-    this.roomStore.addUserToRoom(roomCode, newUser);
+    this.roomStore.addUserToRoom(room.id, newUser);
     return { user: newUser, room };
   }
 
   /**
    * Start voting in a room (only owner can do this)
    */
-  startVoting(roomCode: string, userId: string): void {
-    const room = this.roomStore.getRoom(roomCode);
+  startVoting(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
     if (!room) {
       throw new Error("Room not found");
     }
@@ -75,14 +75,14 @@ export class RoomService {
       throw new Error("Only the room owner can start voting");
     }
 
-    this.roomStore.startVotingInRoom(roomCode);
+    this.roomStore.startVotingInRoom(roomId);
   }
 
   /**
    * End voting in a room (only owner can do this)
    */
-  endVoting(roomCode: string, userId: string): void {
-    const room = this.roomStore.getRoom(roomCode);
+  endVoting(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
     if (!room) {
       throw new Error("Room not found");
     }
@@ -91,23 +91,23 @@ export class RoomService {
       throw new Error("Only the room owner can end voting");
     }
 
-    this.roomStore.endVotingInRoom(roomCode);
+    this.roomStore.endVotingInRoom(roomId);
   }
 
   /**
    * Vote for a restaurant in a room
    */
   voteRestaurant(
-    roomCode: string,
+    roomId: string,
     restaurantId: string,
     vote: number,
   ): { restaurantId: string; newVoteCount: number; gameState: string } {
-    const room = this.roomStore.getRoom(roomCode);
+    const room = this.roomStore.getRoomById(roomId);
     if (!room) {
       throw new Error("Room not found");
     }
 
-    this.roomStore.voteRestaurantInRoom(roomCode, restaurantId, vote);
+    this.roomStore.voteRestaurantInRoom(roomId, restaurantId, vote);
     return {
       restaurantId,
       newVoteCount: room.restaurantVotes.get(restaurantId) ?? 0,
@@ -118,8 +118,8 @@ export class RoomService {
   /**
    * Prepare results for a room (only when game is finished)
    */
-  prepareResults(roomCode: string): Room {
-    const room = this.roomStore.getRoom(roomCode);
+  prepareResults(roomId: string): Room {
+    const room = this.roomStore.getRoomById(roomId);
     if (!room) {
       throw new Error("Room not found");
     }
@@ -128,27 +128,27 @@ export class RoomService {
       throw new Error("Cannot prepare results, game is not finished");
     }
 
-    this.roomStore.prepareResultsInRoom(roomCode);
+    this.roomStore.prepareResultsInRoom(roomId);
     return room;
   }
 
   /**
    * Remove a user from a room
    */
-  removeUserFromRoom(roomCode: string, userId: string): void {
-    const room = this.roomStore.getRoom(roomCode);
+  removeUserFromRoom(roomId: string, userId: string): void {
+    const room = this.roomStore.getRoomById(roomId);
     if (!room) {
       throw new Error("Room not found");
     }
 
-    this.roomStore.removeUserFromRoom(roomCode, userId);
+    this.roomStore.removeUserFromRoom(roomId, userId);
   }
 
   /**
    * Delete a room
    */
-  deleteRoom(roomCode: string): boolean {
-    return this.roomStore.deleteRoom(roomCode);
+  deleteRoom(roomId: string): boolean {
+    return this.roomStore.deleteRoom(roomId);
   }
 
   /**
