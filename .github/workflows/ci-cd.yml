@@ -11,6 +11,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+
     services:
       redis:
         image: redis
@@ -21,6 +22,12 @@ jobs:
           --health-retries 5
         ports:
           - 6379:6379
+    env:
+      NODE_ENV: test
+      USE_MOCK_RESTAURANTS: true
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+
 
     steps:
       - name: Checkout code
