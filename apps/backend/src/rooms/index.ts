@@ -8,7 +8,7 @@ export { createRoomRouter } from "./room.routes";
 export { setUpRoomSocketListeners, type SocketState } from "./room.sockets";
 export { RoomService, RoomServiceDependencies } from "./room.service";
 export { RoomStore } from "./room.store";
-export { RoomTimerQueue, IRoomTimerQueue } from "./queue";
+export { RoomTimerQueue } from "./queue";
 
 /**
  * Factory function to create a RoomService with all dependencies properly initialized
