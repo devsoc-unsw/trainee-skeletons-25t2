@@ -1,5 +1,5 @@
 "use client";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSocket } from "../contexts";
 import { useEffect, useState } from "react";
 import type { GameState } from "../types";

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 
 export default function PreferencePage() {
   const [location, setLocation] = useState("");
