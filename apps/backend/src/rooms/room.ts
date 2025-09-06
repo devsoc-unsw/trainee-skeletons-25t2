@@ -58,9 +58,6 @@ export class Room {
     });
 
     this.gameState = "STARTED";
-
-    // TODO:
-    // add timer logic here
   }
 
   endVoting() {

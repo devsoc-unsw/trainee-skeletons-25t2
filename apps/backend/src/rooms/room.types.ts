@@ -1,7 +1,6 @@
 import { User } from "../types";
 import { Restaurant } from "../restaurants";
 
-// TODO: Add timer
 export type CreateRoomRequest = {
   ownerName: string;
   location: string;
