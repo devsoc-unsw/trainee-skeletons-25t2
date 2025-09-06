@@ -1,11 +1,11 @@
 import { User } from "../types";
 import { Restaurant } from "../restaurants";
 
-// TODO: Add timer
 export type CreateRoomRequest = {
   ownerName: string;
   location: string;
   cuisine: string;
+  endDate: string;
   priceLevel: "$" | "$$" | "$$$" | "$$$$";
   minRating?: 3.5 | 4 | 4.5;
 };
@@ -21,7 +21,7 @@ export type RoomResponse = {
   owner: User;
   users: User[];
   code: string;
-  endDate: Date;
+  endDate: string;
   restaurants: Restaurant[];
   restaurantVotes: { [id: string]: number };
   gameState: GameState;

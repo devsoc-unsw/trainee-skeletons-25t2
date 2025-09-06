@@ -9,8 +9,8 @@ export class RoomStore {
   /**
    * Create a new room with the given owner and restaurants
    */
-  createRoom(owner: User, restaurants?: Restaurant[]): Room {
-    const room = new Room(owner, restaurants);
+  createRoom(owner: User, restaurants?: Restaurant[], endDate?: Date): Room {
+    const room = new Room(owner, restaurants, endDate);
     this.rooms.set(room.id, room);
     this.roomCodeToId.set(room.code, room.id);
     return room;
