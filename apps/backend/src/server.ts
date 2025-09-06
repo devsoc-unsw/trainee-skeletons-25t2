@@ -10,7 +10,7 @@ import {
   createRoomRouter,
   setUpRoomSocketListeners,
   SocketState,
-  RoomService,
+  createRoomService,
 } from "./rooms";
 import { config } from "./config";
 
@@ -29,7 +29,7 @@ const io = new Server<
 
 const swaggerDocument = YAML.load(path.join(__dirname, "../api-schema.yaml"));
 
-const roomService = new RoomService();
+const roomService = createRoomService(io);
 setUpRoomSocketListeners(io, roomService);
 
 if (config.nodeEnv !== "test") {
