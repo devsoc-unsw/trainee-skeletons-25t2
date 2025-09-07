@@ -8,6 +8,26 @@ import {
 import { RoomStore } from "./room.store";
 import { v4 as uuidv4 } from "uuid";
 import { TimerQueue } from "./queue";
+import { GameState } from "./room.types";
+
+/**
+ * Factory function to create a RoomService with all dependencies properly initialized
+ * Use this in production code instead of manually constructing dependencies
+ */
+export function createRoomService(
+  roomEvent: (roomId: string, gameState: GameState) => void,
+): RoomService {
+  const roomStore = new RoomStore();
+  const restaurantService = new RestaurantService();
+
+  const handleVotingEnded = (roomId: string, gameState: GameState) => {
+    roomStore.endVotingInRoom(roomId);
+    roomEvent(roomId, gameState);
+  };
+  const timerQueue = new TimerQueue(handleVotingEnded);
+
+  return new RoomService(roomStore, restaurantService, timerQueue);
+}
 
 export class RoomService {
   constructor(

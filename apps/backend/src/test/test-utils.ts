@@ -13,13 +13,13 @@ import {
   createRoomService,
 } from "../rooms";
 
-export interface TestServer {
+export type TestServer = {
   server: Server;
   httpServer: Server;
   io: SocketIOServer;
   roomService: RoomService;
   baseUrl: string;
-}
+};
 
 /**
  * Creates a test server with Express and Socket.IO
@@ -39,14 +39,17 @@ export async function createTestServer(port: number): Promise<TestServer> {
     },
   });
 
-  const roomService = createRoomService(io);
+  const emitEndVotingForRoom = (roomId: string, gameState: string) => {
+    io.in(roomId).emit("game:state_change", gameState);
+  };
+
+  const roomService = createRoomService(emitEndVotingForRoom);
   setUpRoomSocketListeners(io, roomService);
 
   app.use(cors()).use(express.json()).use("", createRoomRouter(roomService));
 
   const server = httpServer.listen(port);
   // Wait for server to be ready
-  await new Promise((resolve) => setTimeout(resolve, 200));
 
   return {
     server,
@@ -63,8 +66,6 @@ export async function createTestServer(port: number): Promise<TestServer> {
 export async function closeTestServer(testServer: TestServer): Promise<void> {
   if (testServer.server && testServer.server.listening) {
     testServer.server.close();
-    // Wait for server to fully close
-    await new Promise((resolve) => setTimeout(resolve, 200));
   }
 }
 
@@ -73,8 +74,8 @@ export async function closeTestServer(testServer: TestServer): Promise<void> {
  */
 export function clearAllRooms(roomService: RoomService): void {
   const rooms = roomService.getRooms();
-  rooms.forEach((_, roomCode) => {
-    roomService.deleteRoom(roomCode);
+  rooms.forEach((_, id) => {
+    roomService.deleteRoom(id);
   });
 }
 

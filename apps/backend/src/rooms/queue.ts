@@ -1,7 +1,6 @@
 import { Queue, Worker } from "bullmq";
-import { Server } from "socket.io";
 import { config } from "../config";
-import { RoomStore } from "./room.store";
+import { GameState } from "./room.types";
 
 export class TimerQueue {
   readonly queue = new Queue("room-timers", {
@@ -15,8 +14,7 @@ export class TimerQueue {
     "room-timers",
     async (job) => {
       const { roomId } = job.data;
-      this.roomStore.endVotingInRoom(roomId);
-      this.socket.in(roomId).emit("game:state_change", "FINISHED");
+      this.onTimerFinish(roomId, "FINISHED");
     },
     {
       connection: {
@@ -27,8 +25,10 @@ export class TimerQueue {
   );
 
   constructor(
-    private readonly socket: Server,
-    private readonly roomStore: RoomStore,
+    private readonly onTimerFinish: (
+      roomId: string,
+      gameState: GameState,
+    ) => void,
   ) {
     this.worker.on("completed", (job) => {
       console.log(`Room timer job ${job.id} completed`);

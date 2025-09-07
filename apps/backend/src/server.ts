@@ -11,6 +11,7 @@ import {
   setUpRoomSocketListeners,
   SocketState,
   createRoomService,
+  GameState,
 } from "./rooms";
 import { config } from "./config";
 
@@ -29,7 +30,11 @@ const io = new Server<
 
 const swaggerDocument = YAML.load(path.join(__dirname, "../api-schema.yaml"));
 
-const roomService = createRoomService(io);
+const emitEndVotingForRoom = (roomId: string, gameState: GameState) => {
+  io.in(roomId).emit("game:state_change", gameState);
+};
+
+const roomService = createRoomService(emitEndVotingForRoom);
 setUpRoomSocketListeners(io, roomService);
 
 if (config.nodeEnv !== "test") {

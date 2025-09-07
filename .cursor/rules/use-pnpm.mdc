@@ -1,0 +1,5 @@
+---
+description: If running any commands that use `npm`, use `pnpm` instead
+globs:
+alwaysApply: true
+---
