@@ -6,6 +6,10 @@
 
 ```env
 export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
+export GOOGLE_PLACES_API_KEY=API_KEY
+export USE_MOCK_RESTAURANTS=false
+export REDIS_HOST=localhost
+export REDIS_PORT=6379
 
 ```
 
@@ -31,11 +35,13 @@ pnpm run db:migrate
 
 ## Project Structure
 
-The backend follows a layered architecture, being split into `routes`, `controllers` and `services`.
+The backend follows an architecture that has it's modules split by domain.
 
-- `routes/`: Defines the API endpoints and handles HTTP request routing. Each route file typically imports the relevant controller(s).
-- `controllers/`: Contains the logic for handling requests, acting as an intermediary between routes and services. Controllers process input, call service methods, and return responses.
-- `services/`: Encapsulates business logic and operations, often interacting with the database layer. Services are called by controllers to perform core application tasks.
 - `db/`: Manages database access, schema definitions, and connections. This is where you’ll find the schema and database utility files.
-- `tests/`: Where unit or integration tests are written to test various parts of the code base
+- `restaurants/`: Logic to call the Google Places API
+- `rooms/`: Logic to create game rooms
+- `test/`: Where unit or integration tests are written to test various parts of the code base
+- `config.ts`: Centralised point for where environment variables are defined and exported
+- `server.ts`: Logic for setting up the express and socket.io server to be exported
+- `types.ts`: Common types that are shared across the application
 - `index.ts`: The entry point of the backend application. It sets up the Express server, loads routes, and starts listening for requests.
