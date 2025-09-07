@@ -3,7 +3,7 @@ import { Server } from "socket.io";
 import { config } from "../config";
 import { RoomStore } from "./room.store";
 
-export class RoomTimerQueue {
+export class TimerQueue {
   readonly queue = new Queue("room-timers", {
     connection: {
       host: config.redis.host,
@@ -16,7 +16,7 @@ export class RoomTimerQueue {
     async (job) => {
       const { roomId } = job.data;
       this.roomStore.endVotingInRoom(roomId);
-      this.io.in(roomId).emit("game:state_change", "FINISHED");
+      this.socket.in(roomId).emit("game:state_change", "FINISHED");
     },
     {
       connection: {
@@ -27,7 +27,7 @@ export class RoomTimerQueue {
   );
 
   constructor(
-    private readonly io: Server,
+    private readonly socket: Server,
     private readonly roomStore: RoomStore,
   ) {
     this.worker.on("completed", (job) => {

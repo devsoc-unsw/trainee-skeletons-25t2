@@ -1,14 +1,14 @@
 import { Server } from "socket.io";
-import { RoomService, RoomServiceDependencies } from "./room.service";
+import { RoomService } from "./room.service";
 import { RoomStore } from "./room.store";
-import { RoomTimerQueue } from "./queue";
+import { TimerQueue } from "./queue";
 import { RestaurantService } from "../restaurants";
 
-export { createRoomRouter } from "./room.routes";
+export { createRoomRouter } from "./room.controller";
 export { setUpRoomSocketListeners, type SocketState } from "./room.sockets";
-export { RoomService, RoomServiceDependencies } from "./room.service";
+export { RoomService } from "./room.service";
 export { RoomStore } from "./room.store";
-export { RoomTimerQueue } from "./queue";
+export { TimerQueue } from "./queue";
 
 /**
  * Factory function to create a RoomService with all dependencies properly initialized
@@ -17,11 +17,7 @@ export { RoomTimerQueue } from "./queue";
 export function createRoomService(io: Server): RoomService {
   const roomStore = new RoomStore();
   const restaurantService = new RestaurantService();
-  const timerQueue = new RoomTimerQueue(io, roomStore);
+  const timerQueue = new TimerQueue(io, roomStore);
 
-  return new RoomService({
-    roomStore,
-    restaurantService,
-    timerQueue,
-  });
+  return new RoomService(roomStore, restaurantService, timerQueue);
 }
