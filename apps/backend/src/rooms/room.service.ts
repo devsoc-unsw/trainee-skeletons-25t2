@@ -7,14 +7,37 @@ import {
 } from "../restaurants";
 import { RoomStore } from "./room.store";
 import { v4 as uuidv4 } from "uuid";
+import { TimerQueue } from "./queue";
+import { GameState } from "./room.types";
+
+/**
+ * Factory function to create a RoomService with all dependencies properly initialized
+ * Use this in production code instead of manually constructing dependencies
+ */
+export function createRoomService(
+  roomEvent: (roomId: string, gameState: GameState) => void,
+): RoomService {
+  const roomStore = new RoomStore();
+  const restaurantService = new RestaurantService();
+
+  const handleVotingEnded = (roomId: string, gameState: GameState) => {
+    roomStore.endVotingInRoom(roomId);
+    roomEvent(roomId, gameState);
+  };
+  const timerQueue = new TimerQueue(handleVotingEnded);
+
+  return new RoomService(roomStore, restaurantService, timerQueue);
+}
 
 export class RoomService {
-  private roomStore: RoomStore;
-  private restaurantService: RestaurantService;
-
-  constructor(roomStore?: RoomStore, restaurantService?: RestaurantService) {
-    this.roomStore = roomStore || new RoomStore();
-    this.restaurantService = restaurantService || new RestaurantService();
+  constructor(
+    private readonly roomStore: RoomStore,
+    private readonly restaurantService: RestaurantService,
+    private readonly timerQueue: TimerQueue,
+  ) {
+    this.roomStore = roomStore;
+    this.restaurantService = restaurantService;
+    this.timerQueue = timerQueue;
   }
 
   /**
@@ -23,17 +46,18 @@ export class RoomService {
   async createRoomWithSearch(
     owner: User,
     searchParams: RestaurantSearchParams,
+    endDate?: Date,
   ): Promise<Room> {
     const restaurants =
       await this.restaurantService.searchRestaurants(searchParams);
-    return this.roomStore.createRoom(owner, restaurants);
+    return this.roomStore.createRoom(owner, restaurants, endDate);
   }
 
   /**
    * Create a new room with the given owner and restaurants
    */
-  createRoom(owner: User, restaurants?: Restaurant[]): Room {
-    return this.roomStore.createRoom(owner, restaurants);
+  createRoom(owner: User, restaurants?: Restaurant[], endDate?: Date): Room {
+    return this.roomStore.createRoom(owner, restaurants, endDate);
   }
 
   /**
@@ -76,6 +100,7 @@ export class RoomService {
     }
 
     this.roomStore.startVotingInRoom(roomId);
+    this.timerQueue.scheduleRoomEnd(roomId, room.endDate);
   }
 
   /**
@@ -92,6 +117,7 @@ export class RoomService {
     }
 
     this.roomStore.endVotingInRoom(roomId);
+    this.timerQueue.cancelRoomEnd(roomId);
   }
 
   /**
@@ -148,6 +174,7 @@ export class RoomService {
    * Delete a room
    */
   deleteRoom(roomId: string): boolean {
+    this.timerQueue.cancelRoomEnd(roomId);
     return this.roomStore.deleteRoom(roomId);
   }
 

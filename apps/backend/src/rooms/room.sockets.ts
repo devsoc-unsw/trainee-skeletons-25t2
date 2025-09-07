@@ -67,7 +67,7 @@ export function setUpRoomSocketListeners(
     socket.on("room:endVoting", () => {
       try {
         roomService.endVoting(roomId, socket.data.userId);
-        io.in(roomId).emit("game:state_update", "ENDED");
+        io.in(roomId).emit("game:state_update", "FINISHED");
       } catch (error) {
         console.error(`Error ending voting in room ${roomId}:`, error);
       }

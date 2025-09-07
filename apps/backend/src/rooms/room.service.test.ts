@@ -4,14 +4,19 @@ import { RoomStore } from "./room.store";
 import { User } from "../types";
 import mockRestaurantData from "../restaurants/restaurants-mock.json";
 import { RestaurantSearchParams, RestaurantService } from "../restaurants";
+import { TimerQueue } from "./queue";
 
 // Mock the RestaurantService
 vi.mock("../restaurants/restaurant.service");
+
+// Mock the RoomTimerQueue
+vi.mock("./queue");
 
 describe("RoomService", () => {
   let roomService: RoomService;
   let mockRoomStore: RoomStore;
   let mockRestaurantService: RestaurantService;
+  let mockTimerQueue: TimerQueue;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -21,8 +26,20 @@ describe("RoomService", () => {
     mockRoomStore = new RoomStore();
     mockRestaurantService = new RestaurantService();
 
+    // Create mock timer queue instance
+    mockTimerQueue = {
+      scheduleRoomEnd: vi.fn().mockResolvedValue(undefined),
+      cancelRoomEnd: vi.fn().mockResolvedValue(undefined),
+      getRemainingTime: vi.fn().mockResolvedValue(null),
+      hasActiveTimer: vi.fn().mockResolvedValue(false),
+    } as unknown as TimerQueue;
+
     // Create RoomService with mocked dependencies
-    roomService = new RoomService(mockRoomStore, mockRestaurantService);
+    roomService = new RoomService(
+      mockRoomStore,
+      mockRestaurantService,
+      mockTimerQueue,
+    );
   });
 
   describe("createRoomWithSearch", () => {
@@ -41,6 +58,8 @@ describe("RoomService", () => {
         minRating: 4.0,
       };
 
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
       // Mock the restaurant service to return mock data
       vi.mocked(mockRestaurantService.searchRestaurants).mockResolvedValue(
         mockRestaurantData.restaurants,
@@ -50,6 +69,7 @@ describe("RoomService", () => {
       const result = await roomService.createRoomWithSearch(
         owner,
         searchParams,
+        endDate,
       );
 
       // Assert
@@ -80,6 +100,8 @@ describe("RoomService", () => {
         minRating: 4.0,
       };
 
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
       const error = new Error("API Error");
       vi.mocked(mockRestaurantService.searchRestaurants).mockRejectedValue(
         error,
@@ -87,7 +109,7 @@ describe("RoomService", () => {
 
       // Act & Assert
       await expect(
-        roomService.createRoomWithSearch(owner, searchParams),
+        roomService.createRoomWithSearch(owner, searchParams, endDate),
       ).rejects.toThrow("API Error");
     });
   });
@@ -102,9 +124,10 @@ describe("RoomService", () => {
       };
 
       const restaurants = mockRestaurantData.restaurants.slice(0, 3);
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
 
       // Act
-      const result = roomService.createRoom(owner, restaurants);
+      const result = roomService.createRoom(owner, restaurants, endDate);
 
       // Assert
       expect(result).toBeDefined();
@@ -122,8 +145,10 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
       // Act
-      const result = roomService.createRoom(owner);
+      const result = roomService.createRoom(owner, undefined, endDate);
 
       // Assert
       expect(result).toBeDefined();
@@ -143,7 +168,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
 
       // Act
       const result = roomService.getRoom(room.id);
@@ -171,7 +200,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const userName = "Jane Smith";
 
       // Act
@@ -203,7 +236,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const userName = "  Jane Smith  ";
 
       // Act
@@ -223,7 +260,8 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      const room = roomService.createRoom(owner, undefined, endDate);
 
       // Act
       roomService.startVoting(room.id, owner.userId);
@@ -231,6 +269,10 @@ describe("RoomService", () => {
       // Assert
       expect(room.gameState).toBe("STARTED");
       expect(room.users.get(owner.userId)?.userState).toBe("VOTING");
+      expect(mockTimerQueue.scheduleRoomEnd).toHaveBeenCalledWith(
+        room.id,
+        endDate,
+      );
     });
 
     it("should throw error when non-owner tries to start voting", () => {
@@ -241,7 +283,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const nonOwnerId = "non-owner-123";
 
       // Act & Assert
@@ -267,7 +313,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       roomService.startVoting(room.id, owner.userId);
 
       // Act
@@ -276,6 +326,7 @@ describe("RoomService", () => {
       // Assert
       expect(room.gameState).toBe("FINISHED");
       expect(room.users.get(owner.userId)?.userState).toBe("FINISHED");
+      expect(mockTimerQueue.cancelRoomEnd).toHaveBeenCalledWith(room.id);
     });
 
     it("should throw error when non-owner tries to end voting", () => {
@@ -286,7 +337,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const nonOwnerId = "non-owner-123";
 
       // Act & Assert
@@ -313,7 +368,11 @@ describe("RoomService", () => {
       };
 
       const restaurants = mockRestaurantData.restaurants.slice(0, 2);
-      const room = roomService.createRoom(owner, restaurants);
+      const room = roomService.createRoom(
+        owner,
+        restaurants,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const restaurantId = restaurants[0].id;
       const vote = 1;
 
@@ -336,7 +395,11 @@ describe("RoomService", () => {
       };
 
       const restaurants = mockRestaurantData.restaurants.slice(0, 2);
-      const room = roomService.createRoom(owner, restaurants);
+      const room = roomService.createRoom(
+        owner,
+        restaurants,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const restaurantId = restaurants[0].id;
 
       // Act
@@ -366,7 +429,11 @@ describe("RoomService", () => {
       };
 
       const restaurants = mockRestaurantData.restaurants.slice(0, 2);
-      const room = roomService.createRoom(owner, restaurants);
+      const room = roomService.createRoom(
+        owner,
+        restaurants,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       roomService.startVoting(room.id, owner.userId);
       roomService.endVoting(room.id, owner.userId);
 
@@ -386,7 +453,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
 
       // Act & Assert
       expect(() => {
@@ -411,7 +482,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
       const { user } = roomService.joinRoom(room.code, "Jane Smith");
 
       // Act
@@ -438,7 +513,11 @@ describe("RoomService", () => {
         userState: "WAITING",
       };
 
-      const room = roomService.createRoom(owner);
+      const room = roomService.createRoom(
+        owner,
+        undefined,
+        new Date(Date.now() + 24 * 60 * 60 * 1000),
+      );
 
       // Act
       const result = roomService.deleteRoom(room.id);
@@ -446,6 +525,7 @@ describe("RoomService", () => {
       // Assert
       expect(result).toBe(true);
       expect(roomService.getRoom(room.id)).toBeUndefined();
+      expect(mockTimerQueue.cancelRoomEnd).toHaveBeenCalledWith(room.id);
     });
 
     it("should return false when deleting non-existent room", () => {

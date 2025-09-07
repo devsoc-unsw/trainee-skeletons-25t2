@@ -5,7 +5,6 @@ import {
   beforeAll,
   afterAll,
   beforeEach,
-  afterEach,
   vi,
 } from "vitest";
 import request from "supertest";
@@ -56,6 +55,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Chinese",
         priceLevel: "$",
         minRating: 3,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -104,6 +104,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Italian",
         priceLevel: "$$",
         minRating: 4,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -157,6 +158,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Mexican",
         priceLevel: "$$$",
         minRating: 4.5,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -232,6 +234,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Japanese",
         priceLevel: "$$",
         minRating: 4,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -266,7 +269,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
     await new Promise<void>((resolve) => {
       ownerSocket.on("game:state_update", (state: string) => {
         if (stateUpdateCount === 2) {
-          expect(state).toBe("ENDED");
+          expect(state).toBe("FINISHED");
           resolve();
         }
       });
@@ -288,6 +291,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Indian",
         priceLevel: "$",
         minRating: 3.5,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -337,6 +341,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Italian",
         priceLevel: "$$",
         minRating: 4,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
@@ -363,6 +368,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "UnknownCuisine",
         priceLevel: "$$",
         minRating: 4,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(500);
 
@@ -382,6 +388,7 @@ describe("Room Integration Tests (Express + Socket.IO)", () => {
         cuisine: "Italian",
         priceLevel: "$$",
         minRating: 4,
+        endDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       })
       .expect(200);
 
