@@ -10,6 +10,9 @@ export default function HomePage() {
   const [gameCode, setGameCode] = useState("");
 
   const handleCreateGame = () => {
+    // call api here to create room in the backend after we have set our preferences
+    // should also get taken to the 
+
     alert(`Game created by: ${hostName}\nEnd Time: ${endTime}`);
   };
 
