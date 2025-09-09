@@ -11,7 +11,7 @@ export default function HomePage() {
 
   const handleCreateGame = () => {
     // call api here to create room in the backend after we have set our preferences
-    // should also get taken to the 
+    // should also get taken to the host page after we create the room
 
     alert(`Game created by: ${hostName}\nEnd Time: ${endTime}`);
   };
@@ -70,6 +70,8 @@ export default function HomePage() {
             </div>
             <hr className="border-t border-gray-300 my-4" />
 
+            {/* IS THIS WHERE THE PREFERENCES CONTEXT PROVIDER IS SUPPOSED TO GO ?? 
+                i believe i need to wrap this button inside of the context provider  */}
             <button
               onClick={handleCreateGame}
               className="w-full bg-gray-500  py-2 rounded-lg hover:bg-gray-600"
